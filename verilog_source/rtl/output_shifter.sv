@@ -2,7 +2,7 @@
 
 
 
-module output_buffer
+module output_shifter
 (
 	input wire clk, rst, 
 	

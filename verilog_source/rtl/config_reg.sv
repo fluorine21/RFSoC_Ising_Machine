@@ -8,6 +8,7 @@ module config_reg
 parameter word_width = 8 //In bits
 parameter num_words = 4
 parameter addr_width = 16 //In bits
+parameter bus_addr = 0
 )
 (
 	input wire clk, rst,
@@ -32,7 +33,7 @@ always @ (posedge clk or negedge rst) begin
 	else begin
 		if(state) begin
 			//If we have an incomming write
-			if(w_clk) begin
+			if(w_clk && gpio_addr == bus_addr) begin
 				reg_out <= {reg_out[0+:((num_words-1)*word_width)], gpio_data};//Append the incomming byte to the end of the register and discard the most significant byte
 				state <= 1;//Wait for w_clk to reset
 			end
