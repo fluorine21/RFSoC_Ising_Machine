@@ -11,7 +11,7 @@ module input_scaler
 	input wire [31:0] gpio_in,
 	
 	//Input from peak detector
-	input wire [15:0] peak_in, //Assumed to always be valid
+	input wire [15:0] peak_in,
 	input wire peak_in_valid,
 	
 	output reg [7:0] out_val,
