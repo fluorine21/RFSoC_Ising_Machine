@@ -54,7 +54,7 @@ scaler_node #(start_addr) input_node
 
 
 genvar i, j, node_cnt, output_val_cnt;
-node_cnt = 0;
+node_cnt = 1;
 output_val_cnt = -128;
 //this tree layer
 for(i = 1; i < 7; i = i + 1) begin

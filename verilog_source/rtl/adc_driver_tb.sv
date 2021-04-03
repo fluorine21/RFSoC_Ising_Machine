@@ -54,8 +54,9 @@ integer layer_4[16];
 integer layer_3[8];
 integer layer_2[4];
 integer layer_1[2];
+integer layer_0;
 
-integer i, j, k;
+integer i, j, k, num_errs;
 
 
 initial begin
@@ -76,6 +77,7 @@ initial begin
 	generate_layer(layer_4, layer_3);
 	generate_layer(layer_3, layer_2);
 	generate_layer(layer_2, layer_1);
+	layer_0 = (layer_1[0]+layer_1[1])/2
 	
 	//Start the logic simulation
 	clk <= 0;
@@ -89,6 +91,39 @@ initial begin
 	adc_input_scaler_run <= 0; //Might need to start this a cycle late so it skips whatever was waiting inside the peak detector
 	m_axis_tready <= 0;
 	
+	//reset cycle
+	repeat(10) clk_cycle();
+	rst <= 0;
+	repeat(10) clk_cycle();
+	rst <= 1;
+	repeat(20) clk_cycle();
+	
+	//Load the layers in_list
+	gpio_write(0, layer_0);
+	write_layer(layer_1, 0+1);
+	write_layer(layer_2, 2+1);
+	write_layer(layer_3, 4+1);
+	write_layer(layer_4, 8+1);
+	write_layer(layer_5, 16+1);
+	write_layer(layer_6, 32+1);
+	write_layer(layer_7, 64+1);
+	
+	j = 0;//Output val counter
+	num_errs = 0;
+	//Start writing values to ADC driver
+	s_axis_tvalid <= 1;
+	for(i = 0; i < 256; i = i + 1) begin
+		
+		//Set the current data and cycle the clock
+		s_axis_tdata <= {{4{16'b0}}, lookup_table_in[i], {3{16'b0}}};
+		clk_cycle();
+		
+		//If there's something coming out the other end
+		if(val_valid) begin
+		
+		
+		end
+	end
 	
 	
 end
@@ -123,7 +158,7 @@ endtask
 
 task generate_layer
 (
-	ref in_list, out_list
+	ref integer in_list[], out_list[]
 );
 begin
 	integer i, avg;
@@ -134,6 +169,18 @@ begin
 end
 endtask
 
+
+task write_layer
+(
+integer layer_list[], integer start_addr
+);
+begin
+	integer i;
+	for(i = 0; i < size(layer_list); i = i + 1) begin
+		gpio_write(start_addr+i, layer_list[i]);
+	end
+end
+endtask
 
 
 endmodule

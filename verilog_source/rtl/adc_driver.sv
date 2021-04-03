@@ -20,7 +20,7 @@ parameter adc_trig_reg_base_addr = 256
 	output wire [7:0] val_out,
 	output wire val_valid,
 	
-	input wire adc_input_scaler_run,//From FSM, tells input scaler to start processing data
+	input wire adc_input_scaler_run,//From FSM, tells peak detector to start processing data
 	
 	//Output to PS over DMA
 	output wire [127:0] m_axis_tdata,
@@ -35,11 +35,14 @@ assign s_axis_tready = 1;
 //peak detector instantiation
 wire [15:0] peak_val;
 wire [2:0] peak_pos;
+wire peak_out_valid;
 peak_detector peak_detector_inst
 (
 	clk, rst,
 	s_axis_tdata,
-	peak_out, peak_pos
+	adc_input_scaler_run,
+	
+	peak_out, peak_out_valid, peak_pos
 );
 
 //input scaler instantiation
@@ -50,7 +53,7 @@ input_scaler #(input_scaler_base_addr) input_scaler_inst
 	
 	//Input from peak detector
 	peak_out,
-	adc_input_scaler_run,
+	peak_out_valid,
 	
 	val_out,
 	val_valid
@@ -135,8 +138,11 @@ endmodule
 module peak_detector
 (
 	input wire clk, rst,
-	input wire [127:0] adc_word_in,//Assumed to always be valid
+	input wire [127:0] adc_word_in,
+	input wire adc_word_in_valid,
+	
 	output reg [15:0] peak_out,
+	output reg peak_out_valid,
 	output reg [2:0] peak_pos_out
 );
 
@@ -150,10 +156,16 @@ always @ (posedge clk or negedge rst) begin
 		adc_word_mag <= 0;
 	end
 	else begin
-		adc_word_last <= adc_word_in;//Save for later
-		for(i = 0; i < 8; i = i + 1) begin
-			//If it's negative, invert it
-			adc_word_mag[(i*8)+:8] <= adc_word_in[(i*8)+7] ? ~adc_word_in[(i*8)+:16] + 1 : adc_word_in[(i*8)+:16];
+		if(adc_word_in_valid) begin
+			peak_out_valid <= 1;
+			adc_word_last <= adc_word_in;//Save for later
+			for(i = 0; i < 8; i = i + 1) begin
+				//If it's negative, invert it
+				adc_word_mag[(i*8)+:8] <= adc_word_in[(i*8)+7] ? ~adc_word_in[(i*8)+:16] + 1 : adc_word_in[(i*8)+:16];
+			end
+		end
+		else begin
+			peak_out_valid <= 0;
 		end
 	end
 end
