@@ -120,11 +120,44 @@ initial begin
 		
 		//If there's something coming out the other end
 		if(val_valid) begin
-		
+			//See if we got the correct value out
+			if(val_out != lookup_table_out[j]) begin
+				num_errs = num_errs + 1;
+			end
+			j = j + 1;
 		
 		end
 	end
 	
+	$display("\nADC decode test complete, num errs: %x\n", num_errs);
+	
+	
+	//Reset everything 
+	repeat(10) clk_cycle();
+	rst <= 0;
+	repeat(10) clk_cycle();
+	rst <= 1;
+	repeat(20) clk_cycle();
+	
+	//Start the ADC readback
+	gpio_write(256, 1);
+	
+	
+	for(i = 0; i < 1024; i = i + 1) begin
+		//Set the current data and cycle the clock
+		s_axis_tdata <= {{4{16'b0}}, i, {3{16'b0}}};
+		clk_cycle();
+	end
+	
+	//Stop the adc readback
+	gpio_write(256, 0);
+	
+	//Start reading out the adc
+	s_axis_tready <= 1;
+	
+	repeat(1100) clk_cycle();
+	
+	$finish
 	
 end
 

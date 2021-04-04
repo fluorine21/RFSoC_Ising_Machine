@@ -29,7 +29,7 @@ parameter adc_trig_reg_base_addr = 256
 	
 );
 
-assign s_axis_tready = 1;
+assign s_axis_tready = 1;//Always ready to read data from ADC even if we're not using it
 
 
 //peak detector instantiation
