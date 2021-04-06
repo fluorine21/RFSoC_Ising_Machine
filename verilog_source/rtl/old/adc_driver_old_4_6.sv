@@ -3,9 +3,8 @@
 
 module adc_driver
 #(
-parameter addr_reg = 0,
-parameter data_reg = 1,
-parameter adc_trig_reg_base_addr = 2
+parameter input_scaler_base_addr = 0,
+parameter adc_trig_reg_base_addr = 256
 )
 (
 	input wire clk, rst,
@@ -18,7 +17,7 @@ parameter adc_trig_reg_base_addr = 2
 	output wire s_axis_tready,
 	
 	//Output to experiment FSM
-	output wire [num_bits-1:0] val_out,
+	output wire [7:0] val_out,
 	output wire val_valid,
 	
 	input wire adc_input_scaler_run,//From FSM, tells peak detector to start processing data
@@ -29,11 +28,6 @@ parameter adc_trig_reg_base_addr = 2
 	input wire m_axis_tready
 	
 );
-
-//GPIO bus definitions
-wire w_clk = gpio_in[gpio_w_clk_bit]
-wire [addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
-wire [word_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
 
 assign s_axis_tready = 1;//Always ready to read data from ADC even if we're not using it
 
@@ -51,10 +45,18 @@ peak_detector peak_detector_inst
 	peak_out, peak_out_valid, peak_pos
 );
 
-//Lookup table for input
-lookup_table #(addr_reg, data_reg, 16, num_bits) input_lookup_table_inst
+//input scaler instantiation
+input_scaler #(input_scaler_base_addr) input_scaler_inst
 (
-	clk, rst, gpio_in, peak_out, peak_out_valid, val_out, val_valid
+	clk, rst,
+	gpio_in,
+	
+	//Input from peak detector
+	peak_out,
+	peak_out_valid,
+	
+	val_out,
+	val_valid
 );
 
 

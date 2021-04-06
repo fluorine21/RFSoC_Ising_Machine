@@ -11,11 +11,14 @@ parameter gpio_data_end = 16;
 
 parameter adc_buffer_len = 256;
 
+parameter num_bits = 8; //Bit precision to use for internal logic
+
 
 //Address table for configuration registers (0 to 65535)
-parameter mac_input_scaler_base_addr = 0;
-parameter nl_input_scaler_base_addr = 256;
-
+parameter mac_input_scaler_addr_reg = 0;
+parameter mac_input_scaler_data_reg = 0;
+parameter nl_input_scaler_addr_reg = 256;
+parameter nl_input_scaler_data_reg = 256;
 
 
 endpackage
