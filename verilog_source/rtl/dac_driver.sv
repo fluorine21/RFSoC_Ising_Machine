@@ -13,7 +13,10 @@ parameter shift_amt_reg_base_addr = 0
 	
 	input wire [31:0] gpio_in,
 	
-	input wire fsm_val_in,//assumed to always be valid
+	input wire [255:0] fsm_val_in,
+	input wire fsm_in_valid,
+	
+	input wire del_trig,
 	
 	output wire [255:0] dac_out
 	
@@ -27,6 +30,7 @@ output_scaler #(output_scaler_base_addr) output_scaler_inst
 	clk, rst,
 	
 	fsm_val_in,
+	fsm_in_valid,
 	
 	gpio_in,
 	
@@ -56,9 +60,24 @@ config_reg #(8,1,16,dac_mux_sel_reg_base_addr) dac_mux_sel_reg_inst
 	dac_mux_sel
 );
 
+//DAC delay calibration driver
+wire [255:0] delay_cal_dac_word;
+del_cal del_cal_inst(clk, rst, del_trig, static_dac_word delay_cal_dac_word);
+
 
 //DAC mux
-wire [255:0] shifter_input = dac_mux_sel[0] ? static_dac_word : dac_scaler_out;
+reg [255:0] shifter_input;
+always @ * begin
+	if(dac_mux_sel == 2) begin
+		shifter_input <= delay_cal_dac_word;
+	end
+	else if (dac_mux_sel == 1) begin
+		shifter_input <= static_dac_word;
+	end
+	else begin
+		shifter_input <= dac_scaler_out;
+	end
+end
 
 //Shift ammount register
 wire [7:0] shift_amt;

@@ -21,7 +21,7 @@ parameter adc_trig_reg_base_addr = 2
 	output wire [num_bits-1:0] val_out,
 	output wire val_valid,
 	
-	input wire adc_input_scaler_run,//From FSM, tells peak detector to start processing data
+	input wire adc_input_scaler_run,//From FSM, tells peak detector to start processing data, need to OR this with del trig
 	
 	//Output to PS over DMA
 	output wire [127:0] m_axis_tdata,

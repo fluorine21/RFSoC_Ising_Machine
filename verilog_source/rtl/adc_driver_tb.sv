@@ -22,7 +22,7 @@ wire m_axis_tvalid;
 reg m_axis_tready;
 
 
-adc_driver #(0,256) adc_driver_inst
+adc_driver #(0, 1, 2) adc_driver_inst
 (
 	clk, rst,	
 	gpio_in
@@ -45,39 +45,27 @@ adc_driver #(0,256) adc_driver_inst
 	
 );
 
-integer lookup_table_in[256];
-integer lookup_table_out[256];
-integer layer_7[128];
-integer layer_6[64];
-integer layer_5[32];
-integer layer_4[16];
-integer layer_3[8];
-integer layer_2[4];
-integer layer_1[2];
-integer layer_0;
+
 
 integer i, j, k, num_errs;
+
+//External lookup tables used to generate internal lookup table
+integer lookup_table_in[256];
+integer lookup_table_out[256];
 
 
 initial begin
 
 	//Generate the lookup table listing (evenly spaced)
 	j = 0;
-	for(i = 127; i > 128; i = i - 1) begin
-		lookup_table_in[j] = i;
+	for(i = 127; i > -128; i = i - 1) begin
+		lookup_table_in[j] = i * 8;
 		lookup_table_out[j] = i;
 		j = j + 1;
 	end
 	
-	//Then generate the layers
-	generate_layer(lookup_table_in, layer_7);
-	generate_layer(layer_7, layer_6);
-	generate_layer(layer_6, layer_5);
-	generate_layer(layer_5, layer_4);
-	generate_layer(layer_4, layer_3);
-	generate_layer(layer_3, layer_2);
-	generate_layer(layer_2, layer_1);
-	layer_0 = (layer_1[0]+layer_1[1])/2
+	//Generate the internal lookup table
+	
 	
 	//Start the logic simulation
 	clk <= 0;
@@ -98,15 +86,9 @@ initial begin
 	rst <= 1;
 	repeat(20) clk_cycle();
 	
-	//Load the layers in_list
-	gpio_write(0, layer_0);
-	write_layer(layer_1, 0+1);
-	write_layer(layer_2, 2+1);
-	write_layer(layer_3, 4+1);
-	write_layer(layer_4, 8+1);
-	write_layer(layer_5, 16+1);
-	write_layer(layer_6, 32+1);
-	write_layer(layer_7, 64+1);
+	//Load the lookup table
+	write_lookup_table(lookup_table_in, lookup_table_out);
+
 	
 	j = 0;//Output val counter
 	num_errs = 0;
@@ -140,7 +122,7 @@ initial begin
 	repeat(20) clk_cycle();
 	
 	//Start the ADC readback
-	gpio_write(256, 1);
+	gpio_write(2, 1);
 	
 	
 	for(i = 0; i < 1024; i = i + 1) begin
@@ -203,15 +185,33 @@ end
 endtask
 
 
-task write_layer
+task write_lookup_table
 (
-integer layer_list[], integer start_addr
+integer lut_in[], integer lut_out[], integer addr_reg, integer data_reg
 );
 begin
-	integer i;
-	for(i = 0; i < size(layer_list); i = i + 1) begin
-		gpio_write(start_addr+i, layer_list[i]);
+	//Internal lookup table generation
+	integer lut_data[65536];
+	integer signed i, j;
+	reg [15:0] k;
+	j = 0;//in out counter
+	for(i = 32767, i >= -32768; i = i - 1) begin
+		k = unsigned'(i);
+		lut_data[k] = lut_out[j];//Write this entry to the lookup table
+		//If we're at the halfway point between the 0th and 1st entries
+		if(i < lut_in[j] - ((lut_in[j]-lut_in[j+1])/2) && j < 255) begin
+			j = j + 1;
+		end
 	end
+	
+	//Writing the lookup table
+	gpio_write(0, 0);
+	gpio_write(0, 0);
+	for(i = 0; i < 65536; i = i + 1) begin
+		gpio_write(0, 1);
+		gpio_write(0, 8'(lut_data[i]));
+	end
+
 end
 endtask
 
