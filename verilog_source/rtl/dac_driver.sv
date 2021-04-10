@@ -3,10 +3,11 @@ import ising_config::*;
 
 module dac_driver
 #(
-parameter output_scaler_base_addr = 0,
-parameter static_output_reg_base_addr = 0,
-parameter dac_mux_sel_reg_base_addr = 0,
-parameter shift_amt_reg_base_addr = 0
+parameter output_scaler_addr_reg = 0,
+parameter output_scaler_data_reg = 1,
+parameter static_output_reg_base_addr = 0,//Static dac word to output
+parameter dac_mux_sel_reg_base_addr = 0,//Selects between input from output scaler, static word, or delay cal
+parameter shift_amt_reg_base_addr = 0//Selects how much to shift output by
 )
 (
 	input wire clk, rst,
@@ -25,7 +26,7 @@ parameter shift_amt_reg_base_addr = 0
 
 //output scaler instantiation
 wire [255:0] dac_scaler_out;
-output_scaler #(output_scaler_base_addr) output_scaler_inst
+output_scaler #(output_scaler_addr_reg, output_scaler_data_reg) output_scaler_inst
 (
 	clk, rst,
 	
@@ -91,10 +92,10 @@ config_reg #(8,1,16,shift_amt_reg_base_addr) dac_mux_sel_reg_inst
 );
 
 //Shifter instantiation
-module output_shifter
+shifter #(16, 256) output_shifter_inst
 (
 	clk, rst, 
-	shift_amt[3:0],//Number of samples to shift by
+	shift_amt,//Number of samples to shift by
 	shifter_input,
 	dac_out
 );

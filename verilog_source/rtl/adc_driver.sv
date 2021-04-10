@@ -5,7 +5,7 @@ module adc_driver
 #(
 parameter addr_reg = 0,
 parameter data_reg = 1,
-parameter adc_trig_reg_base_addr = 2
+parameter shift_amt_reg_base_addr = 2
 )
 (
 	input wire clk, rst,
@@ -38,6 +38,24 @@ wire [word_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
 assign s_axis_tready = 1;//Always ready to read data from ADC even if we're not using it
 
 
+//Config reg for input shifter
+wire [7:0] shift_amt;
+config_reg #(8,1,16,shift_amt_reg_base_addr) dac_mux_sel_reg_inst
+(
+	clk, rst,
+	
+	gpio_in, //GPIO bus, 15:0 is addr, 23:16 is data, 24 is w_clk
+	
+	shift_amt
+);
+
+//Input shifter instantiation
+shifter #(16, 256) input_shifter_inst
+(
+clk, rst, shift_amt, dac_word_in, dac_word_out
+);
+
+
 //peak detector instantiation
 wire [15:0] peak_val;
 wire [2:0] peak_pos;
@@ -57,18 +75,6 @@ lookup_table #(addr_reg, data_reg, 16, num_bits) input_lookup_table_inst
 	clk, rst, gpio_in, peak_out, peak_out_valid, val_out, val_valid
 );
 
-
-//config reg for triggering adc record
-//Shift ammount register
-wire [7:0] adc_trig;
-config_reg #(8,1,16,adc_trig_reg_base_addr) adc_trig_reg
-(
-	clk, rst,
-	
-	gpio_in, //GPIO bus, 15:0 is addr, 23:16 is data, 24 is w_clk
-	
-	adc_trig
-);
 
 reg adc_buffer_valid;
 reg [1:0] state;

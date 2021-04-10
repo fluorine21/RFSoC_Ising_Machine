@@ -9,7 +9,7 @@ module output_scaler
 #(
 //GPIO addresses for writing lookup table
 parameter addr_reg = 0, 
-parameter data_reg = 0
+parameter data_reg = 1
 )
 (
 	input wire clk, rst,

@@ -122,7 +122,7 @@ initial begin
 	repeat(20) clk_cycle();
 	
 	//Start the ADC readback
-	gpio_write(2, 1);
+	adc_input_scaler_run <= 1;
 	
 	
 	for(i = 0; i < 1024; i = i + 1) begin
@@ -132,7 +132,7 @@ initial begin
 	end
 	
 	//Stop the adc readback
-	gpio_write(256, 0);
+	adc_input_scaler_run <= 0;
 	
 	//Start reading out the adc
 	s_axis_tready <= 1;
