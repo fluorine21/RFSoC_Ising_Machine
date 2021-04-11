@@ -5,9 +5,9 @@ module dac_driver
 #(
 parameter output_scaler_addr_reg = 0,
 parameter output_scaler_data_reg = 1,
-parameter static_output_reg_base_addr = 0,//Static dac word to output
-parameter dac_mux_sel_reg_base_addr = 0,//Selects between input from output scaler, static word, or delay cal
-parameter shift_amt_reg_base_addr = 0//Selects how much to shift output by
+parameter static_output_reg_base_addr = 2,//Static dac word to output
+parameter dac_mux_sel_reg_base_addr = 3,//Selects between input from output scaler, static word, or delay cal
+parameter shift_amt_reg_base_addr = 4//Selects how much to shift output by
 )
 (
 	input wire clk, rst,

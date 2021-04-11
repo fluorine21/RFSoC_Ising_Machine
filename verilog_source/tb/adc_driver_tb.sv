@@ -8,8 +8,8 @@ reg clk, rst;
 reg w_clk;
 reg [15:0] gpio_addr;
 reg [7:0] gpio_data;
-
 wire [31:0] gpio_in = {8'b0,w_clk, gpio_data, gpio_addr};
+
 reg [127:0] s_axis_tdata;
 reg s_axis_tvalid;
 wire s_axis_tready;
