@@ -89,6 +89,7 @@ initial begin
 	//set the mux to 0
 	gpio_write(3, 0);
 	
+	repeat(100) clk_cycle();
 	
 	//Start the test
 	reg [255:0] t;
@@ -106,7 +107,23 @@ initial begin
 	end
 	
 	$display("DAC driver test complete, num_errs = %i", num_errs);
-
+	
+	repeat(100) clk_cycle();
+	
+	
+	//Test the shift
+	repeat(100) clk_cycle();
+	
+	for(i = 0; i < 256; i = i + 1) begin
+		//TODO
+		
+		//Write new shift value
+		
+		//Give it a few cycles
+		
+		//Check
+	
+	end
 
 end
 
