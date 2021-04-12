@@ -1,5 +1,7 @@
 
 
+import ising_config::*;
+
 
 module adc_driver
 #(
@@ -10,7 +12,7 @@ parameter shift_amt_reg_base_addr = 2
 (
 	input wire clk, rst,
 	
-	input wire [31:0] gpio_in
+	input wire [31:0] gpio_in,
 	
 	//Input from ADC
 	input wire [127:0] s_axis_tdata,
@@ -26,21 +28,23 @@ parameter shift_amt_reg_base_addr = 2
 	//Output to PS over DMA
 	output wire [127:0] m_axis_tdata,
 	output wire m_axis_tvalid,
-	input wire m_axis_tready
+	input wire m_axis_tready,
+	
+	input wire del_trig//From CPU, tells adc driver when to start recording raw data
 	
 );
 
 //GPIO bus definitions
-wire w_clk = gpio_in[gpio_w_clk_bit]
-wire [addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
-wire [word_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
+wire w_clk = gpio_in[gpio_w_clk_bit];
+wire [gpio_addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
+wire [gpio_data_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
 
 assign s_axis_tready = 1;//Always ready to read data from ADC even if we're not using it
 
 
 //Config reg for input shifter
 wire [7:0] shift_amt;
-config_reg #(8,1,16,shift_amt_reg_base_addr) dac_mux_sel_reg_inst
+config_reg #(8,1,16,shift_amt_reg_base_addr) shift_amt_reg_inst
 (
 	clk, rst,
 	
@@ -50,20 +54,21 @@ config_reg #(8,1,16,shift_amt_reg_base_addr) dac_mux_sel_reg_inst
 );
 
 //Input shifter instantiation
-shifter #(16, 256) input_shifter_inst
+wire [127:0] shifted_adc_word;
+shifter #(32, 128) input_shifter_inst
 (
-clk, rst, shift_amt, dac_word_in, dac_word_out
+clk, rst, shift_amt, s_axis_tdata, shifted_adc_word
 );
 
 
 //peak detector instantiation
-wire [15:0] peak_val;
+wire [15:0] peak_out;
 wire [2:0] peak_pos;
 wire peak_out_valid;
 peak_detector peak_detector_inst
 (
 	clk, rst,
-	s_axis_tdata,
+	shifted_adc_word,
 	adc_input_scaler_run,
 	
 	peak_out, peak_out_valid, peak_pos
@@ -86,9 +91,10 @@ always @ (posedge clk or negedge rst) begin
 		cnt <= 0;
 	end
 	else begin
-		case state:
+		case (state)
 		0: begin
-			if(adc_trig[0]) begin
+			//If we're begin triggered to run by the cpu
+			if(del_trig) begin
 				state <= 1;
 				adc_buffer_valid <= 1;
 				cnt <= 1020;
@@ -104,7 +110,7 @@ always @ (posedge clk or negedge rst) begin
 			end
 		end
 		2: begin
-			if(!adc_trig[0])begin
+			if(del_trig)begin
 				state <= 0;
 			end
 		end
@@ -112,19 +118,20 @@ always @ (posedge clk or negedge rst) begin
 			state <= 0;
 			adc_buffer_valid <= 0;
 		end
+		endcase
 	end
 end
 
 //ADC buffer for PS readback
-wire s_axis_tready;
+wire s_axis_tready_i;
 axis_sync_fifo #(1024, 128) adc_buffer(
 
 	rst,
 	clk,
 
     adc_buffer_valid,
-    s_axis_tready,
-    s_axis_tdata,
+    s_axis_tready_i,
+    shifted_adc_word,
     
     m_axis_tdata,
     m_axis_tvalid,
@@ -165,7 +172,7 @@ always @ (posedge clk or negedge rst) begin
 			adc_word_last <= adc_word_in;//Save for later
 			for(i = 0; i < 8; i = i + 1) begin
 				//If it's negative, invert it
-				adc_word_mag[(i*8)+:8] <= adc_word_in[(i*8)+7] ? ~adc_word_in[(i*8)+:16] + 1 : adc_word_in[(i*8)+:16];
+				adc_word_mag[(i*16)+:16] <= adc_word_in[(i*16)+15] ? ~adc_word_in[(i*16)+:16] + 1 : adc_word_in[(i*16)+:16];
 			end
 		end
 		else begin
@@ -180,12 +187,12 @@ always @ * begin
 	max_val = 0;
 	max_pos = 0;
 	for(i = 0; i < 8; i = i + 1) begin
-		if(adc_word_mag[(i*8)+:16] > max_val) begin
-			max_val = adc_word_mag[(i*8)+:16];
+		if(adc_word_mag[(i*16)+:16] > max_val) begin
+			max_val = adc_word_mag[(i*16)+:16];
 			max_pos = i;
 		end
 	end
-	peak_out <= adc_word_last[(max_pos*8)+:16];
+	peak_out <= adc_word_last[(max_pos*16)+:16];
 	peak_pos_out <= max_pos;
 end
 

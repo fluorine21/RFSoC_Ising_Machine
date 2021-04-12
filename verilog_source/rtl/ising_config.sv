@@ -1,13 +1,16 @@
 
 
 
-package rfsoc_config;
+package ising_config;
 
 parameter gpio_w_clk_bit = 24;
-parameter gpio_addr_start = 015
+parameter gpio_addr_start = 15;
 parameter gpio_addr_end = 0;
 parameter gpio_data_start = 23;
 parameter gpio_data_end = 16;
+
+parameter gpio_addr_width = 16;
+parameter gpio_data_width = 8;
 
 parameter adc_buffer_len = 256;
 

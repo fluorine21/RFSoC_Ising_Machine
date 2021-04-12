@@ -5,9 +5,9 @@ import ising_config::*;
 
 module config_reg
 #(
-parameter word_width = 8 //In bits
-parameter num_words = 4
-parameter addr_width = 16 //In bits
+parameter word_width = 8, //In bits
+parameter num_words = 4,
+parameter addr_width = 16, //In bits
 parameter bus_addr = 0
 )
 (
@@ -19,7 +19,7 @@ parameter bus_addr = 0
 );
 
 
-wire w_clk = gpio_in[gpio_w_clk_bit]
+wire w_clk = gpio_in[gpio_w_clk_bit];
 wire [addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
 wire [word_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
 
@@ -40,7 +40,7 @@ always @ (posedge clk or negedge rst) begin
 		end
 		else begin
 			//If the write clock has been reset
-			if(!w_clk)
+			if(!w_clk) begin
 				state <= 0; //go back to the initial state
 			end
 		end

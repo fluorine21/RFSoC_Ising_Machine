@@ -21,11 +21,12 @@ wire [127:0] m_axis_tdata;
 wire m_axis_tvalid;
 reg m_axis_tready;
 
+reg del_trig;
 
 adc_driver #(0, 1, 2) adc_driver_inst
 (
 	clk, rst,	
-	gpio_in
+	gpio_in,
 	
 	//Input from ADC
 	s_axis_tdata,
@@ -41,7 +42,9 @@ adc_driver #(0, 1, 2) adc_driver_inst
 	//Output to PS over DMA
 	m_axis_tdata,
 	m_axis_tvalid,
-	m_axis_tready
+	m_axis_tready,
+	
+	del_trig
 	
 );
 
@@ -58,14 +61,11 @@ initial begin
 
 	//Generate the lookup table listing (evenly spaced)
 	j = 0;
-	for(i = 127; i > -128; i = i - 1) begin
+	for(i = 127; i > -129; i = i - 1) begin
 		lookup_table_in[j] = i * 8;
 		lookup_table_out[j] = i;
 		j = j + 1;
 	end
-	
-	//Generate the internal lookup table
-	
 	
 	//Start the logic simulation
 	clk <= 0;
@@ -78,6 +78,7 @@ initial begin
 	s_axis_tvalid <= 0;
 	adc_input_scaler_run <= 0; //Might need to start this a cycle late so it skips whatever was waiting inside the peak detector
 	m_axis_tready <= 0;
+	del_trig <= 0;
 	
 	//reset cycle
 	repeat(10) clk_cycle();
@@ -93,11 +94,11 @@ initial begin
 	j = 0;//Output val counter
 	num_errs = 0;
 	//Start writing values to ADC driver
-	s_axis_tvalid <= 1;
+	adc_input_scaler_run <= 1;
 	for(i = 0; i < 256; i = i + 1) begin
 		
 		//Set the current data and cycle the clock
-		s_axis_tdata <= {{4{16'b0}}, lookup_table_in[i], {3{16'b0}}};
+		s_axis_tdata <= {{1{16'b0}}, 16'(unsigned'(lookup_table_in[i])), {6{16'b0}}};
 		clk_cycle();
 		
 		//If there's something coming out the other end
@@ -111,6 +112,8 @@ initial begin
 		end
 	end
 	
+	adc_input_scaler_run <= 0;
+	
 	$display("\nADC decode test complete, num errs: %x\n", num_errs);
 	
 	
@@ -122,7 +125,7 @@ initial begin
 	repeat(20) clk_cycle();
 	
 	//Start the ADC readback
-	adc_input_scaler_run <= 1;
+	del_trig <= 1;
 	
 	
 	for(i = 0; i < 1024; i = i + 1) begin
@@ -132,18 +135,16 @@ initial begin
 	end
 	
 	//Stop the adc readback
-	adc_input_scaler_run <= 0;
+	del_trig <= 0;
 	
 	//Start reading out the adc
-	s_axis_tready <= 1;
+	m_axis_tready <= 1;
 	
 	repeat(1100) clk_cycle();
 	
-	$finish
-	
 end
 
-task clk_cycle;
+task clk_cycle();
 begin
 	#1
 	clk <= 1;
@@ -151,6 +152,7 @@ begin
 	#1
 	clk <= 0;
 	#1
+	clk <= 0;
 end
 endtask
 
@@ -163,53 +165,44 @@ begin
 	gpio_addr <= addr;
 	gpio_data <= data;
 	clk_cycle();
-	gpio_write <= 1;
+	w_clk <= 1;
 	repeat(2) clk_cycle();
-	gpio_write <= 0;
+	w_clk <= 0;
 	repeat(5) clk_cycle();
 	
-end
-endtask
-
-task generate_layer
-(
-	ref integer in_list[], out_list[]
-);
-begin
-	integer i, avg;
-	for(i = 0; i < size(in_list); i = i + 2) begin
-		avg = (in_list[i]+in_list[i+1])/2;
-		out_list[i/2] = avg;
-	end
 end
 endtask
 
 
 task write_lookup_table
 (
-integer lut_in[], integer lut_out[], integer addr_reg, integer data_reg
+integer lut_in[], integer lut_out[]
 );
 begin
 	//Internal lookup table generation
 	integer lut_data[65536];
-	integer signed i, j;
-	reg [15:0] k;
-	j = 0;//in out counter
-	for(i = 32767, i >= -32768; i = i - 1) begin
-		k = unsigned'(i);
-		lut_data[k] = lut_out[j];//Write this entry to the lookup table
+	integer p;
+	integer signed m, n, midp, r;
+	
+	p = 0;
+	n = 0;//in out counter
+	
+	for(m = 32767; m >= -32768; m = m - 1) begin
+		p = 16'(unsigned'(m));
+		lut_data[p] = lut_out[n];//Write this entry to the lookup table
 		//If we're at the halfway point between the 0th and 1st entries
-		if(i < lut_in[j] - ((lut_in[j]-lut_in[j+1])/2) && j < 255) begin
-			j = j + 1;
+		midp = ((lut_in[n]+lut_in[n+1])/2);
+		if(n < 255 && m <= midp) begin
+			n = n + 1;
 		end
 	end
 	
 	//Writing the lookup table
 	gpio_write(0, 0);
 	gpio_write(0, 0);
-	for(i = 0; i < 65536; i = i + 1) begin
-		gpio_write(0, 1);
-		gpio_write(0, 8'(lut_data[i]));
+	for(r = 0; r < 65536; r = r + 1) begin
+		gpio_write(1, 0);
+		gpio_write(1, 8'(lut_data[r]));
 	end
 
 end
