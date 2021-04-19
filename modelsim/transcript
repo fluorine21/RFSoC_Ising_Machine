@@ -296,3 +296,35 @@ run -all
 # Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
 run -all
 # Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 107
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 107
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 107
+run -all
+# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
