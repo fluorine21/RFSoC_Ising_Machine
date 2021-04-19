@@ -14,7 +14,7 @@ parameter shift_amt_reg_base_addr = 4//Selects how much to shift output by
 	
 	input wire [31:0] gpio_in,
 	
-	input wire [255:0] fsm_val_in,
+	input wire [num_bits-1:0] fsm_val_in,
 	input wire fsm_in_valid,
 	
 	input wire del_trig,
