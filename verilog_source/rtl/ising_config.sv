@@ -24,4 +24,7 @@ parameter nl_input_scaler_addr_reg = 256;
 parameter nl_input_scaler_data_reg = 256;
 
 
+
+parameter var_fifo_depth = 4096;
+
 endpackage

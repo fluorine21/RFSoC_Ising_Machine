@@ -8,40 +8,33 @@ module experiment_fsm(
 	input wire run_trig,
 	output reg run_done,//Done flag for when we've finished processing instructions
 	
-	//Instruction bus, upper 16 bits are instruction, lower 16 are data
-	input wire [31:0] instr_axis_tdata,
+	//Instruction bus, upper 16 bits are instruction, lower 16 are data for the 32-bit bus coming from cpu
+	input wire [16:0] instr_axis_tdata,
 	input wire instr_axis_tvalid,
 	output wire instr_axis_tready,
 	
-	//alpha in and out bus///////////////
-	input wire [num_bits-1:0] a_r_tdata;
-	input wire a_r_tvalid,
-	output wire a_r_tready,
+	//beta in bus////////////////
+	input wire [num_bits-1:0] b_r_tdata;
+	input wire b_r_tvalid,
+	output reg b_r_tready,
 	
-	output wire [num_bits-1:0] a_w_tdata;
-	output wire a_w_tvalid,
-	input wire a_w_tready,
-	/////////////////////////////////////
+	//Needed for CPU readback
+	output wire [num_bits-1:0] a_in_data,
+	output wire a_in_valid,
+	input wire a_in_ready,
 	
-	//beta in and out bus////////////////
-	//Don't think we actually need this
-	//input wire [num_bits-1:0] b_r_tdata;
-	//input wire b_r_tvalid,
-	//output wire b_r_tready,
+	output wire [num_bits-1:0] c_out_data,
+	output wire c_out_valid,
+	input wire c_out_ready,
+
+	output wire [num_bits-1:0] a_out_data,
+	output wire a_out_valid,
+	input wire a_out_ready,
 	
-	//output wire [num_bits-1:0] b_w_tdata;
-	//output wire b_w_tvalid,
-	//input wire b_w_tready,
-	/////////////////////////////////////
-	
-	//gamma in and out bus///////////////
-	input wire [num_bits-1:0] c_r_tdata;
-	input wire c_r_tvalid,
-	output wire c_r_tready,
-	
-	output wire [num_bits-1:0] c_w_tdata;
-	output wire c_w_tvalid,
-	input wire c_w_tready,
+	output wire [num_bits-1:0] c_out_data,
+	output wire c_out_valid,
+	input wire c_out_ready,
+
 	/////////////////////////////////////
 	
 	//Outputs to DAC drivers
@@ -74,16 +67,192 @@ module experiment_fsm(
 	output reg del_done //Done flag for when this measurement finishes
 );
 
+//Delay measurement stuff
 reg [15:0] mac_del_counter, nl_del_counter;
-
-
 wire [num_bits-1:0] mac_mag = mac_val_in[num_bits-1] ? (~mac_val_in+1) : mac_val_in;
 wire [num_bits-1:0] nl_mag = nl_val_in[num_bits-1] ? (~nl_val_in+1) : nl_val_in;
+
+
+//Internal busses for alpha and gamma fifos////////////////////////////////
+//alpha in and out bus///////////////
+wire [num_bits-1:0] a_r_tdata;
+wire a_r_tvalid,
+reg a_r_tready,
+assign a_out_data = a_r_tdata;
+assign a_out_valid = a_r_tvalid;
+
+reg [num_bits-1:0] a_w_tdata;
+reg a_w_tvalid,
+wire a_w_tready,
+/////////////////////////////////////
+
+//gamma in and out bus///////////////
+wire [num_bits-1:0] c_r_tdata;
+wire c_r_tvalid,
+reg c_r_tready,
+assign c_out_data = c_r_tdata;
+assign c_out_valid = c_r_tvalid;
+
+reg [num_bits-1:0] c_w_tdata;
+reg c_w_tvalid,
+wire c_w_tready,
+/////////////////////////////////////
+
+
+//Doing all the bus multiplexing down here
+//alpha fifo
+axis_sync_fifo
+#(var_fifo_depth, num_bits) a_fifo_inst
+(
+
+	rst,
+	clk,
+
+    (a_w_tvalid | a_in_valid),
+    a_w_tready,
+    (a_in_valid ? a_in_data : a_w_tdata),//Prefer write from CPU
+    
+    a_r_tdata,
+    a_r_tvalid,
+    (a_r_tready | a_out_ready) 
+);
+
+//gamma fifo
+axis_sync_fifo
+#(var_fifo_depth, num_bits) c_fifo_inst
+(
+
+	rst,
+	clk,
+
+    (c_w_tvalid | c_in_valid),
+    c_w_tready,
+    (c_in_valid ? c_in_data : c_w_tdata),
+    
+    c_r_tdata,
+    c_r_tvalid,
+    (c_r_tready | c_out_ready)
+);
+//////////////////////////////////////////////////////////////////////////
+
+
+reg out;//0 for MAC, 1 for NL
+reg [num_bits-1:0] out_val = out ? nl_val_in : mac_val_in;
+
+task execute_run();
+begin
+	
+	//If we're done
+	if(!instr_axis_tvalid)begin
+	
+	
+	end
+	else begin
+	
+		if(instr_axis_tdata & (1 << 0) begin //remove a
+			a_r_tready <= 1;
+		end
+		else
+			a_r_tready <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 1) begin //remove b
+			b_r_tready <= 1;
+		end
+		else
+			b_r_tready <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 2) begin //remove c
+			c_r_tready <= 1;
+		end
+		else
+			c_r_tready <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 3) begin //add out -> a
+			a_w_tdata <= out_val;
+			a_w_tvalid <= 1;
+		else
+			a_w_tvalid <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 4) begin //add out -> c
+			c_w_tdata <= out_val;
+			c_w_tvalid <= 1;
+		else
+			c_w_tvalid <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 5) begin //add 0 -> a
+			a_w_tdata <= 0;
+			a_w_tvalid <= 1;
+		else
+			a_w_tvalid <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 6) begin //add 0 -> c
+			c_w_tdata <= 0;
+			c_w_tvalid <= 1;
+		else
+			c_w_tvalid <= 0;
+		end
+		
+		if(instr_axis_tdata & (1 << 7) begin //switch
+			out <= ~out;
+		end
+		if(instr_axis_tdata & (1 << 8) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 9) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 10) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 11) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 12) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 13) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 14) begin
+		
+		end
+		if(instr_axis_tdata & (1 << 15) begin
+		
+		end
+		
+		
+		
+	
+	end
+
+
+end
+endtask
+
+
 
 task reset_regs();
 begin
 
 	state <= state_idle;
+	
+	a_w_tdata <= 0;
+	a_w_tvalid <= 0;
+	a_r_tready <= 0;
+	c_w_tdata <= 0;
+	c_w_tvalid <= 0;
+	c_r_tready <= 0;
+	
+	b_r_tready <= 0;
+	
+	out <= 0;
+	
 
 end
 endtask
@@ -99,8 +268,7 @@ localparam [2:0] state_idle = 0,
 
 always @ (posedge clk or negedge rst) begin
 	if(!rst) begin
-	
-	
+		reset_regs();
 	end
 	else begin
 	
@@ -131,6 +299,12 @@ always @ (posedge clk or negedge rst) begin
 				state <= state_run;
 			end
 		end
+		
+		
+		state_run: begin
+			execute_run();
+		end
+		
 		
 		state_del_meas_1: begin
 			a_valid <= 0;
