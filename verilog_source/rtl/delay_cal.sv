@@ -7,13 +7,14 @@ module delay_cal
 	input wire trig,
 	
 	input wire [255:0] static_word,
-	output wire [255:0] word_out
+	output reg [255:0] word_out
 );
 
 reg state;
 always @ (posedge clk or negedge rst) begin
 	if(!rst) begin
 		state <= 0;
+		word_out <= 0;
 	end
 	else begin
 		if(!state) begin

@@ -1,330 +1,43 @@
-vsim -gui work.adc_driver_tb
-# vsim -gui work.adc_driver_tb 
-# Start time: 13:01:06 on Apr 12,2021
-# Loading sv_std.std
-# Loading work.adc_driver_tb
-# Loading work.ising_config
-# Loading work.adc_driver_sv_unit
-# Loading work.adc_driver
-# Loading work.config_reg_sv_unit
-# Loading work.config_reg
-# Loading work.shifter
-# Loading work.peak_detector
-# Loading work.lookup_table_sv_unit
-# Loading work.lookup_table
-# Loading work.axis_sync_fifo
-# Loading work.axis_fifo
 # Compile of dac_driver.sv failed with 2 errors.
 # Compile of output_scaler.sv failed with 1 errors.
+# Compile of dac_driver_tb.sv failed with 12 errors.
+# Compile of delay_cal.sv failed with 3 errors.
+# 4 compiles, 4 failed with 18 errors.
+# Compile of dac_driver.sv failed with 2 errors.
+# Compile of output_scaler.sv failed with 1 errors.
+# Compile of dac_driver_tb.sv failed with 12 errors.
+# Compile of delay_cal.sv was successful.
+# 4 compiles, 3 failed with 15 errors.
+# Compile of dac_driver.sv failed with 1 errors.
+# Compile of output_scaler.sv failed with 1 errors.
+# Compile of dac_driver_tb.sv failed with 12 errors.
+# 3 compiles, 3 failed with 14 errors.
+# Compile of dac_driver.sv was successful.
+# Compile of output_scaler.sv failed with 1 errors.
+# Compile of dac_driver_tb.sv failed with 12 errors.
+# 3 compiles, 2 failed with 13 errors.
+# Compile of output_scaler.sv was successful.
+# Compile of dac_driver_tb.sv failed with 12 errors.
+# 2 compiles, 1 failed with 12 errors.
+# Compile of adc_driver.sv was successful.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
 # Compile of adc_driver_tb.sv was successful.
 # Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_tb
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 201
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of adc_driver_tb.sv failed with 3 errors.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 5 failed with 21 errors.
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of adc_driver_tb.sv was successful.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_tb
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 201
-step -over
-# Next activity is in 1 ps.
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-restart -f
-add wave -position insertpoint  \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/clk \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/rst \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/gpio_in \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/val_in \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/val_in_valid \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/val_out \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/val_out_valid \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/lut_mem \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/w_clk \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/gpio_addr \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/gpio_data \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/i_scaler_addr \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/i_scaler_data \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/addr_state \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/wr_cnt \
-sim:/adc_driver_tb/adc_driver_inst/input_lookup_table_inst/lut_next_word
-# (vsim-4077) Logging very large object: /adc_driver_tb/adc_driver_inst/input_lookup_table_inst/lut_mem
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 201
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
+# Compile of delay_cal.sv was successful.
 # Compile of lookup_table.sv was successful.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.lookup_table_sv_unit
-# Loading work.lookup_table
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 201
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-step -over
-# Next activity is in 1 ps.
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# Compile of lookup_table.sv was successful.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.lookup_table_sv_unit
-# Loading work.lookup_table
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 201
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of adc_driver_tb.sv was successful.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_tb
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 201
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 205
-run -all
-# Break in Task write_lookup_table at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 204
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-add wave -position insertpoint  \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/clk \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/rst \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/adc_word_in \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/adc_word_in_valid \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/peak_out \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/peak_out_valid \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/peak_pos_out \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/adc_word_mag \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/adc_word_last \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/i \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/max_val \
-sim:/adc_driver_tb/adc_driver_inst/peak_detector_inst/max_pos
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-# Compile of adc_driver.sv was successful.
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_sv_unit
-# Loading work.adc_driver
-# Loading work.peak_detector
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-# Compile of adc_driver.sv was successful.
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_sv_unit
-# Loading work.adc_driver
-# Loading work.peak_detector
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of adc_driver_tb.sv was successful.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_tb
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of adc_driver_tb.sv was successful.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_tb
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-# Compile of adc_driver.sv was successful.
-# Compile of dac_driver.sv failed with 2 errors.
-# Compile of output_scaler.sv failed with 1 errors.
-# Compile of dac_driver_tb.sv failed with 12 errors.
-# Compile of delay_cal.sv failed with 3 errors.
-# 5 compiles, 4 failed with 18 errors.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.adc_driver_sv_unit
-# Loading work.adc_driver
-# Loading work.peak_detector
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 107
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 107
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 105
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 107
-run -all
-# Break in Module adc_driver_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv line 98
+# 12 compiles, 1 failed with 12 errors.
+# Compile of dac_driver_tb.sv failed with 11 errors.
+# Compile of dac_driver_tb.sv failed with 10 errors.
+# Compile of dac_driver_tb.sv failed with 9 errors.
+# Compile of dac_driver_tb.sv failed with 7 errors.
+# Compile of dac_driver_tb.sv failed with 6 errors.
+# Compile of dac_driver_tb.sv failed with 1 errors.
+# Compile of dac_driver_tb.sv failed with 6 errors.
+# Compile of dac_driver_tb.sv was successful.

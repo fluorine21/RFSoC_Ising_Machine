@@ -16,6 +16,16 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Ap
 Top level modules:
 	config_reg
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
+-- Compiling package adc_driver_sv_unit
+-- Importing package ising_config
+-- Compiling module adc_driver
+-- Compiling module peak_detector
+
+Top level modules:
+	adc_driver
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
 -- Compiling module adc_driver_tb
@@ -23,14 +33,14 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Ap
 Top level modules:
 	adc_driver_tb
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv {0 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
 -- Compiling module delay_cal
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv(20): (vlog-2110) Illegal reference to net "word_out".
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv(22): (vlog-2110) Illegal reference to net "word_out".
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv(27): (vlog-2110) Illegal reference to net "word_out".
 
-} {4.0 7.0} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/fifo_wrappers.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/fifo_wrappers.sv
+Top level modules:
+	delay_cal
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/fifo_wrappers.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/fifo_wrappers.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
 -- Compiling module axis_sync_fifo
 -- Compiling module axis_async_fifo
@@ -46,27 +56,25 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Ap
 Top level modules:
 	--none--
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv {0 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
-** Error: (vlog-13069) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv(66): near "delay_cal_dac_word": syntax error, unexpected IDENTIFIER, expecting ')'.
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv(92): (vlog-13282) 'dac_mux_sel_reg_inst' already declared in this scope.
+-- Compiling package dac_driver_sv_unit
+-- Importing package ising_config
+-- Compiling module dac_driver
 
-} {3.0 5.0} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv {0 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv
+Top level modules:
+	dac_driver
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
-** Error (suppressible): D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(14): (vlog-2388) 'gpio_in' already declared in this scope (dac_driver_tb) at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(12).
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(66): (vlog-2730) Undefined variable: 'static_word'.
-** Error: (vlog-13069) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(70): near ";": syntax error, unexpected ';', expecting ')'.
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(96): Illegal declaration after the statement near line '92'.  Declarations must precede statements.  Look for stray semicolons.
-** Error: (vlog-13053) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(99): near "'i": Illegal base specifier in numeric constant.
-** Error: (vlog-13057) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(99): near "[end of file]": Expecting numeric digits.
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(103): (vlog-2730) Undefined variable: 'fsm_val_out'.
-** Error: (vlog-13069) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(153): near "end": syntax error, unexpected end.
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(162): (vlog-2730) Undefined variable: 'addr'.
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(163): (vlog-2730) Undefined variable: 'data'.
-** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(165): (vlog-2730) Undefined variable: 'gpio_write'.
-** Error: (vlog-13069) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv(171): near "endtask": syntax error, unexpected endtask.
+-- Compiling package dac_driver_tb_sv_unit
+-- Importing package ising_config
+-- Compiling module dac_driver_tb
 
-} {4.0 15.0} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/shifter.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/shifter.sv
+Top level modules:
+	dac_driver_tb
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/shifter.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/shifter.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
 -- Compiling module shifter
 
@@ -82,8 +90,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Ap
 Top level modules:
 	lookup_table
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv {0 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
-** Error: (vlog-13069) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv(21): near "input": syntax error, unexpected input, expecting ')'.
+-- Compiling package output_scaler_sv_unit
+-- Importing package ising_config
+-- Compiling module output_scaler
 
-} {3.0 4.0} {}}
+Top level modules:
+	output_scaler
+
+} {} {}}

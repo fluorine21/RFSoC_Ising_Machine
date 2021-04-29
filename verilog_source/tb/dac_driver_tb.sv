@@ -11,9 +11,10 @@ reg [15:0] gpio_addr;
 reg [7:0] gpio_data;
 wire [31:0] gpio_in = {8'b0,w_clk, gpio_data, gpio_addr};
 	
-wire [31:0] gpio_in;
+
+reg [num_bits-1:0] fsm_val_in;
 	
-reg	[255:0] fsm_val_in;
+reg	[255:0] static_word;
 reg	fsm_in_valid;
 	
 reg	del_trig;
@@ -37,6 +38,7 @@ dac_driver
 );
 
 integer i, j, num_errs;
+reg [255:0] t;
 
 initial begin
 
@@ -67,7 +69,7 @@ initial begin
 	
 	//32 bytes in 16 16 bit words :)
 	for(i = 0; i < 32; i = i + 1) begin
-		gpio_write(2, static_word[(i*8)+:16]; 
+		gpio_write(2, static_word[(i*8)+:16]); 
 	end
 	
 	//Set the mux to 1
@@ -92,15 +94,15 @@ initial begin
 	repeat(100) clk_cycle();
 	
 	//Start the test
-	reg [255:0] t;
-	fsm_in_valid <= 1;
-	for(i = 0; i < 65536; i = i + 1) begin
 	
-			fsm_val_in <= { {1{16'b0}}, {{8{16'i}}}, {7{16'b0}} };
+	fsm_in_valid <= 1;
+	for(i = 0; i <= 2**num_bits-1; i = i + 1) begin
+	
+			fsm_val_in <= num_bits'(i);
 			
 			t = { {1{16'b0}}, {{8{16'((i-1)*-1)}}}, {7{16'b0}} };
 			if(i) begin//Skip the first cycle
-				if(fsm_val_out != t) begin
+				if(dac_out != t) begin
 					num_errs = num_errs + 1;
 				end
 			end
@@ -144,12 +146,14 @@ endtask
 
 task clk_cycle;
 begin
+
 	#1
 	clk <= 1;
 	#1
 	#1
 	clk <= 0;
 	#1
+	clk <= 0;
 end
 endtask
 
@@ -162,9 +166,9 @@ begin
 	gpio_addr <= addr;
 	gpio_data <= data;
 	clk_cycle();
-	gpio_write <= 1;
+	w_clk <= 1;
 	repeat(2) clk_cycle();
-	gpio_write <= 0;
+	w_clk <= 0;
 	repeat(5) clk_cycle();
 	
 end

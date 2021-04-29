@@ -63,7 +63,7 @@ config_reg #(8,1,16,dac_mux_sel_reg_base_addr) dac_mux_sel_reg_inst
 
 //DAC delay calibration driver
 wire [255:0] delay_cal_dac_word;
-del_cal del_cal_inst(clk, rst, del_trig, static_dac_word delay_cal_dac_word);
+del_cal del_cal_inst(clk, rst, del_trig, static_dac_word, delay_cal_dac_word);
 
 
 //DAC mux
@@ -82,7 +82,7 @@ end
 
 //Shift ammount register
 wire [7:0] shift_amt;
-config_reg #(8,1,16,shift_amt_reg_base_addr) dac_mux_sel_reg_inst
+config_reg #(8,1,16,shift_amt_reg_base_addr) shift_amt_reg_inst
 (
 	clk, rst,
 	

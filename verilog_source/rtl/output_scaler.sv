@@ -15,7 +15,7 @@ parameter data_reg = 1
 	input wire clk, rst,
 	
 	input wire [num_bits-1:0] val_in,
-	input wire val_in_valid
+	input wire val_in_valid,
 	
 	
 	input wire [31:0] gpio_in, //GPIO bus, 15:0 is addr, 23:16 is data, 24 is w_clk
@@ -24,6 +24,7 @@ parameter data_reg = 1
 );
 
 wire [15:0] val_out;
+wire [15:0] val_out_inv = (~val_out)+1;
 wire val_out_valid;
 lookup_table #(addr_reg,data_reg,num_bits,16) output_lookup_table_inst
 ( 
@@ -37,7 +38,7 @@ always @ (posedge clk or negedge rst) begin
 	end
 	else begin
 		if(val_out_valid) begin
-			dac_word_out <= {{4{16'b0}}, {8{val_out}}, {4{16'b0}}};
+			dac_word_out <= {{8{val_out}}, {8{val_out_inv}}};
 		end
 		else begin
 			dac_word_out <= 0;
