@@ -1,4 +1,14 @@
-D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/axis_fifos.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/axis_fifos.sv
+D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package adc_driver_sv_unit
+-- Importing package ising_config
+-- Compiling module adc_driver
+-- Compiling module peak_detector
+
+Top level modules:
+	adc_driver
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/axis_fifos.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/axis_fifos.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling module axis_fifo
 -- Compiling module axis_async_fifo_def
@@ -15,16 +25,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 
 Top level modules:
 	config_reg
-
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
--- Compiling package adc_driver_sv_unit
--- Importing package ising_config
--- Compiling module adc_driver
--- Compiling module peak_detector
-
-Top level modules:
-	adc_driver
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021

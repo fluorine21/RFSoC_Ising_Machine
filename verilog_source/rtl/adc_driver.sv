@@ -111,7 +111,7 @@ always @ (posedge clk or negedge rst) begin
 			end
 		end
 		2: begin
-			if(del_trig)begin
+			if(!del_trig)begin//If the triger line has been reset
 				state <= 0;
 			end
 		end
@@ -125,7 +125,8 @@ end
 
 //ADC buffer for PS readback
 wire s_axis_tready_i;
-axis_sync_fifo #(1024, 128) adc_buffer(
+//2**10 is 1024
+axis_sync_fifo #(10, 128) adc_buffer(
 
 	rst,
 	clk,

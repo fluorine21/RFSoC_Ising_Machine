@@ -127,10 +127,12 @@ initial begin
 	//Start the ADC readback
 	del_trig <= 1;
 	
+	//Account for trigger FSM one cycle delay
+	clk_cycle();
 	
 	for(i = 0; i < 1024; i = i + 1) begin
 		//Set the current data and cycle the clock
-		s_axis_tdata <= {{4{16'b0}}, i, {3{16'b0}}};
+		s_axis_tdata <= {{4{16'b0}}, 8'(i), {3{16'b0}}};
 		clk_cycle();
 	end
 	
@@ -140,7 +142,18 @@ initial begin
 	//Start reading out the adc
 	m_axis_tready <= 1;
 	
-	repeat(1100) clk_cycle();
+	//While there is data coming out of the fifo
+	i = 0;
+	num_errs = 0;
+	while(m_axis_tvalid) begin
+		if(m_axis_tdata != {{4{16'b0}}, 8'(i), {3{16'b0}}}) begin
+			num_errs = num_errs + 1;
+		end
+		clk_cycle();
+		i = i + 1;
+	end
+	
+	$display("\nADC PS readback test complete, num errs: %x\n", num_errs);
 	
 end
 

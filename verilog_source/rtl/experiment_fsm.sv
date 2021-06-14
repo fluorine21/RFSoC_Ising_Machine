@@ -136,7 +136,7 @@ axis_sync_fifo
 //////////////////////////////////////////////////////////////////////////
 
 
-reg out;//0 for MAC, 1 for NL
+reg out;//0 for MAC, 1 for NL (changed during runtime by instruction)
 reg [num_bits-1:0] out_val = out ? nl_val_in : mac_val_in;
 
 task execute_run();
@@ -307,9 +307,15 @@ always @ (posedge clk or negedge rst) begin
 		
 		
 		state_del_meas_1: begin
-			a_valid <= 0;
-			b_valid <= 0;
-			c_valid <= 0;
+			//keep all outputs valid so we bias the modulator back to 0 signal
+			a_valid <= 1;
+			b_valid <= 1;
+			c_valid <= 1;
+			
+			//Set all outputs back to 0 here
+			a_out <= 0;
+			b_out <= 0;
+			c_out <= 0;
 			
 			//If both are done
 			if(mac_mag > del_meas_thresh && nl_mag > del_meas_thresh) begin
