@@ -104,7 +104,7 @@ initial begin
 		//If there's something coming out the other end
 		if(val_valid) begin
 			//See if we got the correct value out
-			if(val_out != lookup_table_out[j]) begin
+			if(val_out != 8'(lookup_table_out[j])) begin
 				num_errs = num_errs + 1;
 			end
 			j = j + 1;
@@ -173,7 +173,7 @@ begin
 end
 endtask
 
-
+//When you (Jim) implement this in Python, please just make 65k arrays instead and then you can avoid all of this nonsense
 task write_lookup_table
 (
 integer lut_in[], integer lut_out[]
@@ -198,9 +198,11 @@ begin
 	end
 	
 	//Writing the lookup table
+	//Starting address first (address 0)
 	gpio_write(0, 0);
 	gpio_write(0, 0);
 	for(r = 0; r < 65536; r = r + 1) begin
+		//Each write is 16 bits
 		gpio_write(1, 0);
 		gpio_write(1, 8'(lut_data[r]));
 	end

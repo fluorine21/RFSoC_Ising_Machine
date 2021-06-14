@@ -81,6 +81,7 @@ lookup_table #(addr_reg, data_reg, 16, num_bits) input_lookup_table_inst
 );
 
 
+//FSM for running the ADC buffer
 reg adc_buffer_valid;
 reg [1:0] state;
 reg [9:0] cnt;
@@ -199,3 +200,6 @@ end
 
 
 endmodule
+
+
+

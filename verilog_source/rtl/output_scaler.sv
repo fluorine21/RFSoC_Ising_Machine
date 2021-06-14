@@ -1,6 +1,7 @@
 
 
 //Takes an 8-bit input and returns a 256-bit dac word with a 2ns pulse in the middle each cycle
+//Basically the lookup table but it also puts the DAC word together correctly
 
 import ising_config::*;
 

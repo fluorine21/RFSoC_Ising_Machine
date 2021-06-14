@@ -145,7 +145,7 @@ begin
 	//If we're done
 	if(!instr_axis_tvalid)begin
 	
-	
+		state <= state_idle;//Return to the idle state 
 	end
 	else begin
 	
