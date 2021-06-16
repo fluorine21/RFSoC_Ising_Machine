@@ -296,6 +296,7 @@ always @ (posedge clk or negedge rst) begin
 				a_valid <= 1;
 				mac_run <= 1;
 				nl_run <= 1;
+				del_done <= 0;
 			end
 			else if(bc_del_meas_trig) begin
 				state <= state_del_meas_1;
@@ -305,6 +306,7 @@ always @ (posedge clk or negedge rst) begin
 				c_valid <= 1;
 				mac_run <= 1;
 				nl_run <= 1;
+				del_done <= 0;
 			end
 			else if(run_trig) begin
 				state <= state_run;

@@ -206,7 +206,55 @@ initial begin
 	del_meas_val <= 8'h7F;
 	del_meas_thresh <= 8'h10;
 	
+	//Try the A delay measurement first
+	a_del_meas_trig <= 1;
 	
+	repeat(10) clk_cycle();
+	//assert the triggering value on the MAC input for one cycle
+	mac_val_in <= 8'h3F;
+	clk_cycle();
+	mac_val_in <= 0;
+	repeat(10) clk_cycle();
+	
+	//Make sure the DEL flag was not asserted here
+	if(del_done) begin
+		$display("Error, del flag was asserted before measurement finished!\n");
+	end
+	
+	nl_val_in <= 8'h3F;//Do the same thing for NL
+	clk_cycle();
+	nl_val_in <= 0;
+	repeat(100) clk_cycle();
+	
+	//Check to make sure the done flag was asserted
+	if(!del_done) begin
+		$display("Error, del flag was not asserted after 100 cycles\n");
+	end
+	
+	//Check to make sure the outputs are correct
+	if(del_meas_mac_result != 10) begin
+		$display("Error, MAC delay measurement result was wrong!\n");
+	end
+	if(del_meas_nl_result != 20) begin
+		$display("Error, NL delay measurement result was wrong!\n");
+	end
+	
+	
+	//Load more dummy data into the internal A and C fifos
+	
+	a_in_valid <= 1;
+	c_in_valid <= 1;
+	
+	for(i = 0; i < 8; i = i + 1) begin
+		a_in_data <= 8'(i);
+		c_in_data <= 8'(i);
+		clk_cycle();
+	end
+	
+	a_in_valid <= 0;
+	c_in_valid <= 0;
+	
+	//Feed the FSM some instructions and see what happens
 	
 	
 	
