@@ -21,11 +21,11 @@ module experiment_fsm(
 	//Needed for CPU readback
 	output wire [num_bits-1:0] a_in_data,
 	output wire a_in_valid,
-	input wire a_in_ready,
+	output wire a_in_ready,
 	
-	output wire [num_bits-1:0] c_out_data,
-	output wire c_out_valid,
-	input wire c_out_ready,
+	input wire [num_bits-1:0] c_in_data,
+	input wire c_in_valid,
+	output wire c_in_ready,
 
 	output wire [num_bits-1:0] a_out_data,
 	output wire a_out_valid,
@@ -62,9 +62,11 @@ module experiment_fsm(
 	input wire a_del_meas_trig, bc_del_meas_trig,
 	input wire [num_bits-1:0] del_meas_val,
 	input wire [num_bits-1:0] del_meas_thresh,//If we reach this value the pulse is consildered as recieved and the timer stops
-	output wire [15:0] del_meas_mac_result,
-	output wire [15:0] del_meas_nl_result,
-	output reg del_done //Done flag for when this measurement finishes
+	output reg [15:0] del_meas_mac_result,
+	output reg [15:0] del_meas_nl_result,
+	output reg del_done, //Done flag for when this measurement finishes
+	
+	input wire halt//from shift reg attached to bus, tells fsm when to stop on buffer empty
 );
 
 //Delay measurement stuff
@@ -76,26 +78,28 @@ wire [num_bits-1:0] nl_mag = nl_val_in[num_bits-1] ? (~nl_val_in+1) : nl_val_in;
 //Internal busses for alpha and gamma fifos////////////////////////////////
 //alpha in and out bus///////////////
 wire [num_bits-1:0] a_r_tdata;
-wire a_r_tvalid,
-reg a_r_tready,
+wire a_r_tvalid;
+reg a_r_tready;
 assign a_out_data = a_r_tdata;
 assign a_out_valid = a_r_tvalid;
 
 reg [num_bits-1:0] a_w_tdata;
-reg a_w_tvalid,
-wire a_w_tready,
+reg a_w_tvalid;
+wire a_w_tready;
+assign a_in_ready = a_w_tready;
 /////////////////////////////////////
 
 //gamma in and out bus///////////////
 wire [num_bits-1:0] c_r_tdata;
-wire c_r_tvalid,
-reg c_r_tready,
+wire c_r_tvalid;
+reg c_r_tready;
 assign c_out_data = c_r_tdata;
 assign c_out_valid = c_r_tvalid;
 
 reg [num_bits-1:0] c_w_tdata;
-reg c_w_tvalid,
-wire c_w_tready,
+reg c_w_tvalid;
+wire c_w_tready;
+assign c_in_ready = c_w_tready;
 /////////////////////////////////////
 
 
@@ -114,7 +118,7 @@ axis_sync_fifo
     
     a_r_tdata,
     a_r_tvalid,
-    (a_r_tready | a_out_ready) 
+    (a_r_tready | a_out_ready) //Readout from either the CPU or the FMS
 );
 
 //gamma fifo
@@ -131,10 +135,12 @@ axis_sync_fifo
     
     c_r_tdata,
     c_r_tvalid,
-    (c_r_tready | c_out_ready)
+    (c_r_tready | c_out_ready) //Readout from either the CPU or the FMS
 );
 //////////////////////////////////////////////////////////////////////////
 
+//1 if all buffers are valid, waits on invalid buffer but does not halt
+wire buf_rdy = c_r_tvalid & a_r_tvalid & b_r_tvalid & instr_axis_tvalid;
 
 reg out;//0 for MAC, 1 for NL (changed during runtime by instruction)
 reg [num_bits-1:0] out_val = out ? nl_val_in : mac_val_in;
@@ -143,11 +149,13 @@ task execute_run();
 begin
 	
 	//If we're done
-	if(!instr_axis_tvalid)begin
+	if(!instr_axis_tvalid && halt_in)begin
 	
 		state <= state_idle;//Return to the idle state 
+		run_done <= 1;
 	end
-	else begin
+	//Only execute if we're on a valid instruction
+	else if(!instr_axis_tvalid) begin
 	
 		if(instr_axis_tdata & (1 << 0) begin //remove a
 			a_r_tready <= 1;
@@ -253,7 +261,10 @@ begin
 	
 	out <= 0;
 	
-
+	del_meas_mac_result <= 0;
+	del_meas_nl_result <= 0;
+	del_done <= 0;
+	
 end
 endtask
 
@@ -297,12 +308,16 @@ always @ (posedge clk or negedge rst) begin
 			end
 			else if(run_trig) begin
 				state <= state_run;
+				run_done <= 0;
 			end
 		end
 		
 		
 		state_run: begin
-			execute_run();
+			//If all of the buffers are ready
+			if(buf_rdy) begin
+				execute_run();
+			end
 		end
 		
 		

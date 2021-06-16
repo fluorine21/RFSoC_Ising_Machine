@@ -26,6 +26,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	config_reg
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling module adc_driver_tb
+
+Top level modules:
+	adc_driver_tb
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/delay_cal.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling module delay_cal
@@ -41,13 +48,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	axis_sync_fifo
 	axis_async_fifo
-
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
--- Compiling package ising_config
-
-Top level modules:
-	--none--
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
