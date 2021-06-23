@@ -1,5 +1,5 @@
 
-
+import ising_config::*;
 module experiment_fsm_tb();
 
 reg clk, rst;
@@ -82,7 +82,7 @@ experiment_fsm dut(
 	instr_axis_tready,
 	
 	//beta in bus////////////////
-	b_r_tdata;
+	b_r_tdata,
 	b_r_tvalid,
 	b_r_tready,
 	
@@ -164,6 +164,12 @@ initial begin
 	
 	halt_reg <= 0;
 	
+	a_del_meas_trig <= 0;
+	bc_del_meas_trig <= 0;
+	
+	del_meas_thresh <= 0;
+	del_meas_val <= 0;
+	
 	
 	repeat(10) clk_cycle();
 	rst <= 0;
@@ -235,9 +241,12 @@ initial begin
 	if(del_meas_mac_result != 10) begin
 		$display("Error, MAC delay measurement result was wrong!\n");
 	end
-	if(del_meas_nl_result != 20) begin
+	if(del_meas_nl_result != 21) begin
 		$display("Error, NL delay measurement result was wrong!\n");
 	end
+	
+	
+	$display("Delay measurement test complete");
 	
 	
 	//Load more dummy data into the internal A and C fifos
@@ -326,6 +335,9 @@ initial begin
 	repeat(4) clk_cycle();
 	
 	instr_axis_tdata <= 0;
+	instr_axis_tvalid <= 0;//Halt the FSM here
+	halt_reg <= 1;
+	
 	
 	//Read out A and see what we get
 	a_out_ready <= 1;
@@ -365,6 +377,10 @@ initial begin
 	end
 	
 	
+	
+	
+	
+	
 
 end
 
@@ -379,28 +395,6 @@ begin
 	clk <= 0;
 end
 endtask
-
-task gpio_write;
-input [15:0] addr;
-input [7:0] data;
-begin
-	
-	clk_cycle();
-	gpio_addr <= addr;
-	gpio_data <= data;
-	clk_cycle();
-	w_clk <= 1;
-	repeat(2) clk_cycle();
-	w_clk <= 0;
-	repeat(5) clk_cycle();
-	
-end
-endtask
-
-
-
-
-
 
 endmodule 
 

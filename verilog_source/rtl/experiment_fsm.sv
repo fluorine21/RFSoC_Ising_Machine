@@ -1,5 +1,5 @@
 
-
+import ising_config::*;
 
 module experiment_fsm(
 	input wire clk, rst,
@@ -11,16 +11,16 @@ module experiment_fsm(
 	//Instruction bus, upper 16 bits are instruction, lower 16 are data for the 32-bit bus coming from cpu
 	input wire [16:0] instr_axis_tdata,
 	input wire instr_axis_tvalid,
-	output wire instr_axis_tready,
+	output reg instr_axis_tready,
 	
 	//beta in bus////////////////
-	input wire [num_bits-1:0] b_r_tdata;
+	input wire [num_bits-1:0] b_r_tdata,
 	input wire b_r_tvalid,
 	output reg b_r_tready,
 	
 	//Needed for CPU readback
-	output wire [num_bits-1:0] a_in_data,
-	output wire a_in_valid,
+	input wire [num_bits-1:0] a_in_data,
+	input wire a_in_valid,
 	output wire a_in_ready,
 	
 	input wire [num_bits-1:0] c_in_data,
@@ -145,14 +145,28 @@ wire buf_rdy = c_r_tvalid & a_r_tvalid & b_r_tvalid & instr_axis_tvalid;
 reg out;//0 for MAC, 1 for NL (changed during runtime by instruction)
 reg [num_bits-1:0] out_val = out ? nl_val_in : mac_val_in;
 
+
+//State definitions
+reg [2:0] state;
+reg mac_done;//Used for keeping track of what is done when doing delay measurement
+localparam [2:0] state_idle = 0, 
+				 state_del_meas_1 = 1, 
+				 state_del_meas_2 = 2, //waits for all triggers to go low before resetting
+				 state_run = 3,
+				 state_wait_rst = 4;
+
 task execute_run();
 begin
 	
 	//If we're done
-	if(!instr_axis_tvalid && halt_in)begin
+	if(!instr_axis_tvalid && halt)begin
 	
 		state <= state_idle;//Return to the idle state 
 		run_done <= 1;
+		
+		//Deassert ready
+		instr_axis_tready <= 0;
+		
 	end
 	//Only execute if we're on a valid instruction
 	else if(!instr_axis_tvalid) begin
@@ -166,85 +180,86 @@ begin
 		b_valid <= 1;
 		c_valid <= 1;
 	
-		if(instr_axis_tdata & (1 << 0) begin //remove a
+		if(instr_axis_tdata & (1 << 0)) begin //remove a
 			a_r_tready <= 1;
 		end
-		else
+		else begin
 			a_r_tready <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 1) begin //remove b
+		if(instr_axis_tdata & (1 << 1)) begin //remove b
 			b_r_tready <= 1;
 		end
-		else
+		else begin
 			b_r_tready <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 2) begin //remove c
+		if(instr_axis_tdata & (1 << 2)) begin //remove c
 			c_r_tready <= 1;
 		end
-		else
+		else begin
 			c_r_tready <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 3) begin //add out -> a
+		if(instr_axis_tdata & (1 << 3)) begin //add out -> a
 			a_w_tdata <= out_val;
 			a_w_tvalid <= 1;
-		else
+		end
+		else begin
 			a_w_tvalid <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 4) begin //add out -> c
+		if(instr_axis_tdata & (1 << 4)) begin //add out -> c
 			c_w_tdata <= out_val;
 			c_w_tvalid <= 1;
-		else
+		end
+		else begin
 			c_w_tvalid <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 5) begin //add 0 -> a
+		if(instr_axis_tdata & (1 << 5)) begin //add 0 -> a
 			a_w_tdata <= 0;
 			a_w_tvalid <= 1;
-		else
+		end
+		else begin
 			a_w_tvalid <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 6) begin //add 0 -> c
+		if(instr_axis_tdata & (1 << 6)) begin //add 0 -> c
 			c_w_tdata <= 0;
 			c_w_tvalid <= 1;
-		else
+		end
+		else begin
 			c_w_tvalid <= 0;
 		end
 		
-		if(instr_axis_tdata & (1 << 7) begin //switch
+		if(instr_axis_tdata & (1 << 7)) begin //switch
 			out <= ~out;
 		end
-		if(instr_axis_tdata & (1 << 8) begin
+		if(instr_axis_tdata & (1 << 8)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 9) begin
+		if(instr_axis_tdata & (1 << 9)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 10) begin
+		if(instr_axis_tdata & (1 << 10)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 11) begin
+		if(instr_axis_tdata & (1 << 11)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 12) begin
+		if(instr_axis_tdata & (1 << 12)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 13) begin
+		if(instr_axis_tdata & (1 << 13)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 14) begin
+		if(instr_axis_tdata & (1 << 14)) begin
 		
 		end
-		if(instr_axis_tdata & (1 << 15) begin
+		if(instr_axis_tdata & (1 << 15)) begin
 		
 		end
-		
-		
-		
 	
 	end
 
@@ -274,7 +289,7 @@ begin
 	del_meas_nl_result <= 0;
 	del_done <= 0;
 	
-	//Outputs to DACsa_out <= a_r_tdata;
+	//Outputs to DACs
 	a_out <= 0;
 	b_out <= 0;
 	c_out <= 0;
@@ -282,17 +297,20 @@ begin
 	b_valid <= 0;
 	c_valid <= 0;
 	
+	mac_run <= 0;
+	nl_run <= 0;
+	
+	run_done <= 1;//done by default
+	
+	instr_axis_tready <= 0;
+	
+	mac_done <= 0;
+	
 	
 end
 endtask
 
-reg [2:0] state;
-reg mac_done;
-localparam [2:0] state_idle = 0, 
-				 state_del_meas_1 = 1, 
-				 state_del_meas_2 = 2, //waits for all triggers to go low before resetting
-				 state_run = 3,
-				 state_wait_rst = 4;
+
 
 
 always @ (posedge clk or negedge rst) begin
@@ -305,8 +323,12 @@ always @ (posedge clk or negedge rst) begin
 	
 		state_idle: begin
 		
+			//Idle state defaults
 			mac_del_counter <= 1;
 			nl_del_counter <= 1;
+			mac_run <= 0;
+			nl_run <= 0;
+			mac_done <= 0;
 			
 			if(a_del_meas_trig) begin
 				state <= state_del_meas_1;
@@ -329,6 +351,13 @@ always @ (posedge clk or negedge rst) begin
 			else if(run_trig) begin
 				state <= state_run;
 				run_done <= 0;
+				
+				mac_run <= 1;
+				nl_run <= 1;
+				
+				//We assert ready on this clock cycle so that we won't execute the first instruction twice
+				instr_axis_tready <= 1;
+				
 			end
 		end
 		
@@ -364,11 +393,13 @@ always @ (posedge clk or negedge rst) begin
 				nl_del_counter <= nl_del_counter + 1;
 				mac_done <= 1;
 				state <= state_del_meas_2;
+				del_meas_mac_result <= mac_del_counter;
 			end
 			else if(nl_mag > del_meas_thresh) begin
 				mac_del_counter <= mac_del_counter + 1;
 				mac_done <= 0;
 				state <= state_del_meas_2;
+				del_meas_nl_result <= nl_del_counter;
 			end
 			//If we had some kind of timeout
 			else if(nl_del_counter > 255 || mac_del_counter > 255) begin
