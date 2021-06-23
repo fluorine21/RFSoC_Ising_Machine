@@ -255,12 +255,116 @@ initial begin
 	c_in_valid <= 0;
 	
 	//Feed the FSM some instructions and see what happens
+	run_trig <= 1;
+	//Tell it to remove a for 8 cycles and verify the output
+	instr_axis_tdata <= (1 << 0);
+	instr_axis_tvalid <= 1;
 	
+	//Need one cycle to switch into the run state
+	clk_cycle();
 	
+	//verify the output
+	num_errs <= 0;
+	for(i = 0; i < 8; i = i + 1) begin
+		clk_cycle();//Cycle clock first so we execute the current instruction
+		if(a_out != 8'(i)) begin
+			num_errs <= num_errs + 1;
+		end
+	end
 	
+	$display("\nA buff readout test complete, num errs: %x\n", num_errs);
 	
+	//Do the same thing for c
+	instr_axis_tdata <= (1 << 2);
+	//verify the output
+	num_errs <= 0;
+	for(i = 0; i < 8; i = i + 1) begin
+		clk_cycle();//Cycle clock first so we execute the current instruction
+		if(c_out != 8'(i)) begin
+			num_errs <= num_errs + 1;
+		end
+	end
+	
+	$display("\nC buff readout test complete, num errs: %x\n", num_errs);
 
-
+	//Do the same thing for B but this time provide the B input
+	instr_axis_tdata <= (1 << 1);
+	b_r_tdata <= 8'hff;
+	//verify the output
+	num_errs <= 0;
+	for(i = 0; i < 8; i = i + 1) begin
+		clk_cycle();//Cycle clock first so we execute the current instruction
+		if(b_out != 8'hff) begin
+			num_errs <= num_errs + 1;
+		end
+	end
+	
+	$display("\nB buff readout test complete, num errs: %x\n", num_errs);
+	
+	
+	//See if we can get it to add stuff into the buffers from the MAC input
+	mac_val_in <= 8'haa;
+	mac_val_valid <= 1;
+	nl_val_in <= 8'hbb;
+	nl_val_valid <= 1;
+	
+	instr_axis_tdata <= (1 << 3);
+	
+	//Add it to the a buffer 8 times, but on the last time also do a switch
+	repeat(7) clk_cycle();
+	instr_axis_tdata <= (1 << 3) | (1 << 7);
+	clk_cycle();
+	
+	//Now do the same thing for the c buffer
+	instr_axis_tdata <= (1 << 4);
+	
+	repeat(8) clk_cycle();
+	
+	//Now add 4 0s to both A and CPU
+	instr_axis_tdata <= (1 << 5) | (1 << 6);
+	
+	repeat(4) clk_cycle();
+	
+	instr_axis_tdata <= 0;
+	
+	//Read out A and see what we get
+	a_out_ready <= 1;
+	num_errs <= 0;
+	for(i = 0; i < 8+4; i = i + 1) begin
+		if(i < 8) begin//Should be 0xaa
+			if(a_out_data != 8'haa) begin
+				num_errs <= num_errs + 1;
+			end
+		end
+		else begin//Should be 0
+			if(a_out_data) begin
+				num_errs <= num_errs + 1;
+			end
+		end
+		clk_cycle();
+	end
+	
+	a_out_ready <= 0;
+	$display("\nA buff write+read test complete, num errs: %x\n", num_errs);
+	
+	//Read out C and see what we get
+	c_out_ready <= 1;
+	num_errs <= 0;
+	for(i = 0; i < 8+4; i = i + 1) begin
+		if(i < 8) begin//Should be 0xbb
+			if(c_out_data != 8'hbb) begin
+				num_errs <= num_errs + 1;
+			end
+		end
+		else begin//Should be 0
+			if(c_out_data) begin
+				num_errs <= num_errs + 1;
+			end
+		end
+		clk_cycle();
+	end
+	
+	
 
 end
 

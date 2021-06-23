@@ -157,6 +157,15 @@ begin
 	//Only execute if we're on a valid instruction
 	else if(!instr_axis_tvalid) begin
 	
+		//Buffer outputs always get pushed to DACs regardless of instruction
+		a_out <= a_r_tdata;
+		b_out <= b_r_tdata;
+		c_out <= c_r_tdata;
+		//They're also always valid here
+		a_valid <= 1;
+		b_valid <= 1;
+		c_valid <= 1;
+	
 		if(instr_axis_tdata & (1 << 0) begin //remove a
 			a_r_tready <= 1;
 		end
@@ -264,6 +273,15 @@ begin
 	del_meas_mac_result <= 0;
 	del_meas_nl_result <= 0;
 	del_done <= 0;
+	
+	//Outputs to DACsa_out <= a_r_tdata;
+	a_out <= 0;
+	b_out <= 0;
+	c_out <= 0;
+	a_valid <= 0;
+	b_valid <= 0;
+	c_valid <= 0;
+	
 	
 end
 endtask
