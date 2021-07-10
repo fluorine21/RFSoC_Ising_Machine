@@ -392,10 +392,8 @@ initial begin
 	
 	instr_axis_tdata <= 0;
 	instr_axis_tvalid <= 0;//Halt the FSM here
-	run_trig <= 0;
 	halt_reg <= 1;
 	
-	repeat(100) clk_cycle();
 	
 	//Read out A and see what we get
 	a_out_ready <= 1;
@@ -433,9 +431,6 @@ initial begin
 		end
 		clk_cycle();
 	end
-	
-	c_out_ready <= 0;
-	$display("\nC buff write+read test complete, num errs: %x\n", num_errs);
 	
 	
 	

@@ -66,7 +66,11 @@ module experiment_fsm(
 	output reg [15:0] del_meas_nl_result,
 	output reg del_done, //Done flag for when this measurement finishes
 	
-	input wire halt//from shift reg attached to bus, tells fsm when to stop on buffer empty
+	input wire halt,//from shift reg attached to bus, tells fsm when to stop on buffer empty
+	
+	output wire [2:0] state_out,
+	
+	output reg err_out //This will get set if a buffer was read from while not being valid
 );
 
 //Delay measurement stuff
@@ -143,11 +147,12 @@ axis_sync_fifo
 wire buf_rdy = c_r_tvalid & a_r_tvalid & b_r_tvalid & instr_axis_tvalid;
 
 reg out;//0 for MAC, 1 for NL (changed during runtime by instruction)
-reg [num_bits-1:0] out_val = out ? nl_val_in : mac_val_in;
+wire [num_bits-1:0] out_val = out ? nl_val_in : mac_val_in;
 
 
 //State definitions
 reg [2:0] state;
+assign state_out = state;
 reg mac_done;//Used for keeping track of what is done when doing delay measurement
 localparam [2:0] state_idle = 0, 
 				 state_del_meas_1 = 1, 
@@ -161,15 +166,19 @@ begin
 	//If we're done
 	if(!instr_axis_tvalid && halt)begin
 	
-		state <= state_idle;//Return to the idle state 
+		state <= state_wait_rst;//Return to the idle state 
 		run_done <= 1;
+		
+		//Stop any buffer writes
+		a_w_tvalid <= 0;
+		c_w_tvalid <= 0;
 		
 		//Deassert ready
 		instr_axis_tready <= 0;
 		
 	end
 	//Only execute if we're on a valid instruction
-	else if(!instr_axis_tvalid) begin
+	else if(instr_axis_tvalid) begin
 	
 		//Buffer outputs always get pushed to DACs regardless of instruction
 		a_out <= a_r_tdata;
@@ -182,6 +191,8 @@ begin
 	
 		if(instr_axis_tdata & (1 << 0)) begin //remove a
 			a_r_tready <= 1;
+			//If this buffer was not valid, raise an error
+			if(!a_r_tvalid) begin err_out <= 1; end
 		end
 		else begin
 			a_r_tready <= 0;
@@ -189,6 +200,8 @@ begin
 		
 		if(instr_axis_tdata & (1 << 1)) begin //remove b
 			b_r_tready <= 1;
+			//If this buffer was not valid, raise an error
+			if(!b_r_tvalid) begin err_out <= 1; end
 		end
 		else begin
 			b_r_tready <= 0;
@@ -196,6 +209,8 @@ begin
 		
 		if(instr_axis_tdata & (1 << 2)) begin //remove c
 			c_r_tready <= 1;
+			//If this buffer was not valid, raise an error
+			if(!c_r_tvalid) begin err_out <= 1; end
 		end
 		else begin
 			c_r_tready <= 0;
@@ -221,7 +236,7 @@ begin
 			a_w_tdata <= 0;
 			a_w_tvalid <= 1;
 		end
-		else begin
+		else if(!(instr_axis_tdata & (1 << 3)))begin //If we're also not trying to write to the buffer
 			a_w_tvalid <= 0;
 		end
 		
@@ -229,7 +244,7 @@ begin
 			c_w_tdata <= 0;
 			c_w_tvalid <= 1;
 		end
-		else begin
+		else if(!(instr_axis_tdata & (1 << 4)))begin //If we're also not trying to write to the buffer
 			c_w_tvalid <= 0;
 		end
 		
@@ -262,7 +277,12 @@ begin
 		end
 	
 	end
-
+	
+	//Otherwise don't write anything to the two buffers
+	else begin
+		a_w_tvalid <= 0;
+		c_w_tvalid <= 0;
+	end
 
 end
 endtask
@@ -306,6 +326,7 @@ begin
 	
 	mac_done <= 0;
 	
+	err_out <= 0;
 	
 end
 endtask
@@ -364,9 +385,9 @@ always @ (posedge clk or negedge rst) begin
 		
 		state_run: begin
 			//If all of the buffers are ready
-			if(buf_rdy) begin
-				execute_run();
-			end
+			//if(buf_rdy) begin //removing this check for now and replacing it with error flag instead
+			execute_run();
+			//end
 		end
 		
 		
