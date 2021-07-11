@@ -27,4 +27,12 @@ parameter nl_input_scaler_data_reg = 256;
 
 parameter var_fifo_depth = 12; //(2**12 = 4096)
 
+
+
+
+//Config Reg Address table
+parameter run_trig_reg = 16'h0000;
+parameter del_trig_reg = 16'h0001;
+
+
 endpackage

@@ -437,11 +437,6 @@ initial begin
 	c_out_ready <= 0;
 	$display("\nC buff write+read test complete, num errs: %x\n", num_errs);
 	
-	
-	
-	
-	
-	
 
 end
 

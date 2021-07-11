@@ -655,3 +655,5 @@ run -all
 # 
 # C buff write+read test complete, num errs: 00000000
 # 
+# End time: 16:14:18 on Jul 10,2021, Elapsed time: 1:40:43
+# Errors: 0, Warnings: 4
