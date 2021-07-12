@@ -4,6 +4,7 @@
 package ising_config;
 
 //GPIO bus definitions
+parameter instr_b_sw = 25;//Tells AXIS mux where to write incomming axis word
 parameter gpio_w_clk_bit = 24;
 parameter gpio_addr_start = 15;
 parameter gpio_addr_end = 0;
@@ -19,6 +20,7 @@ parameter num_bits = 8; //Bit precision to use for internal logic
 
 
 parameter var_fifo_depth = 12; //(2**12 = 4096)
+parameter instr_fifo_depth = 16;
 
 
 
@@ -45,7 +47,8 @@ parameter a_read_reg = 16'h0008;
 parameter c_read_reg = 16'h0009;
 parameter mac_adc_read_reg = 16'h000A;
 parameter nl_adc_read_reg = 16'h000B;
-
+parameter instr_count_reg = 16'h0012;
+parameter b_count_reg = 16'h0013;
 
 
 

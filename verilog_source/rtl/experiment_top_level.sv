@@ -11,8 +11,44 @@ module experiment_top_level
 	output wire [15:0] gpio_out_bus,
 	
 	
+	//Outputs to DACs/////////////////
+	output wire [255:0] m0_axis_tdata,
+	output wire m0_axis_tvalid,
+	input wire m0_axis_tready,
+	
+	output wire [255:0] m1_axis_tdata,
+	output wire m1_axis_tvalid,
+	input wire m1_axis_tready,
+	
+	output wire [255:0] m2_axis_tdata,
+	output wire m2_axis_tvalid,
+	input wire m2_axis_tready,
+	//////////////////////////////////
+	
+	//Inputs from ADCs////////////////
+	input wire [127:0] s0_axis_tdata,
+	input wire s0_axis_tvalid,
+	output wire s0_axis_tready,
+	
+	input wire [127:0] s1_axis_tdata,
+	input wire s1_axis_tvalid,
+	output wire s1_axis_tready,
+	//////////////////////////////////
+	
+	//Input from CPU over DMA/////////
+	input wire [127:0] s2_axis_tdata,
+	input wire s2_axis_tvalid,
+	output wire s2_axis_tready,
+	//////////////////////////////////
+	
 );
 
+assign m0_axis_tvalid = 1;
+assign m1_axis_tvalid = 1;
+assign m2_axis_tvalid = 1;
+
+assign s0_axis_tready = 1;
+assign s1_axis_tready = 1
 
 //Experiment FSM instantiation
 //Run trigger for starting experiment
@@ -103,7 +139,10 @@ gpio_reader
 	
 	nl_adc_data,
 	nl_adc_valid,
-	nl_adc_ready
+	nl_adc_ready,
+	
+	instr_count,
+	b_count
 );
 
 
@@ -185,9 +224,9 @@ mac_driver_shift_amt_reg_base_addr
 	gpio_in,
 	
 	//Input from ADC
-	mac_adc_axis_tdata,
-	mac_adc_axis_tvalid,
-	mac_adc_axis_tready,
+	s0_axis_tdata,
+	s0_axis_tvalid,
+	s0_axis_tready,
 	
 	//Output to experiment FSM
 	mac_val_in,
@@ -216,9 +255,9 @@ nl_driver_shift_amt_reg_base_addr
 	gpio_in,
 	
 	//Input from ADC
-	nl_adc_axis_tdata,
-	nl_adc_axis_tvalid,
-	nl_adc_axis_tready,
+	s1_axis_tdata,
+	s1_axis_tvalid,
+	s1_axis_tready,
 	
 	//Output to experiment FSM
 	nl_val_in,
@@ -235,6 +274,135 @@ nl_driver_shift_amt_reg_base_addr
 	
 );
 
+
+//DAC drivers
+
+wire [255:0] m0_axis_tdata;
+dac_driver
+#(
+a_output_scaler_addr_reg,
+a_output_scaler_data_reg,
+a_static_output_reg_base_addr,//Static dac word to output
+a_dac_mux_sel_reg_base_addr,//Selects between input from output scaler, static word, or delay cal
+a_shift_amt_reg_base_addr//Selects how much to shift output by
+) a_dac_driver_inst
+(
+	clk, rst,
+	
+	gpio_in,
+	
+	a_out,
+	a_valid,
+	
+	1'b0,//Delay trgger
+	
+	m0_axis_tdata
+	
+);
+
+wire [255:0] m1_axis_tdata;
+dac_driver
+#(
+b_output_scaler_addr_reg,
+b_output_scaler_data_reg,
+b_static_output_reg_base_addr,//Static dac word to output
+b_dac_mux_sel_reg_base_addr,//Selects between input from output scaler, static word, or delay cal
+b_shift_amt_reg_base_addr//Selects how much to shift output by
+) b_dac_driver_inst
+(
+	clk, rst,
+	
+	gpio_in,
+	
+	b_out,
+	b_valid,
+	
+	1'b0,//Delay trgger
+	
+	m1_axis_tdata
+	
+);
+
+wire [255:0] m2_axis_tdata;
+dac_driver
+#(
+c_output_scaler_addr_reg,
+c_output_scaler_data_reg,
+c_static_output_reg_base_addr,//Static dac word to output
+c_dac_mux_sel_reg_base_addr,//Selects between input from output scaler, static word, or delay cal
+c_shift_amt_reg_base_addr//Selects how much to shift output by
+) c_dac_driver_inst
+(
+	clk, rst,
+	
+	gpio_in,
+	
+	c_out,
+	c_valid,
+	
+	1'b0,//Delay trgger
+	
+	m2_axis_tdata
+	
+);
+
+
+//Input fifo selector for ps to pl
+
+wire [15:0] sa_axis_tdata, sb_axis_tdata;
+wire sa_axis_tvalid, sa_axis_tvalid, sb_axis_tvalid, sb_axis_tready;
+
+ axis_selector #(16) axis_input_selector
+(
+	s2_axis_tdata,
+	s2_axis_tvalid,
+	s2_axis_tready,
+	
+	sa_axis_tdata,
+	sa_axis_tvalid,
+	sa_axis_tready,
+	
+	sb_axis_tdata,
+	sb_axis_tvalid,
+	sb_axis_tready,
+	
+	instr_b_sel
+	
+);
+
+//FIFOs for B and instructions
+wire [31:0] b_count, instr_count;
+counter_fifo
+#(16, instr_fifo_depth) instr_fifo_inst
+(
+	clk, rst,
+	
+	sa_axis_tdata,
+	sa_axis_tvalid,
+	sa_axis_tready,
+	
+	instr_axis_tdata,
+	instr_axis_tvalid,
+	instr_axis_tready,
+	
+	instr_count
+);
+
+counter_fifo
+#(16, instr_fifo_depth) b_fifo_inst
+(
+	clk, rst,
+	
+	sb_axis_tdata,
+	sb_axis_tvalid,
+	sb_axis_tready,
+	
+	b_r_tdata,
+	b_r_tvalid,
+	b_r_tready,
+	
+	b_count
+);
 
 
 experiment_fsm dut(

@@ -29,7 +29,9 @@ module gpio_reader
 	
 	input wire [127:0] nl_adc_data,
 	input wire nl_adc_valid,
-	output reg nl_adc_ready
+	output reg nl_adc_ready,
+	
+	input wire [31:0] instr_count, b_count
 );
 
 
@@ -133,6 +135,13 @@ always @ * begin
 		end
 		del_meas_nl_result: begin
 			gpio_out <= del_meas_nl_result_in;
+		end
+		
+		instr_count_reg: begin
+			gpio_out <= instr_count;
+		end
+		b_count_reg: begin
+			gpio_out <= b_count;
 		end
 		
 		default begin
