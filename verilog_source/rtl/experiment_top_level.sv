@@ -8,35 +8,35 @@ module experiment_top_level
 	
 	input wire [31:0] gpio_in,
 	
-	output wire [15:0] gpio_out_bus,
+	output wire [31:0] gpio_out_bus,
 	
 	
 	//Outputs to DACs/////////////////
-	output wire [255:0] m0_axis_tdata,
+	output wire [255:0] m0_axis_tdata, //A
 	output wire m0_axis_tvalid,
 	input wire m0_axis_tready,
 	
-	output wire [255:0] m1_axis_tdata,
+	output wire [255:0] m1_axis_tdata, //B
 	output wire m1_axis_tvalid,
 	input wire m1_axis_tready,
 	
-	output wire [255:0] m2_axis_tdata,
+	output wire [255:0] m2_axis_tdata, //C
 	output wire m2_axis_tvalid,
 	input wire m2_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////
-	input wire [127:0] s0_axis_tdata,
+	input wire [127:0] s0_axis_tdata, //MAC
 	input wire s0_axis_tvalid,
 	output wire s0_axis_tready,
 	
-	input wire [127:0] s1_axis_tdata,
+	input wire [127:0] s1_axis_tdata, //NL
 	input wire s1_axis_tvalid,
 	output wire s1_axis_tready,
 	//////////////////////////////////
 	
 	//Input from CPU over DMA/////////
-	input wire [127:0] s2_axis_tdata,
+	input wire [127:0] s2_axis_tdata, 
 	input wire s2_axis_tvalid,
 	output wire s2_axis_tready,
 	//////////////////////////////////
@@ -82,7 +82,7 @@ wire c_in_valid;
 wire c_in_ready;
 
 //Allows CPU to load A and C fifos over gpio
-gpio_axis_writer #(a_write_addr,c_write_addr) gpio_axis_writer_inst
+gpio_axis_writer #(a_write_reg,c_write_reg) gpio_axis_writer_inst
 (
 	clk, rst,
 	

@@ -8,7 +8,7 @@ module gpio_reader
 	
 	input wire [31:0] gpio_in,
 	
-	output reg [15:0] gpio_out,
+	output reg [31:0] gpio_out,
 	
 	output wire valid,//1 if read was successful (if data was available in the a/c fifo)
 
@@ -39,10 +39,10 @@ wire w_clk = gpio_in[gpio_w_clk_bit];
 wire [addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
 wire [word_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
 
-reg [15:0] ac_reg;
+reg [31:0] ac_reg;
 reg ac_valid;
-wire a_data_wide = { {(16-num_bits){1'b0}}, a_data}; 
-wire c_data_wide = { {(16-num_bits){1'b0}}, c_data}; 
+wire a_data_wide = { {(32-num_bits){1'b0}}, a_data}; 
+wire c_data_wide = { {(32-num_bits){1'b0}}, c_data}; 
 
 wire reg_access = (gpio_addr == a_read_reg) || 
 				  (gpio_addr == c_read_reg) || 
@@ -91,7 +91,7 @@ always @ (posedge clk or negedge rst) begin
 					if(mac_adc_cnt == 3'b111) begin
 						mac_adc_ready <= 1;
 					end
-					ac_reg <= mac_adc_data[(mac_adc_cnt*16)+:16];
+					ac_reg <= mac_adc_data[(mac_adc_cnt*32)+:32];
 					mac_adc_cnt <= mac_adc_cnt + 1;
 					valid <= 1;
 				end
@@ -100,7 +100,7 @@ always @ (posedge clk or negedge rst) begin
 					if(nl_adc_cnt == 3'b111) begin
 						nl_adc_ready <= 1;
 					end
-					ac_reg <= nl_adc_data[(nl_adc_cnt*16)+:16];
+					ac_reg <= nl_adc_data[(nl_adc_cnt*32)+:32];
 					nl_adc_cnt <= nl_adc_cnt + 1;
 					valid <= 1;
 				end
