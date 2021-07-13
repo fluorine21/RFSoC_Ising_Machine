@@ -1,6 +1,8 @@
 
 import ising_config::*;
 
+
+//Takes two gpio writes for addr and data
 module lookup_table 
 #(
 //GPIO bus addresses

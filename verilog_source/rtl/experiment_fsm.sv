@@ -478,7 +478,7 @@ always @ (posedge clk or negedge rst) begin
 		end
 	
 		state_wait_rst: begin
-			if(!a_del_meas_trig && !bc_del_meas_trig && !run_trig) begin
+			if(!a_del_meas_trig && !bc_del_meas_trig && !run_trig && !halt) begin
 				state <= state_idle;
 			end
 		end

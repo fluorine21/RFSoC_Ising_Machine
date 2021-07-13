@@ -38,7 +38,7 @@ module experiment_top_level
 	//Input from CPU over DMA/////////
 	input wire [127:0] s2_axis_tdata, 
 	input wire s2_axis_tvalid,
-	output wire s2_axis_tready,
+	output wire s2_axis_tready
 	//////////////////////////////////
 	
 );
@@ -48,7 +48,13 @@ assign m1_axis_tvalid = 1;
 assign m2_axis_tvalid = 1;
 
 assign s0_axis_tready = 1;
-assign s1_axis_tready = 1
+assign s1_axis_tready = 1;
+
+wire [31:0] b_count, instr_count;
+
+wire [15:0] sa_axis_tdata, sb_axis_tdata;
+wire sa_axis_tvalid, sa_axis_tready, sb_axis_tvalid, sb_axis_tready;
+
 
 //Experiment FSM instantiation
 //Run trigger for starting experiment
@@ -81,23 +87,6 @@ wire [num_bits-1:0] c_in_data;
 wire c_in_valid;
 wire c_in_ready;
 
-//Allows CPU to load A and C fifos over gpio
-gpio_axis_writer #(a_write_reg,c_write_reg) gpio_axis_writer_inst
-(
-	clk, rst,
-	
-	gpio_in,
-	
-	a_in_data,
-	a_in_valid,
-	a_in_ready,
-	
-	c_in_data,
-	c_in_valid,
-	c_in_ready
-);
-
-
 
 wire [num_bits-1:0] a_out_data;
 wire a_out_valid;
@@ -112,41 +101,6 @@ wire c_out_ready;
 wire [15:0] gpio_out;
 wire [127:0] mac_adc_data, nl_adc_data;
 wire mac_adc_valid, mac_adc_ready, nl_adc_valid, nl_adc_ready;
-gpio_reader
-(
-	clk, rst,
-	
-	gpio_in,
-	
-	gpio_out,
-	
-	valid,//1 if read was successful (if data was available in the a/c fifo)
-
-	//Inputs to be read out over gpio
-	del_meas_mac_result, del_meas_nl_result,
-	
-	a_out_data,
-	a_out_valid,
-	a_out_ready,
-	
-	c_out_data,
-	c_out_valid,
-	c_out_ready,
-	
-	mac_adc_data,
-	mac_adc_valid,
-	mac_adc_ready,
-	
-	nl_adc_data,
-	nl_adc_valid,
-	nl_adc_ready,
-	
-	instr_count,
-	b_count
-);
-
-
-
 
 
 
@@ -211,6 +165,59 @@ wire [7:0] adc_run;
 wire mac_adc_run = adc_run[0];
 wire nl_adc_run = adc_run[1];
 config_reg #(8,1,16,adc_run_reg) adc_run_reg_inst (clk, rst, gpio_in, adc_run);
+
+
+//Allows CPU to load A and C fifos over gpio
+gpio_axis_writer #(a_write_reg,c_write_reg) gpio_axis_writer_inst
+(
+	clk, rst,
+	
+	gpio_in,
+	
+	a_in_data,
+	a_in_valid,
+	a_in_ready,
+	
+	c_in_data,
+	c_in_valid,
+	c_in_ready
+);
+
+
+gpio_reader
+(
+	clk, rst,
+	
+	gpio_in,
+	
+	gpio_out,
+	
+	valid,//1 if read was successful (if data was available in the a/c fifo)
+
+	//Inputs to be read out over gpio
+	del_meas_mac_result, del_meas_nl_result,
+	
+	a_out_data,
+	a_out_valid,
+	a_out_ready,
+	
+	c_out_data,
+	c_out_valid,
+	c_out_ready,
+	
+	mac_adc_data,
+	mac_adc_valid,
+	mac_adc_ready,
+	
+	nl_adc_data,
+	nl_adc_valid,
+	nl_adc_ready,
+	
+	instr_count,
+	b_count
+);
+
+
 //MAC driver
 adc_driver
 #(
@@ -277,7 +284,6 @@ nl_driver_shift_amt_reg_base_addr
 
 //DAC drivers
 
-wire [255:0] m0_axis_tdata;
 dac_driver
 #(
 a_output_scaler_addr_reg,
@@ -300,7 +306,6 @@ a_shift_amt_reg_base_addr//Selects how much to shift output by
 	
 );
 
-wire [255:0] m1_axis_tdata;
 dac_driver
 #(
 b_output_scaler_addr_reg,
@@ -323,7 +328,7 @@ b_shift_amt_reg_base_addr//Selects how much to shift output by
 	
 );
 
-wire [255:0] m2_axis_tdata;
+
 dac_driver
 #(
 c_output_scaler_addr_reg,
@@ -349,8 +354,8 @@ c_shift_amt_reg_base_addr//Selects how much to shift output by
 
 //Input fifo selector for ps to pl
 
-wire [15:0] sa_axis_tdata, sb_axis_tdata;
-wire sa_axis_tvalid, sa_axis_tvalid, sb_axis_tvalid, sb_axis_tready;
+wire instr_b_sel;
+config_reg #(8,1,16,instr_b_sel_reg) adc_run_reg_inst (clk, rst, gpio_in, instr_b_sel);
 
  axis_selector #(16) axis_input_selector
 (
@@ -371,7 +376,6 @@ wire sa_axis_tvalid, sa_axis_tvalid, sb_axis_tvalid, sb_axis_tready;
 );
 
 //FIFOs for B and instructions
-wire [31:0] b_count, instr_count;
 counter_fifo
 #(16, instr_fifo_depth) instr_fifo_inst
 (

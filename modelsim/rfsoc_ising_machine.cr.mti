@@ -1,4 +1,29 @@
-D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
+D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv {0 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package experiment_top_level_tb_sv_unit
+-- Importing package ising_config
+-- Compiling module experiment_top_level_tb
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(177): (vlog-2730) Undefined variable: 'instr_b_sel_reg'.
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(181): (vlog-2110) Illegal reference to net "m2_axis_tdata".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(182): (vlog-2110) Illegal reference to net "m2_axis_tvalid".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(186): (vlog-2110) Illegal reference to net "m2_axis_tvalid".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(192): (vlog-2110) Illegal reference to net "m2_axis_tdata".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(193): (vlog-2110) Illegal reference to net "m2_axis_tvalid".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(197): (vlog-2110) Illegal reference to net "m2_axis_tdata".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(199): (vlog-2110) Illegal reference to net "m2_axis_tvalid".
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(214): (vlog-2730) Undefined variable: 'run_reg'.
+** Error: D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv(235): (vlog-2730) Undefined variable: 'halt'.
+
+} {6.0 16.0} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/config_reg.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/config_reg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package config_reg_sv_unit
+-- Importing package ising_config
+-- Compiling module config_reg
+
+Top level modules:
+	config_reg
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling package adc_driver_sv_unit
 -- Importing package ising_config
@@ -16,15 +41,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	axis_fifo
 	axis_async_fifo_def
-
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/config_reg.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/config_reg.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling package config_reg_sv_unit
--- Importing package ising_config
--- Compiling module config_reg
-
-Top level modules:
-	config_reg
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -48,13 +64,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	experiment_fsm_tb
-
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling package ising_config
-
-Top level modules:
-	--none--
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/fifo_wrappers.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/fifo_wrappers.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
