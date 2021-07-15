@@ -14,16 +14,16 @@ wire [31:0] gpio_in = {8'b0,w_clk, gpio_data, gpio_addr};
 
 wire [31:0] gpio_out_bus;
 
-wire [255:0] m0_axis_tdata, m1_axis_tdata;
+wire [255:0] m0_axis_tdata, m1_axis_tdata, m2_axis_tdata;
 wire m0_axis_tvalid, m1_axis_tvalid, m2_axis_tvalid;
 reg m0_axis_tready, m1_axis_tready, m2_axis_tready;
 
-wire [16:0] m2_axis_tdata;
 
 
-reg [127:0] s0_axis_tdata, s1_axis_tdata, s2_axis_tdata;
+reg [127:0] s0_axis_tdata, s1_axis_tdata;
 reg s0_axis_tvalid, s1_axis_tvalid, s2_axis_tvalid;
 wire s0_axis_tready, s1_axis_tready, s2_axis_tready;
+reg [15:0]  s2_axis_tdata;
 
 experiment_top_level dut
 (
@@ -61,7 +61,7 @@ experiment_top_level dut
 	//Input from CPU over DMA/////////
 	s2_axis_tdata, 
 	s2_axis_tvalid,
-	s2_axis_tready,
+	s2_axis_tready
 	//////////////////////////////////
 	
 );
@@ -158,7 +158,7 @@ initial begin
 			num_errs = num_errs + 1;
 		end
 	end
-	$display("A read test complete, num errs: %x\n");
+	$display("A read test complete, num errs: %x\n", num_errs);
 	
 	//Read from C
 	num_errs = 0;
@@ -168,7 +168,7 @@ initial begin
 			num_errs = num_errs + 1;
 		end
 	end
-	$display("C read test complete, num errs: %x\n");
+	$display("C read test complete, num errs: %x\n", num_errs);
 	
 	
 	
@@ -176,7 +176,7 @@ initial begin
 	//Set gpio write to instr
 	gpio_write(instr_b_sel_reg, 0);
 	//Write the instructions
-	for(i = 0; i < size(program_1); i = i + 1) begin
+	for(i = 0; i < $size(program_1); i = i + 1) begin
 		//Set the valid and data lines
 		s2_axis_tdata <= program_1[i];
 		s2_axis_tvalid <= 1;
@@ -211,7 +211,7 @@ initial begin
 	end
 	
 	//Tell the thing to run
-	gpio_write(run_reg, 1);
+	gpio_write(run_trig_reg, 1);
 	
 	clk_cycle();
 	
@@ -232,7 +232,7 @@ initial begin
 		$display("Error, FSM left run state early");
 	end
 	
-	gpio_write(halt, 1);
+	gpio_write(halt_reg, 1);
 	clk_cycle();
 	
 	//Make sure we're in the wait rst state
@@ -240,8 +240,8 @@ initial begin
 		$display("Error, FSM was not in wait rst state!");
 	end
 	
-	gpio_write(halt, 0);
-	gpio_write(run_reg, 0);
+	gpio_write(halt_reg, 0);
+	gpio_write(run_trig_reg, 0);
 	clk_cycle();
 	
 	if(gpio_out_bus != 0) begin

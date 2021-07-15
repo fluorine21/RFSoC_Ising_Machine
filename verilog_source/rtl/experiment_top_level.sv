@@ -36,7 +36,7 @@ module experiment_top_level
 	//////////////////////////////////
 	
 	//Input from CPU over DMA/////////
-	input wire [127:0] s2_axis_tdata, 
+	input wire [15:0] s2_axis_tdata, 
 	input wire s2_axis_tvalid,
 	output wire s2_axis_tready
 	//////////////////////////////////
@@ -67,7 +67,7 @@ assign run_trig = run_trig_out[0];
 config_reg #(8,1,16,run_trig_reg) run_trig_reg_inst (clk, rst, gpio_in, run_trig_out);
 
 //Instruction bus; upper 16 bits are instruction; lower 16 are data for the 32-bit bus coming from cpu
-wire [16:0] instr_axis_tdata;
+wire [15:0] instr_axis_tdata;
 wire instr_axis_tvalid;
 wire instr_axis_tready;
 
@@ -98,7 +98,6 @@ wire c_out_ready;
 
 
 //GPIO reader instantiation
-wire [15:0] gpio_out;
 wire [127:0] mac_adc_data, nl_adc_data;
 wire mac_adc_valid, mac_adc_ready, nl_adc_valid, nl_adc_ready;
 
@@ -184,13 +183,13 @@ gpio_axis_writer #(a_write_reg,c_write_reg) gpio_axis_writer_inst
 );
 
 
-gpio_reader
+gpio_reader gpio_reader_inst
 (
 	clk, rst,
 	
 	gpio_in,
 	
-	gpio_out,
+	gpio_out_bus,
 	
 	valid,//1 if read was successful (if data was available in the a/c fifo)
 
@@ -214,7 +213,9 @@ gpio_reader
 	nl_adc_ready,
 	
 	instr_count,
-	b_count
+	b_count,
+	
+	state_out
 );
 
 
@@ -354,8 +355,9 @@ c_shift_amt_reg_base_addr//Selects how much to shift output by
 
 //Input fifo selector for ps to pl
 
-wire instr_b_sel;
-config_reg #(8,1,16,instr_b_sel_reg) adc_run_reg_inst (clk, rst, gpio_in, instr_b_sel);
+wire [7:0] i_b_s;
+wire instr_b_sel = i_b_s[0];
+config_reg #(8,1,16,instr_b_sel_reg) instr_b_sel_reg_inst (clk, rst, gpio_in, i_b_s);
 
  axis_selector #(16) axis_input_selector
 (
@@ -392,6 +394,9 @@ counter_fifo
 	instr_count
 );
 
+
+wire [15:0] b_r_tdata_o;
+assign b_r_tdata = b_r_tdata_o[num_bits-1:0];
 counter_fifo
 #(16, instr_fifo_depth) b_fifo_inst
 (
@@ -401,7 +406,7 @@ counter_fifo
 	sb_axis_tvalid,
 	sb_axis_tready,
 	
-	b_r_tdata,
+	b_r_tdata_o,
 	b_r_tvalid,
 	b_r_tready,
 	

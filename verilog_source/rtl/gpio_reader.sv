@@ -2,6 +2,8 @@
 
 //Allows CPU to readback A and C fifos along with status stuff over gpio
 
+import ising_config::*;
+
 module gpio_reader
 (
 	input wire clk, rst,
@@ -38,8 +40,7 @@ module gpio_reader
 
 
 wire w_clk = gpio_in[gpio_w_clk_bit];
-wire [addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
-wire [word_width-1:0] gpio_data = gpio_in[gpio_data_start:gpio_data_end];
+wire [gpio_addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
 
 reg [31:0] ac_reg;
 reg ac_valid;
@@ -52,17 +53,18 @@ wire reg_access = (gpio_addr == a_read_reg) ||
 				  (gpio_addr == nl_adc_read_reg);
 assign valid = reg_access ? ac_valid : 1;//Always valid if not accessing an axis bus
 
-reg [2:0] adc_cnt;
+reg [2:0] mac_adc_cnt, nl_adc_cnt;
+reg state;
 
 task reset();
 begin
 	ac_reg <= 0;
 	ac_valid <= 0;
 	state <= 0;
-	valid <= 0;
 	a_ready <= 0;
 	c_ready <= 0;
-	adc_ready <= 0;
+	mac_adc_ready <= 0;
+	nl_adc_ready <= 0;
 end
 endtask
 
@@ -78,15 +80,16 @@ always @ (posedge clk or negedge rst) begin
 	else begin
 		if(!state) begin
 			if(w_clk) begin//Read a
+				state <= 1;//Always need to wait on w_clk rst after this
 				if(gpio_addr == a_read_reg && a_valid) begin
 					ac_reg <= a_data_wide;
 					a_ready <= 1;
-					valid <= 1;
+					ac_valid <= 1;
 				end//Read c
 				else if(gpio_addr == c_read_reg && c_valid) begin
 					ac_reg <= c_data_wide;
 					c_ready <= 1;
-					valid <= 1;
+					ac_valid <= 1;
 				end
 				else if(gpio_addr == mac_adc_read_reg && mac_adc_valid) begin
 					//If this is the last read of the word
@@ -95,7 +98,7 @@ always @ (posedge clk or negedge rst) begin
 					end
 					ac_reg <= mac_adc_data[(mac_adc_cnt*32)+:32];
 					mac_adc_cnt <= mac_adc_cnt + 1;
-					valid <= 1;
+					ac_valid <= 1;
 				end
 				else if(gpio_addr == nl_adc_read_reg && nl_adc_valid) begin
 					//If this is the last read of the word
@@ -104,17 +107,18 @@ always @ (posedge clk or negedge rst) begin
 					end
 					ac_reg <= nl_adc_data[(nl_adc_cnt*32)+:32];
 					nl_adc_cnt <= nl_adc_cnt + 1;
-					valid <= 1;
+					ac_valid <= 1;
 				end
 			end
 		end
 		else begin//Reset everything and hold valid high until write goes low
 			a_ready <= 0;
 			c_ready <= 0;
-			adc_ready <= 0;
+			mac_adc_ready <= 0;
+			nl_adc_ready <= 0;
 			if(!w_clk) begin
 				state <= 0;
-				valid <= 0;
+				ac_valid <= 0;
 			end
 		end
 	end
@@ -123,7 +127,7 @@ end
 //Combo logic for selecting data
 always @ * begin
 
-	case(gpio_addr) begin
+	case(gpio_addr)
 	
 		a_read_reg: begin
 			gpio_out <= ac_reg;
@@ -147,7 +151,7 @@ always @ * begin
 		end
 		
 		ex_state_reg: begin
-			gpio_out <= {(32-3)'b0, ex_state};
+			gpio_out <= {{(32-3){1'b0}}, ex_state};
 		end
 		
 		default begin

@@ -9,7 +9,7 @@ module experiment_fsm(
 	output reg run_done,//Done flag for when we've finished processing instructions
 	
 	//Instruction bus, upper 16 bits are instruction, lower 16 are data for the 32-bit bus coming from cpu
-	input wire [16:0] instr_axis_tdata,
+	input wire [15:0] instr_axis_tdata,
 	input wire instr_axis_tvalid,
 	output reg instr_axis_tready,
 	
