@@ -1,10 +1,11 @@
 
 import ising_config::*;
 
-
 module experiment_top_level
 (
-	input wire clk, rst,
+	input wire clk, 
+	
+	input wire rst,
 	
 	input wire [31:0] gpio_in,
 	

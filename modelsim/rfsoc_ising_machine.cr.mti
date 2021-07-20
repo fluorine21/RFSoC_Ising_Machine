@@ -23,16 +23,8 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	config_reg
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {2 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
--- Compiling package experiment_top_level_tb_sv_unit
--- Importing package ising_config
--- Compiling module experiment_top_level_tb
-
-Top level modules:
-	experiment_top_level_tb
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-** Warning: (vlog-6) -- Waiting for lock by "James Williams@JAMES-TABLET, pid = 16032
-". Lockfile is "D:/repos/RFSoC_Ising_Machine/modelsim/work/_lock".
 -- Compiling package adc_driver_sv_unit
 -- Importing package ising_config
 -- Compiling module adc_driver
@@ -114,6 +106,15 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	gpio_reader
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package experiment_top_level_sv_unit
+-- Importing package ising_config
+-- Compiling module experiment_top_level
+
+Top level modules:
+	experiment_top_level
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling package dac_driver_sv_unit
@@ -147,6 +148,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	experiment_fsm
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v {1 {vlog -work work -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module experiment_top_level_wrapper
+
+Top level modules:
+	experiment_top_level_wrapper
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
