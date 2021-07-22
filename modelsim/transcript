@@ -1,0 +1,246 @@
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# 16 compiles, 0 failed with no errors.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of adc_driver.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Load canceled
+# Compile of experiment_top_level_tb.sv was successful.
+vsim -gui work.experiment_top_level_tb
+# vsim -gui work.experiment_top_level_tb 
+# Start time: 15:09:05 on Jul 22,2021
+# Loading sv_std.std
+# Loading work.ising_config
+# Loading work.experiment_top_level_tb_sv_unit
+# Loading work.experiment_top_level_tb
+# Loading work.experiment_top_level_wrapper
+# Loading work.experiment_top_level_sv_unit
+# Loading work.experiment_top_level
+# ** Error: (vsim-13) Recompile work.config_reg_sv_unit because work.ising_config has changed.
+# ** Error (suppressible): (vsim-12) Recompile work.config_reg after work.config_reg_sv_unit is recompiled.
+# ** Error: (vsim-13) Recompile work.config_reg because work.ising_config has changed.
+# Error loading design
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# End time: 15:09:06 on Jul 22,2021, Elapsed time: 0:00:01
+# Errors: 5, Warnings: 10
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# 21 compiles, 0 failed with no errors.
+vsim -gui work.experiment_top_level_tb
+# vsim -gui work.experiment_top_level_tb 
+# Start time: 15:09:28 on Jul 22,2021
+# Loading sv_std.std
+# Loading work.ising_config
+# Loading work.experiment_top_level_tb_sv_unit
+# Loading work.experiment_top_level_tb
+# Loading work.experiment_top_level_wrapper
+# Loading work.experiment_top_level_sv_unit
+# Loading work.experiment_top_level
+# Loading work.config_reg_sv_unit
+# Loading work.config_reg
+# Loading work.gpio_axis_writer_sv_unit
+# Loading work.gpio_axis_writer
+# Loading work.gpio_reader_sv_unit
+# Loading work.gpio_reader
+# Loading work.adc_driver_sv_unit
+# Loading work.adc_driver
+# Loading work.shifter
+# Loading work.peak_detector
+# Loading work.lookup_table_sv_unit
+# Loading work.lookup_table
+# Loading work.axis_sync_fifo
+# Loading work.axis_fifo
+# Loading work.dac_driver_sv_unit
+# Loading work.dac_driver
+# Loading work.output_scaler_sv_unit
+# Loading work.output_scaler
+# Loading work.axis_selector
+# Loading work.counter_fifo
+# Loading work.experiment_fsm_sv_unit
+# Loading work.experiment_fsm
+add wave -position insertpoint  \
+sim:/experiment_top_level_tb/dut/clk \
+sim:/experiment_top_level_tb/dut/rst \
+sim:/experiment_top_level_tb/dut/gpio_in \
+sim:/experiment_top_level_tb/dut/gpio_out_bus \
+sim:/experiment_top_level_tb/dut/m0_axis_tdata \
+sim:/experiment_top_level_tb/dut/m0_axis_tvalid \
+sim:/experiment_top_level_tb/dut/m0_axis_tready \
+sim:/experiment_top_level_tb/dut/m1_axis_tdata \
+sim:/experiment_top_level_tb/dut/m1_axis_tvalid \
+sim:/experiment_top_level_tb/dut/m1_axis_tready \
+sim:/experiment_top_level_tb/dut/m2_axis_tdata \
+sim:/experiment_top_level_tb/dut/m2_axis_tvalid \
+sim:/experiment_top_level_tb/dut/m2_axis_tready \
+sim:/experiment_top_level_tb/dut/m3_axis_tdata \
+sim:/experiment_top_level_tb/dut/m3_axis_tvalid \
+sim:/experiment_top_level_tb/dut/m3_axis_tready \
+sim:/experiment_top_level_tb/dut/s0_axis_tdata \
+sim:/experiment_top_level_tb/dut/s0_axis_tvalid \
+sim:/experiment_top_level_tb/dut/s0_axis_tready \
+sim:/experiment_top_level_tb/dut/s1_axis_tdata \
+sim:/experiment_top_level_tb/dut/s1_axis_tvalid \
+sim:/experiment_top_level_tb/dut/s1_axis_tready \
+sim:/experiment_top_level_tb/dut/s2_axis_tdata \
+sim:/experiment_top_level_tb/dut/s2_axis_tvalid \
+sim:/experiment_top_level_tb/dut/s2_axis_tready
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: James Williams  Hostname: JAMES-LENOVO  ProcessID: 10644
+#           Attempting to use alternate WLF file "./wlftwqbcfi".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftwqbcfi
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 128
+run -all
+# Compile of experiment_top_level_tb.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 2
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.experiment_top_level_tb_sv_unit
+# Loading work.experiment_top_level_tb
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 136
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 155
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 155
+run -all
+# A read test complete, num errs: 0000000f
+# 
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 177
+# Compile of gpio_axis_writer.sv was successful.
+# ** Error: Acs sdne.
+# 2
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 2
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of gpio_axis_writer.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.gpio_axis_writer_sv_unit
+# Loading work.gpio_axis_writer
+add wave -position insertpoint  \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/clk \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/rst \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/gpio_in \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/gpio_out \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/valid \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/del_meas_mac_result_in \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/del_meas_nl_result_in \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/a_data \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/a_valid \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/a_ready \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/c_data \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/c_valid \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/c_ready \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/mac_adc_data \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/mac_adc_valid \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/mac_adc_ready \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/nl_adc_data \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/nl_adc_valid \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/nl_adc_ready \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/instr_count \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/b_count \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/ex_state
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 155
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 155
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 155
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 155
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 161
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 167
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 168
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 168
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 168
+run -all
+# A read test complete, num errs: 0000000e
+# 
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 177
+add wave -position insertpoint  \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/a_data_wide \
+sim:/experiment_top_level_tb/dut/ex_top_level_inst_in_wrapper/gpio_reader_inst/c_data_wide
+run -all
+# C read test complete, num errs: 00000010
+# 
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 190
+# Compile of gpio_reader.sv was successful.
+# ** Error: Acs sdne.
+# r¶¶I 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.gpio_reader_sv_unit
+# Loading work.gpio_reader
+run -all
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 167
+run -all
+# A read test complete, num errs: 00000000
+# 
+# C read test complete, num errs: 00000000
+# 
+# Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 190

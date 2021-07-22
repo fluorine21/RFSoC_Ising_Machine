@@ -44,8 +44,8 @@ wire [gpio_addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
 
 reg [31:0] ac_reg;
 reg ac_valid;
-wire a_data_wide = { {(32-num_bits){1'b0}}, a_data}; 
-wire c_data_wide = { {(32-num_bits){1'b0}}, c_data}; 
+wire [31:0] a_data_wide = { {(32-num_bits){1'b0}}, a_data}; 
+wire [31:0] c_data_wide = { {(32-num_bits){1'b0}}, c_data}; 
 
 wire reg_access = (gpio_addr == a_read_reg) || 
 				  (gpio_addr == c_read_reg) || 

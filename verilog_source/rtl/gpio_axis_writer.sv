@@ -51,7 +51,7 @@ always @ (posedge clk or negedge rst) begin
 	end
 	else begin
 		if(state == 0) begin
-			if(gpio_addr == a_addr) begin
+			if(gpio_addr == a_addr && w_clk) begin
 				//Update the register and move to the next state
 				a_data <= {a_data[7:0], gpio_data};
 				state <= 1;
@@ -63,7 +63,7 @@ always @ (posedge clk or negedge rst) begin
 					a_cnt <= 1;
 				end
 			end
-			else if(gpio_addr == c_addr) begin
+			else if(gpio_addr == c_addr && w_clk) begin
 				//Update the register and move to the next state
 				c_data <= {c_data[7:0], gpio_data};
 				state <= 1;
@@ -91,3 +91,5 @@ end
 
 
 endmodule
+
+

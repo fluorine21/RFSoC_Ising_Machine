@@ -14,9 +14,9 @@ wire [31:0] gpio_in = {8'b0,w_clk, gpio_data, gpio_addr};
 
 wire [31:0] gpio_out_bus;
 
-wire [255:0] m0_axis_tdata, m1_axis_tdata, m2_axis_tdata;
-wire m0_axis_tvalid, m1_axis_tvalid, m2_axis_tvalid;
-reg m0_axis_tready, m1_axis_tready, m2_axis_tready;
+wire [255:0] m0_axis_tdata, m1_axis_tdata, m2_axis_tdata, m3_axis_tdata;
+wire m0_axis_tvalid, m1_axis_tvalid, m2_axis_tvalid, m3_axis_tvalid;
+reg m0_axis_tready, m1_axis_tready, m2_axis_tready, m3_axis_tready;
 
 
 
@@ -25,7 +25,7 @@ reg s0_axis_tvalid, s1_axis_tvalid, s2_axis_tvalid;
 wire s0_axis_tready, s1_axis_tready, s2_axis_tready;
 reg [15:0]  s2_axis_tdata;
 
-experiment_top_level dut
+experiment_top_level_wrapper dut
 (
 	clk, rst,
 	
@@ -46,6 +46,10 @@ experiment_top_level dut
 	m2_axis_tdata, //C
 	m2_axis_tvalid,
 	m2_axis_tready,
+	
+	m3_axis_tdata, //A NL
+	m3_axis_tvalid,
+	m3_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////
@@ -79,6 +83,7 @@ initial begin
 	m0_axis_tready <= 1;
 	m1_axis_tready <= 1;
 	m2_axis_tready <= 1;
+	m3_axis_tready <= 1;
 
 	s0_axis_tvalid <= 1;
 	s1_axis_tvalid <= 1;
@@ -100,6 +105,14 @@ initial begin
 	for(i = 0; i < 256; i = i + 1) begin
 		gpio_write(a_output_scaler_data_reg, -1*8'(i));
 		gpio_write(a_output_scaler_data_reg, -1*8'(i));
+	end
+	
+	gpio_write(a_nl_output_scaler_addr_reg, 0);
+	gpio_write(a_nl_output_scaler_addr_reg, 0);
+	
+	for(i = 0; i < 256; i = i + 1) begin
+		gpio_write(a_nl_output_scaler_data_reg, -1*8'(i));
+		gpio_write(a_nl_output_scaler_data_reg, 1*8'(i));
 	end
 	
 	gpio_write(b_output_scaler_addr_reg, 0);
@@ -247,6 +260,8 @@ initial begin
 	if(gpio_out_bus != 0) begin
 		$display("Error, FSM did not return to idle state");
 	end
+	
+	
 	
 	
 	
