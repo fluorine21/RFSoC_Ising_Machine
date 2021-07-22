@@ -21,6 +21,10 @@ module experiment_top_level_wrapper
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m2_axis_tdata, //C
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m2_axis_tvalid,
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m2_axis_tready,
+	
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m3_axis_tdata, //A NL output
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m3_axis_tvalid,
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m3_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////
@@ -65,6 +69,10 @@ experiment_top_level ex_top_level_inst_in_wrapper
 	m2_axis_tdata, //C
 	m2_axis_tvalid,
 	m2_axis_tready,
+	
+	m3_axis_tdata, //A NL
+	m3_axis_tvalid,
+	m3_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////

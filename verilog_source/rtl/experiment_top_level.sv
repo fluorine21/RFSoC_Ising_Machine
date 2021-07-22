@@ -24,6 +24,10 @@ module experiment_top_level
 	output wire [255:0] m2_axis_tdata, //C
 	output wire m2_axis_tvalid,
 	input wire m2_axis_tready,
+	
+	output wire [255:0] m3_axis_tdata, //A NL output
+	output wire m3_axis_tvalid,
+	input wire m3_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////
@@ -286,7 +290,7 @@ nl_driver_shift_amt_reg_base_addr
 
 //DAC drivers
 
-dac_driver
+dac_driver //A
 #(
 a_output_scaler_addr_reg,
 a_output_scaler_data_reg,
@@ -308,7 +312,29 @@ a_shift_amt_reg_base_addr//Selects how much to shift output by
 	
 );
 
-dac_driver
+dac_driver //A NL
+#(
+a_nl_output_scaler_addr_reg,
+a_nl_output_scaler_data_reg,
+a_nl_static_output_reg_base_addr,//Static dac word to output
+a_nl_dac_mux_sel_reg_base_addr,//Selects between input from output scaler, static word, or delay cal
+a_nl_shift_amt_reg_base_addr//Selects how much to shift output by
+) a_nl_dac_driver_inst
+(
+	clk, rst,
+	
+	gpio_in,
+	
+	a_out,
+	a_valid,
+	
+	1'b0,//Delay trgger
+	
+	m3_axis_tdata
+	
+);
+
+dac_driver //B
 #(
 b_output_scaler_addr_reg,
 b_output_scaler_data_reg,
@@ -331,7 +357,7 @@ b_shift_amt_reg_base_addr//Selects how much to shift output by
 );
 
 
-dac_driver
+dac_driver //C
 #(
 c_output_scaler_addr_reg,
 c_output_scaler_data_reg,

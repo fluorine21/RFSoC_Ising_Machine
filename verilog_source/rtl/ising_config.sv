@@ -61,6 +61,12 @@ parameter a_static_output_reg_base_addr = 16'h0017;//Static dac word to output
 parameter a_dac_mux_sel_reg_base_addr = 16'h0018;//Selects between input from output scaler, static word, or delay cal
 parameter a_shift_amt_reg_base_addr = 16'h0019;//Selects how much to shift output by
 
+parameter a_nl_output_scaler_addr_reg = 16'h0027;
+parameter a_nl_output_scaler_data_reg = 16'h0028;
+parameter a_nl_static_output_reg_base_addr = 16'h0029;//Static dac word to output
+parameter a_nl_dac_mux_sel_reg_base_addr = 16'h002A;//Selects between input from output scaler, static word, or delay cal
+parameter a_nl_shift_amt_reg_base_addr = 16'h002B;//Selects how much to shift output by
+
 parameter b_output_scaler_addr_reg = 16'h001A;
 parameter b_output_scaler_data_reg = 16'h001B;
 parameter b_static_output_reg_base_addr = 16'h001C;//Static dac word to output
