@@ -15,6 +15,13 @@ def hex_format(val):
         raise RuntimeError("Unable to format hex string")
 
 
+def check_inst(inst):
+
+    if(inst & (1<<3) and inst & (1<<5)):
+        print("Warning, instruction " + hex(inst) + "adds 0 to a and the result to a, adding 0 takes priority")
+    if(inst & (1<<4) and inst & (1<<6)):
+        print("Warning, instruction " + hex(inst) + "adds 0 to c and the result to c, adding 0 takes priority")
+
 infile = ""
 outfile = ""
 
@@ -56,20 +63,26 @@ for l in lines:
         
             if(instr == "MRA"):
                 curr_inst |= (1<<3)
-            elif(insr == "MRC"):
+            elif(instr == "MRC"):
                 curr_inst |= (1<<4)
-            elif(insr == "MZA"):
+            elif(instr == "MZA"):
                 curr_inst |= (1<<5)
-            elif(insr == "MZC"):
+            elif(instr == "MZC"):
                 curr_inst |= (1<<6)
-            elif(insr == "RMA"):
+            elif(instr == "RMA"):
                 curr_inst |= (1<<0)
-            elif(insr == "RMC"):
+            elif(instr == "RMC"):
                 curr_inst |= (1<<2)
-            elif(insr == "RMB"):
+            elif(instr == "RMB"):
                 curr_inst |= (1<<1)
-            elif(insr == "SWI"):
+            elif(instr == "SWI"):
                 curr_inst |= (1<<7)
+            elif(instr == "NOP"):
+                if(curr_inst):
+                    raise RuntimeError("Error, NOP cannot follow other instructions in same cycle (line " + str(line_cnt) + ")")
+                instr_list += [0]
+                pos += 4
+                continue
             else:
                 raise RuntimeError("Syntax error at line " + str(line_cnt) + ": " + l + ", invalid instruction: " + curr_inst + "\n")
 
@@ -77,10 +90,11 @@ for l in lines:
             if(l[pos+3] == ","):
                 #Just go to the next instruction
                 pos += 4
-                continue;
+                continue
             elif(l[pos+3] == ";"):
                 #Finish this instruction and go to the next
-                pos += 4;
+                pos += 4
+                check_inst(curr_inst)
                 instr_list += [curr_inst]
                 curr_inst = 0
                 continue

@@ -722,8 +722,8 @@ L0 7 158
 R10
 31
 Z80 !s108 1626994426.000000
-!s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv|
-Z81 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv|
+Z81 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv|
+Z82 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv|
 !i113 1
 R14
 R15
@@ -748,30 +748,30 @@ L0 5 0
 R10
 31
 R80
-Z82 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv|
 R81
+R82
 !i113 1
 R14
 R15
 Xising_config
 R0
-R18
+!s110 1627495366
 !i10b 1
-!s100 i?9F]_V]FdhEeRM6^@Hj11
-Icemj^=o9ojM[8jlH2[DJd0
+!s100 3WWeIi9>lU2dTAWLi1oz12
+I_R3Iz;UNIKQlc^T:DjmY_1
 S1
 R6
-w1626988807
+w1627495358
 Z83 8D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
 Z84 FD:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
-!i122 32
+!i122 52
 Z85 L0 4 0
-Vcemj^=o9ojM[8jlH2[DJd0
+V_R3Iz;UNIKQlc^T:DjmY_1
 R10
 r1
 !s85 0
 31
-R22
+!s108 1627495366.000000
 Z86 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv|
 Z87 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv|
 !i113 1

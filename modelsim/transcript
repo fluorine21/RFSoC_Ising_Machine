@@ -244,3 +244,20 @@ run -all
 # C read test complete, num errs: 00000000
 # 
 # Break in Module experiment_top_level_tb at D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv line 190
+quit -sim
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# End time: 11:01:25 on Jul 28,2021, Elapsed time: 139:51:57
+# Errors: 2, Warnings: 1
+# Compile of ising_config.sv failed with 4 errors.
+# Compile of ising_config.sv was successful.
+# Compile of ising_config.sv failed with 27 errors.
+# Compile of ising_config.sv failed with 26 errors.
+# Compile of ising_config.sv failed with 16 errors.
+# Compile of ising_config.sv failed with 6 errors.
+# Compile of ising_config.sv failed with 6 errors.
+# Compile of ising_config.sv failed with 5 errors.
