@@ -136,7 +136,7 @@ endfunction
 function cmp_num cmp_inv(input cmp_num a);
 	automatic real d = (a.r*a.r) + (a.i*a.i);
 	cmp_inv.r = a.r/d;
-	cmp_inv.i = (-1*a.i)/d);
+	cmp_inv.i = (-1*a.i)/d;
 endfunction
 
 function real cmp_sqr_mag(input cmp_num a);
@@ -156,7 +156,7 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 	automatic cmp_num t_alpha = '{1,0};
 	automatic cmp_num t_in = '{1,0};
 	automatic cmp_num t_lo = '{1,0};
-	automatic t_a = '{1,0};
+	automatic cmp_num t_a = '{1,0};
 	
 	//Bias points for nl chip (all in radians
     automatic real a_nl_bias = 0;
@@ -168,7 +168,7 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
     automatic cmp_num phi_LO = '{0,(pi * (V_LO/V_pi)) + phi_LO_bias};
     
     //E_4 = t_in * 1i * sqrt(1-(a*a));
-	automatic cmp_num E_4 = '{0,t_in.r * $sqrt(1-(a.r*a.r))};
+	automatic cmp_num E_4 = '{0,t_in.r * $sqrt(1-(a.r*a.r)) * E_in};
     
 	//E_LO = t_lo * exp(1i*phi_LO) * E_4;
     automatic cmp_num E_LO = cmp_mul(t_lo, cmp_mul(cmp_exp(phi_LO) , E_4));
@@ -186,11 +186,11 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 
     //E_2 = t_out * (1/sqrt(2)) * ( (1i*E_LO) + E_NLA);
 	automatic cmp_num last_arg = cmp_add(cmp_mul('{0,1}, E_LO), E_NLA);
-	automatic cmp_num E_2 = cmp_mul(t_out, cmp_mul('{1/$sqrt(2)}, last_arg));
+	automatic cmp_num E_2 = cmp_mul(t_out, cmp_mul('{1/$sqrt(2),0}, last_arg));
 	
     //E_1 = t_out * (1/sqrt(2)) * ( E_LO + (1i*E_NLA));
 	automatic cmp_num last_arg2 = cmp_add(cmp_mul('{0,1}, E_NLA), E_LO);
-	automatic cmp_num E_1 = cmp_mul(t_out, cmp_mul('{1/$sqrt(2)}, last_arg2));
+	automatic cmp_num E_1 = cmp_mul(t_out, cmp_mul('{1/$sqrt(2),0}, last_arg2));
     
     //return eta * ((abs(E_1)^2)-(abs(E_2)^2));
 	return eta.r * (cmp_sqr_mag(E_1) - cmp_sqr_mag(E_2));
@@ -198,5 +198,59 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 endfunction
 
 
+function real I_MAC(input real E_in, V_a, V_LO, V_alpha, V_beta, V_gamma, V_phi);
+
+	//MAC parameters
+    automatic cmp_num eta = '{1,0};
+    automatic cmp_num t_out = '{1,0};
+    automatic cmp_num t_mzi = '{1,0};
+    automatic cmp_num t_alpha = '{1,0};
+    automatic cmp_num t_beta = '{1,0};
+    automatic cmp_num t_gamma = '{1,0};
+    automatic cmp_num t_phi = '{1,0};
+    automatic cmp_num t_in = '{1,0};
+    automatic cmp_num t_lo = '{1,0};
+	
+	//MAC Bias points
+	automatic real a_mac_bias = 0;
+    automatic real alpha_mac_bias = 0;
+    automatic real beta_mac_bias = 0;
+    automatic real gamma_mac_bias = 0;
+    automatic real phi_LO_bias = 0;
+    automatic real phi_alpha_bias = 0;
+	
+	automatic cmp_num a = '{$cos( (V_a/V_pi) + a_mac_bias), 0};
+	automatic cmp_num alpha = '{$cos( (V_alpha/V_pi) + alpha_mac_bias), 0};
+	automatic cmp_num beta = '{$cos( (V_beta/V_pi) + beta_mac_bias), 0};
+	automatic cmp_num gamma = '{$cos( (V_gamma/V_pi) + gamma_mac_bias), 0};
+	automatic cmp_num phi = '{0, $cos( (V_phi/V_pi) + phi_alpha_bias)};//All imaginary for exponential
+	automatic cmp_num phi_LO = '{0, (pi* (V_LO/V_pi)) + phi_LO_bias};//All imaginary for exponential
+
+	automatic cmp_num E_5 = '{0, t_in.r*$sqrt(1-(a.r*a.r))*E_in};
+	
+	automatic cmp_num E_LO = cmp_mul(t_lo, cmp_mul(cmp_exp(phi_LO), E_5));
+	
+	automatic cmp_num E_4 = '{t_in.r*a.r*E_in,0};
+	
+	automatic cmp_num E_alpha = cmp_mul('{0,1/$sqrt(2)}, cmp_mul(t_alpha, cmp_mul(alpha, E_4)));
+	
+	automatic cmp_num E_3 = cmp_mul(t_phi, cmp_mul(cmp_exp(phi), E_alpha));
+	
+	automatic cmp_num E_beta = cmp_mul('{1/$sqrt(2),0}, cmp_mul(t_beta, cmp_mul(beta, E_4)));
+	
+	automatic cmp_num E_bg = cmp_mul('{1/$sqrt(2),0}, cmp_mul(t_beta, cmp_mul(gamma, E_beta)));
+	
+	automatic cmp_num E_mac_arg = cmp_add(E_bg, cmp_mul(E_3, '{0,1}));
+	automatic cmp_num E_mac = cmp_mul('{1/$sqrt(2), 0}, cmp_mul(t_mzi, E_mac_arg));
+	
+	automatic cmp_num E_2_arg = cmp_add(cmp_mul(E_LO, '{0,1}), E_mac);
+	automatic cmp_num E_2 = cmp_mul('{1/$sqrt(2),0}, cmp_mul(t_out, E_2_arg));
+	
+	automatic cmp_num E_1_arg = cmp_add(cmp_mul(E_mac, '{0,1}), E_LO);
+	automatic cmp_num E_1 = cmp_mul('{1/$sqrt(2),0}, cmp_mul(t_out, E_1_arg));
+	
+	return eta.r * (cmp_sqr_mag(E_1) - cmp_sqr_mag(E_2));
+	
+endfunction
 
 endpackage

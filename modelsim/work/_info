@@ -755,23 +755,23 @@ R14
 R15
 Xising_config
 R0
-!s110 1627495366
+!s110 1627667775
 !i10b 1
-!s100 3WWeIi9>lU2dTAWLi1oz12
-I_R3Iz;UNIKQlc^T:DjmY_1
+!s100 gR:m5SdHZFOSQ@eIBD>Yg1
+IOK_7ba3LfmM5VBR=i6[YH1
 S1
 R6
-w1627495358
+w1627667761
 Z83 8D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
 Z84 FD:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
-!i122 52
+!i122 54
 Z85 L0 4 0
-V_R3Iz;UNIKQlc^T:DjmY_1
+VOK_7ba3LfmM5VBR=i6[YH1
 R10
 r1
 !s85 0
 31
-!s108 1627495366.000000
+!s108 1627667775.000000
 Z86 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv|
 Z87 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv|
 !i113 1

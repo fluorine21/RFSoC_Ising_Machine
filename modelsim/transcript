@@ -261,3 +261,7 @@ quit -sim
 # Compile of ising_config.sv failed with 6 errors.
 # Compile of ising_config.sv failed with 6 errors.
 # Compile of ising_config.sv failed with 5 errors.
+# Compile of ising_config.sv failed with 4 errors.
+# Compile of ising_config.sv failed with 4 errors.
+# Compile of ising_config.sv was successful with warnings.
+# Compile of ising_config.sv was successful.
