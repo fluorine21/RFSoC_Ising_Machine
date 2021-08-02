@@ -106,6 +106,8 @@ integer program_1[] =
 real pi = 3.1415926535;
 real V_pi = 7;
 typedef struct {real r, i;} cmp_num;
+typedef struct {real V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max, V_alpha_min, V_alpha_max, V_phi_min, V_phi_max, V_LO_min, V_LO_max;} mac_cal_state;
+typedef struct {real V_a_min, V_a_max, V_alpha_min, V_alpha_max, V_LO_min, V_LO_max;} nl_cal_state;
 
 function cmp_num cmp_add(input cmp_num a, b);
 	cmp_add.r = a.r + b.r;
