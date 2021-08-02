@@ -182,7 +182,6 @@ begin
 	real V_LO = 0;
 	
 	for(real v_in = 0; v_in < 9; v_in += 0.01) begin
-	
 		//0, 0
 		real res = I_MAC(1, v_in, 3.5, 0, 0, 0, 0);
 		if(res < I_min) begin
@@ -235,7 +234,6 @@ begin
 			V_c = 3.5;
 			V_LO = 3.5;
 		end
-	
 	end
 	
 	//Now we know the bias points for A, we'll bias B and C to their more open points (either 0 or 3.5) and then find the right bias for V_LO_max
@@ -246,8 +244,7 @@ begin
 	I_min = 9999;
 	I_max = 0;
 	
-	for(real v_in = 0; v_in < 9; v_in += 0.01) begin
-	
+	for(real v_in = -9; v_in < 9; v_in += 0.01) begin
 		real res = I_MAC(1, V_a_max, 0, 0, V_b, V_c, 0);
 		if(res < I_min) begin
 			I_min = res;
@@ -257,14 +254,110 @@ begin
 			I_max = res;
 			V_LO_max = v_in;
 		end
-	
 	end
 	
 	//Now we have the bias points for a, phi_lo
 	//We will now sweep B and C to find their bias points
 	
 	
-
+	real V_b_min = 0;
+	real V_b_max = 0;
+	
+	I_min = 99999;
+	I_max = 0;
+	
+	for(real v_in = 0; v_in < 9; v_in += 0.01) begin
+		//Using whatever the higher transmittance value was for C here
+		real res = I_MAC(1, V_a_max, V_LO_max, 0, v_in, V_c, 0);
+		if(res < I_min) begin
+			I_min = res;
+			V_b_min = v_in;
+		end
+		if(res > I_max) begin
+			I_max = res;
+			V_b_max = v_in;
+		end
+	end
+	
+	real V_c_min = 0;
+	real V_c_max = 0;
+	
+	I_min = 99999;
+	I_max = 0;
+	
+	for(real v_in = 0; v_in < 9; v_in += 0.01) begin
+		
+		real res = I_MAC(1, V_a_max, V_LO_max, 0, V_b_max, v_in, 0);
+		if(res < I_min) begin
+			I_min = res;
+			V_c_min = v_in;
+		end
+		if(res > I_max) begin
+			I_max = res;
+			V_c_max = v_in;
+		end
+	end
+	
+	//Now we have the bias points for a, b, c, and phi_lo
+	
+	//Next we'll close the b/c path and sweep alpha and phi together to get a rough idea of their bias points
+	
+	
+	real V_alpha_min = 0;
+	real V_alpha_max = 0;
+	
+	I_min = 99999;
+	I_max = 0;
+	
+	//Sweep once with phi set to 0
+	for(real v_in = 0; v_in < 9; v_in += 0.01) begin
+		real res = I_MAC(1, V_a_max, V_LO_max, v_in, V_b_min, V_c_min, 0);
+		if(res < I_min) begin
+			I_min = res;
+			V_alpha_min = v_in;
+		end
+		if(res > I_max) begin
+			I_max = res;
+			V_alpha_max = v_in;
+		end
+	end
+	
+	//Do it again with a different phi
+	for(real v_in = 0; v_in < 9; v_in += 0.01) begin
+		real res = I_MAC(1, V_a_max, V_LO_max, v_in, V_b_min, V_c_min, 3.5);
+		if(res < I_min) begin
+			I_min = res;
+			V_alpha_min = v_in;
+		end
+		if(res > I_max) begin
+			I_max = res;
+			V_alpha_max = v_in;
+		end
+	end
+	
+	//Now we know the bias points for alpha
+	//When we calibrated phi_LO, we locked it to the quadrature produced by the BC path (the positive value)
+	//Therefore, we will now sweep phi with the BC path closed and alpha open such that we can lock phi to phi_LO and therefore the bc path, finding the positive and negative values simultaniously
+	
+	real V_phi_min = 0;
+	real V_phi_max = 0;
+	
+	I_min = 99999;
+	I_max = 0;
+	
+	for(real v_in = -9; v_in < 9; v_in += 0.01) begin
+		real res = I_MAC(1, V_a_max, V_LO_max, V_alpha_max, V_b_min, V_c_min, v_in);
+		if(res < I_min) begin
+			I_min = res;
+			V_phi_min = v_in;
+		end
+		if(res > I_max) begin
+			I_max = res;
+			V_phi_max = v_in;
+		end
+	end
+	
+	
 
 end
 endtask
