@@ -103,7 +103,7 @@ integer program_1[] =
 
 };
 
-real pi = 3.1415926535;
+real pi = 3.1415926535897932384626;
 real V_pi = 7;
 typedef struct {real r, i;} cmp_num;
 typedef struct {real V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max, V_alpha_min, V_alpha_max, V_phi_min, V_phi_max, V_LO_min, V_LO_max;} mac_cal_state;
@@ -165,9 +165,9 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
     automatic real alpha_nl_bias = 0;
     automatic real phi_LO_bias = 0;
 
-    automatic cmp_num a = '{$cos( (V_a/V_pi) + a_nl_bias), 0};
-    automatic cmp_num alpha = '{$cos( (V_alpha/V_pi) + alpha_nl_bias), 0};
-    automatic cmp_num phi_LO = '{0,(pi * (V_LO/V_pi)) + phi_LO_bias};
+    automatic cmp_num a = '{$cos( ((V_a*pi)/(V_pi*2)) + a_nl_bias), 0};
+    automatic cmp_num alpha = '{$cos( ((V_alpha*pi)/(V_pi*2)) + alpha_nl_bias), 0};
+    automatic cmp_num phi_LO = '{0,(pi * 0.5 * (V_LO/V_pi)) + phi_LO_bias};
     
     //E_4 = t_in * 1i * sqrt(1-(a*a));
 	automatic cmp_num E_4 = '{0,t_in.r * $sqrt(1-(a.r*a.r)) * E_in};
@@ -221,12 +221,12 @@ function real I_MAC(input real E_in, V_a, V_LO, V_alpha, V_beta, V_gamma, V_phi)
     automatic real phi_LO_bias = 0;
     automatic real phi_alpha_bias = 0;
 	
-	automatic cmp_num a = '{$cos( (V_a/V_pi) + a_mac_bias), 0};
-	automatic cmp_num alpha = '{$cos( (V_alpha/V_pi) + alpha_mac_bias), 0};
-	automatic cmp_num beta = '{$cos( (V_beta/V_pi) + beta_mac_bias), 0};
-	automatic cmp_num gamma = '{$cos( (V_gamma/V_pi) + gamma_mac_bias), 0};
-	automatic cmp_num phi = '{0, $cos( (V_phi/V_pi) + phi_alpha_bias)};//All imaginary for exponential
-	automatic cmp_num phi_LO = '{0, (pi* (V_LO/V_pi)) + phi_LO_bias};//All imaginary for exponential
+	automatic cmp_num a = '{$cos( (pi*0.5*(V_a/V_pi)) + a_mac_bias), 0};
+	automatic cmp_num alpha = '{$cos( (pi*0.5*(V_alpha/V_pi)) + alpha_mac_bias), 0};
+	automatic cmp_num beta = '{$cos( (pi*0.5*(V_beta/V_pi)) + beta_mac_bias), 0};
+	automatic cmp_num gamma = '{$cos( (pi*0.5*(V_gamma/V_pi)) + gamma_mac_bias), 0};
+	automatic cmp_num phi = '{0, (pi*0.5*(V_phi/V_pi)) + phi_alpha_bias};//All imaginary for exponential
+	automatic cmp_num phi_LO = '{0, (pi*0.5*(V_LO/V_pi)) + phi_LO_bias};//All imaginary for exponential
 
 	automatic cmp_num E_5 = '{0, t_in.r*$sqrt(1-(a.r*a.r))*E_in};
 	
