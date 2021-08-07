@@ -51,7 +51,9 @@ title("NL Chip Output");
 
 subplot(1,2,2);
 fplot(f_nl, [-2*pi, 2*pi]);
-title("cos(x)*sech(cos*x))");
+title("cos(x)*sech(cos(x))");
+xlabel("x");
+ylabel("f(x)");
 
 
 figure();

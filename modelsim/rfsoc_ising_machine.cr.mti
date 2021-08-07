@@ -165,6 +165,15 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	lookup_table
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package chip_cal_alg_sv_unit
+-- Importing package ising_config
+-- Compiling module chip_cal_alg
+
+Top level modules:
+	chip_cal_alg
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling package output_scaler_sv_unit
