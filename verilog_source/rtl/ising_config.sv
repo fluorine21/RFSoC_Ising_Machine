@@ -132,6 +132,12 @@ function cmp_num cmp_sech(input cmp_num a);
 	//Compute the inverse
 	automatic cmp_num d_i = cmp_inv(d);
 	//Compute the rest
+	
+	//For testing
+	if(a.i != 0) begin
+		$display("Warning, cmp_sech recieved complex argument");
+	end
+	
 	return cmp_mul('{2,0}, cmp_mul(cmp_exp(a), d_i));
 endfunction
 
@@ -153,7 +159,9 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 	automatic cmp_num eta = '{1,0};
 	automatic cmp_num t_out = '{1,0};
 	automatic cmp_num kappa = '{510,0};
+	//automatic cmp_num kappa = '{1,0};//For testing purposes
 	automatic cmp_num L = '{0.002,0};
+	//automatic cmp_num L = '{1,0};//For testing purposes
 	automatic cmp_num t_nla = '{1,0};
 	automatic cmp_num t_alpha = '{1,0};
 	automatic cmp_num t_in = '{1,0};
@@ -184,7 +192,8 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
     //E_NLA = t_nla * E_alpha * sech(kappa * L * E_alpha);
 	automatic cmp_num sech_arg = cmp_mul(kappa, cmp_mul(L, E_alpha));
 	automatic cmp_num E_NLA = cmp_mul(t_nla, cmp_mul(E_alpha, cmp_sech(sech_arg)));
-	
+	//automatic cmp_num E_NLA = cmp_mul(E_alpha, cmp_sech(E_alpha));//For testing porpoises
+	//automatic cmp_num E_NLA = cmp_sech(E_alpha);//For testing porpoises
 
     //E_2 = t_out * (1/sqrt(2)) * ( (1i*E_LO) + E_NLA);
 	automatic cmp_num last_arg = cmp_add(cmp_mul('{0,1}, E_LO), E_NLA);
@@ -195,7 +204,9 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 	automatic cmp_num E_1 = cmp_mul(t_out, cmp_mul('{1/$sqrt(2),0}, last_arg2));
     
     //return eta * ((abs(E_1)^2)-(abs(E_2)^2));
-	return eta.r * (cmp_sqr_mag(E_1) - cmp_sqr_mag(E_2));
+	//return eta.r * (cmp_sqr_mag(E_1) - cmp_sqr_mag(E_2));
+	return E_NLA.r;//For testing purposes
+	//return 0;//For testing porpoises :)
 
 endfunction
 
@@ -240,7 +251,7 @@ function real I_MAC(input real E_in, V_a, V_LO, V_alpha, V_beta, V_gamma, V_phi)
 	
 	automatic cmp_num E_beta = cmp_mul('{1/$sqrt(2),0}, cmp_mul(t_beta, cmp_mul(beta, E_4)));
 	
-	automatic cmp_num E_bg = cmp_mul('{1/$sqrt(2),0}, cmp_mul(t_beta, cmp_mul(gamma, E_beta)));
+	automatic cmp_num E_bg = cmp_mul(t_beta, cmp_mul(gamma, E_beta));
 	
 	automatic cmp_num E_mac_arg = cmp_add(E_bg, cmp_mul(E_3, '{0,1}));
 	automatic cmp_num E_mac = cmp_mul('{1/$sqrt(2), 0}, cmp_mul(t_mzi, E_mac_arg));

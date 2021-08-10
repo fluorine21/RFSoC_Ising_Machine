@@ -444,10 +444,11 @@ endfunction
 initial begin
 
 	//automatic real r = cmp_num_test();
-	automatic nl_cal_state nl_state = cal_nl_chip();
-	automatic mac_cal_state mac_state = cal_mac_chip();
-	//test_nl_cal();
-	//test_mac_cal();
+	//automatic nl_cal_state nl_state = cal_nl_chip();
+	//automatic mac_cal_state mac_state = cal_mac_chip();
+	test_nl_cal();
+	test_mac_cal();
+	sech_test();
 end
 
 
@@ -479,6 +480,7 @@ function void test_nl_cal();
 		$fwrite(outfile, "%f, %f, %f\n", v_in, res1, res2);
 	end
 	$display("NL test finished");
+	$fclose(outfile);
 endfunction
 
 
@@ -511,7 +513,19 @@ function void test_mac_cal();
 		end
 	end
 	$display("MAC add test finished");
+	$fclose(outfile);
 	
+	
+	//Single add comparisons
+	outfile = $fopen("mac_add_comp_results.csv", "w");
+	$fwrite(outfile, "v_in, I_a, I_b\n");
+	for(v_in1 = -28; v_in1 <= 28; v_in1 += 0.1) begin
+		res1 = I_MAC(1, 4, 0, v_in1, 7, 0, 14);
+		res2 = I_MAC(1, 4, 0, 7, v_in1, 0, 14);
+		$fwrite(outfile, "%f, %f, %f\n", v_in1, res1, res2);
+	end
+	$display("MAC add comp finished");
+	$fclose(outfile);
 	
 endfunction 
 
@@ -523,6 +537,24 @@ function real abs(real val);
 	else begin
 		return val;
 	end
+endfunction
+
+
+function void sech_test();
+
+	automatic int outfile;
+	automatic real	x, y;
+	automatic cmp_num res;
+	outfile = $fopen("sech_results.csv", "w");
+	$fwrite(outfile, "x, y\n");
+	for(x = -4; x <= 4; x += 0.1) begin
+		res = cmp_sech('{$cos(x),0});
+		y = res.r;
+		$fwrite(outfile, "%f, %f\n", x, y);
+	end
+	$fclose(outfile);
+	$display("Sech test finished");
+
 endfunction
 
 
