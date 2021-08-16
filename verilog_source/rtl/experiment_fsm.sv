@@ -70,7 +70,15 @@ module experiment_fsm(
 	
 	output wire [2:0] state_out,
 	
-	output reg err_out //This will get set if a buffer was read from while not being valid
+	output reg err_out, //This will get set if a buffer was read from while not being valid
+	
+	
+	
+	//Runtime calibration inputs
+	input wire [num_bits-1:0] a_phase_cal, b_phase_cal, c_phase_cal,
+	input wire [15:0] phi_lo_start, phi_start,//Starting values for the phi_lo and phi modulators
+	input wire [num_bits-1:0] mac_phase_exp, nl_phase_exp, //Expected values for a correct phase calibration
+	
 );
 
 //Delay measurement stuff

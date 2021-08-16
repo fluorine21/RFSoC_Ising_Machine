@@ -86,6 +86,14 @@ parameter instr_b_sel_reg = 16'h0026;
 
 
 
+//Runtime calibration parameters
+parameter phase_cal_avgs = 1; //How many samples to average together when doing the measurement for each point
+parameter phase_sweep_dist = 5;//How many data points to look at on each sweep
+parameter phase_sweep_step = 5;//What to increment the 
+parameter phase_cal_tol = 10;//the num_bits-1 value returned by the ADC must be in this range for calibration to be complete
+
+
+
 
 
 integer program_1[] = 
