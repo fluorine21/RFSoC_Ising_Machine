@@ -1,0 +1,2 @@
+We would like to have the high frequency material (AD360(Arlon) with Dk=3.6) in between layers 1 and 2. The material in between layers 2-3 and 3-4 can be FR4, pre-preg, or something else. Whatever is easiest on your end, we are not concerned with impedance control on these layers. 
+Also, I would like to make sure that the board will have two rectangles milled out of it near the middle. It is unclear from the Eagle design if this will be the case. Thanks!
