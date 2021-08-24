@@ -67,6 +67,7 @@ module experiment_fsm(
 	output reg del_done, //Done flag for when this measurement finishes
 	
 	input wire halt,//from shift reg attached to bus, tells fsm when to stop on buffer empty
+	output reg halted,//if 1, cpu is halted waiting to resume
 	
 	output wire [2:0] state_out,
 	
@@ -75,9 +76,13 @@ module experiment_fsm(
 	
 	
 	//Runtime calibration inputs
-	input wire [num_bits-1:0] a_phase_cal, b_phase_cal, c_phase_cal,
+	input wire [num_bits-1:0] a_phase_cal, b_phase_cal, c_phase_cal,//Values to output to a, b, and c intensity modulators during calibration
 	input wire [15:0] phi_lo_start, phi_start,//Starting values for the phi_lo and phi modulators
 	input wire [num_bits-1:0] mac_phase_exp, nl_phase_exp, //Expected values for a correct phase calibration
+	
+	//outputs to phi_lo and phi modulators
+	//TODO
+	output wire [15:0] phi_lo_val_out, phi_val_out//Output value to the phase modulators
 	
 );
 
@@ -113,6 +118,26 @@ reg c_w_tvalid;
 wire c_w_tready;
 assign c_in_ready = c_w_tready;
 /////////////////////////////////////
+
+
+//Calibration routine variables
+reg cal_busy;//If 1, calibration is ongoing
+reg use_cal;//If 1, use new phi values calculated by FPGA instead of inputs
+reg [15:0] phi_lo_internal, phi_internal;//Internal values used to sweep/set new calibration
+
+//Updates the values being sent to the phase modulators based on current CPU state
+task update_phi_vals();
+begin
+	if(cal_busy || use_cal) begin
+		phi_lo_val_out <= phi_lo_internal;
+		phi_val_out <= phi_internal;
+	end
+	else begin
+		phi_lo_val_out <= phi_lo_start;
+		phi_val_out <= phi_start;
+	end
+end
+endtask
 
 
 //Doing all the bus multiplexing down here
@@ -260,10 +285,18 @@ begin
 			out <= ~out;
 		end
 		if(instr_axis_tdata & (1 << 8)) begin
-		
+			//Switch to calibration mode
 		end
 		if(instr_axis_tdata & (1 << 9)) begin
-		
+			//Execute a halt here
+			state <= state_idle;
+			//Stop any buffer writes
+			a_w_tvalid <= 0;
+			c_w_tvalid <= 0;
+			
+			//Deassert ready
+			instr_axis_tready <= 0;
+			halted <= 1;
 		end
 		if(instr_axis_tdata & (1 << 10)) begin
 		
@@ -336,6 +369,11 @@ begin
 	
 	err_out <= 0;
 	
+	halted <= 0;
+	
+	cal_busy <= 0;
+	use_cal <= 0;
+	
 end
 endtask
 
@@ -358,6 +396,9 @@ always @ (posedge clk or negedge rst) begin
 			mac_run <= 0;
 			nl_run <= 0;
 			mac_done <= 0;
+			halted <= 1;
+			
+			update_phi_vals();//Always push out the current phase measurement values here
 			
 			if(a_del_meas_trig) begin
 				state <= state_del_meas_1;
@@ -395,7 +436,8 @@ always @ (posedge clk or negedge rst) begin
 			//If all of the buffers are ready
 			//if(buf_rdy) begin //removing this check for now and replacing it with error flag instead
 			execute_run();
-			//end
+			run_done <= 0;
+			halted <= 0;
 		end
 		
 		

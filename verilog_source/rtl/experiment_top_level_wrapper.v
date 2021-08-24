@@ -25,6 +25,14 @@ module experiment_top_level_wrapper
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m3_axis_tdata, //A NL output
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m3_axis_tvalid,
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m3_axis_tready,
+	
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m4_axis_tdata, //Phi LO
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m4_axis_tvalid,
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m4_axis_tready,
+	
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m5_axis_tdata, //Phi
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m5_axis_tvalid,
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m5_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////

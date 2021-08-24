@@ -28,7 +28,19 @@ module experiment_top_level
 	output wire [255:0] m3_axis_tdata, //A NL output
 	output wire m3_axis_tvalid,
 	input wire m3_axis_tready,
+	
+	
+	output wire [255:0] m4_axis_tdata, //Phi LO
+	output wire m4_axis_tvalid,
+	input wire m4_axis_tready,
+	
+	output wire [255:0] m5_axis_tdata, //Phi 
+	output wire m5_axis_tvalid,
+	input wire m5_axis_tready,
+	
 	//////////////////////////////////
+	
+
 	
 	//Inputs from ADCs////////////////
 	input wire [127:0] s0_axis_tdata, //MAC
@@ -440,6 +452,13 @@ counter_fifo
 	b_count
 );
 
+//Runtime phase calibration signals
+wire [num_bits-1:0] a_phase_cal, b_phase_cal, c_phase_cal, mac_phase_exp, nl_phase_exp;
+wire [15:0] phi_lo_start, phi_start;
+
+wire halted;
+
+wire [15:0] phi_lo_out, phi_out;
 
 experiment_fsm dut(
 	clk, rst,
@@ -507,12 +526,32 @@ experiment_fsm dut(
 	del_done, //Done flag for when this measurement finishes
 	
 	halt, 
+	halted,
 	state_out,
-	err_out
+	err_out,
+	
+	a_phase_cal, b_phase_cal, c_phase_cal,
+	phi_lo_start, phi_start,
+	mac_phase_exp, nl_phase_exp,
+	
+	phi_lo_out, phi_out
+	
 );
 
+//10.8.25.103
+//Pipeline for assembling and time-delaying phi waveforms
+wire [255:0] phi_lo_wave, phi_wave;
+waveform_assembler phi_lo_wave_asm_inst (phi_lo_out,phi_lo_wave);
+waveform_assembler phi_wave_asm_inst (phi_out,phi_wave);
 
-
+wire [7:0] phi_lo_shift_amt, phi_shift_amt;
+shifter phi_lo_shifter_inst (clk, rst, phi_lo_shift_amt, phi_lo_wave, m4_axis_tdata);
+shifter phi_shifter_inst (clk, rst, phi_shift_amt, phi_wave, m5_axis_tdata);
+assign m4_axis_tvalid = 1; 
+assign m5_axis_tvalid = 1;
+//Config registers for shift ammount 
+config_reg #(8,1,16,phi_lo_shift_amt_reg) phi_lo_shift_reg_inst (clk, rst, gpio_in,phi_lo_shift_amt);
+config_reg #(8,1,16,phi_shift_amt_reg) phi_shift_reg_inst (clk, rst, gpio_in,phi_shift_amt);
 
 
 
