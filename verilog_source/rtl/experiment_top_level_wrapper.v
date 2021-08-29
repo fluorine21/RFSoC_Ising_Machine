@@ -33,6 +33,18 @@ module experiment_top_level_wrapper
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m5_axis_tdata, //Phi
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m5_axis_tvalid,
 	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m5_axis_tready,
+	
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m6_axis_tdata, //"a" output (see gordo doc)
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m6_axis_tvalid,
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m6_axis_tready,
+	
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m7_axis_tdata, //"a_nl" output (see gordo doc)
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m7_axis_tvalid,
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m7_axis_tready,
+	
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire [255:0] m8_axis_tdata, //"phi_nl" output (see gordo doc)
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) output wire m8_axis_tvalid,
+	(* X_INTERFACE_PARAMETER = "FREQ_HZ 250000000"*) input wire m8_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////

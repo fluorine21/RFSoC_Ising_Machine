@@ -13,31 +13,42 @@ module experiment_top_level
 	
 	
 	//Outputs to DACs/////////////////
-	output wire [255:0] m0_axis_tdata, //A
+	output wire [255:0] m0_axis_tdata, //A (MAC)
 	output wire m0_axis_tvalid,
 	input wire m0_axis_tready,
 	
-	output wire [255:0] m1_axis_tdata, //B
+	output wire [255:0] m1_axis_tdata, //B (MAC)
 	output wire m1_axis_tvalid,
 	input wire m1_axis_tready,
 	
-	output wire [255:0] m2_axis_tdata, //C
+	output wire [255:0] m2_axis_tdata, //C (MAC)
 	output wire m2_axis_tvalid,
 	input wire m2_axis_tready,
 	
-	output wire [255:0] m3_axis_tdata, //A NL output
+	output wire [255:0] m3_axis_tdata, //A NL output (NL)
 	output wire m3_axis_tvalid,
 	input wire m3_axis_tready,
 	
 	
-	output wire [255:0] m4_axis_tdata, //Phi LO
+	output wire [255:0] m4_axis_tdata, //Phi LO (MAC)
 	output wire m4_axis_tvalid,
 	input wire m4_axis_tready,
 	
-	output wire [255:0] m5_axis_tdata, //Phi 
+	output wire [255:0] m5_axis_tdata, //Phi (MAC)
 	output wire m5_axis_tvalid,
 	input wire m5_axis_tready,
 	
+	output wire [255:0] m6_axis_tdata,// "a" (see gordo doc) (MAC)
+	output wire m6_axis_tvalid,
+	input wire m6_axis_tready,
+	
+	output wire [255:0] m7_axis_tdata,// "a_nl" (see gordo doc) (NL)
+	output wire m7_axis_tvalid,
+	input wire m7_axis_tready,
+	
+	output wire [255:0] m8_axis_tdata,// "phi_nl" (see gordo doc) (NL)
+	output wire m8_axis_tvalid,
+	input wire m8_axis_tready,
 	//////////////////////////////////
 	
 
@@ -553,6 +564,17 @@ assign m5_axis_tvalid = 1;
 config_reg #(8,1,16,phi_lo_shift_amt_reg) phi_lo_shift_reg_inst (clk, rst, gpio_in,phi_lo_shift_amt);
 config_reg #(8,1,16,phi_shift_amt_reg) phi_shift_reg_inst (clk, rst, gpio_in,phi_shift_amt);
 
+
+
+//Connecting up the first modulator (referred to as "a" in Gordo's doc)
+config_reg #(8,32,16,a_output_reg) a_output_reg_inst (clk, rst, gpio_in,m6_axis_tdata);
+assign m6_axis_tvalid = 1;
+
+config_reg #(8,32,16,a_nl_output_reg) a_nl_output_reg_inst (clk, rst, gpio_in,m7_axis_tdata);
+assign m7_axis_tvalid = 1;
+
+config_reg #(8,32,16,phi_nl_output_reg) phi_nl_output_reg_inst (clk, rst, gpio_in,m8_axis_tdata);
+assign m8_axis_tvalid = 1;
 
 
 endmodule

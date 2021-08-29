@@ -90,6 +90,11 @@ parameter phi_lo_shift_amt_reg = 16'h0027;
 parameter phi_shift_amt_reg = 16'h0028;
 
 
+parameter a_output_reg = 16'h0029;
+parameter a_nl_output_reg = 16'h002A;
+parameter phi_nl_output_reg = 16'h002B;
+
+
 
 //Runtime calibration parameters
 parameter phase_cal_avgs = 1; //How many samples to average together when doing the measurement for each point
