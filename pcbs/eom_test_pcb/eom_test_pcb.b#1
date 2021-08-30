@@ -159,9 +159,9 @@
 <wire x1="0" y1="52.07" x2="58.109459375" y2="52.07" width="0" layer="20"/>
 <wire x1="58.109459375" y1="52.07" x2="58.5160625" y2="52.22263125" width="0" layer="20"/>
 <wire x1="58.5160625" y1="52.22263125" x2="58.5166" y2="65.291534375" width="0" layer="20"/>
-<wire x1="58.5166" y1="65.291534375" x2="58.906309375" y2="66.153540625" width="0" layer="20"/>
-<wire x1="58.906309375" y1="66.153540625" x2="101.298096875" y2="66.183203125" width="0" layer="20"/>
-<wire x1="101.298096875" y1="66.183203125" x2="102.17505625" y2="65.502840625" width="0" layer="20"/>
+<wire x1="58.5166" y1="65.291534375" x2="58.8541125" y2="66.4930875" width="0" layer="20"/>
+<wire x1="58.8541125" y1="66.4930875" x2="101.2459" y2="66.52275" width="0" layer="20"/>
+<wire x1="101.2459" y1="66.52275" x2="102.17505625" y2="65.502840625" width="0" layer="20"/>
 <wire x1="102.17505625" y1="65.502840625" x2="102.17505625" y2="52.21094375" width="0" layer="20"/>
 <wire x1="102.17505625" y1="52.21094375" x2="102.320903125" y2="52.065096875" width="0" layer="20"/>
 <wire x1="102.320903125" y1="52.065096875" x2="160" y2="52.07" width="0" layer="20"/>
@@ -338,7 +338,7 @@ design rules under a new name.</description>
 <param name="mdSmdSmd" value="6mil"/>
 <param name="mdViaViaSameLayer" value="6mil"/>
 <param name="mnLayersViaInSmd" value="2"/>
-<param name="mdCopperDimension" value="40mil"/>
+<param name="mdCopperDimension" value="30mil"/>
 <param name="mdDrill" value="6mil"/>
 <param name="mdSmdStop" value="0mil"/>
 <param name="msWidth" value="6mil"/>

@@ -169,11 +169,8 @@
 <dimension x1="85.671" y1="82.423" x2="85.67" y2="81.153" x3="87.122196875" y3="81.78685625" textsize="0.254" layer="25" width="0.0254" unit="mil" precision="1"/>
 <dimension x1="85.671" y1="82.423" x2="86.1314" y2="82.423" x3="85.9012" y3="81.153" textsize="0.254" layer="25" width="0.0254" unit="mil" precision="1"/>
 <rectangle x1="58.17" y1="87.46" x2="102.4" y2="99.99" layer="46"/>
-<dimension x1="58.17" y1="87.46" x2="48.97" y2="49.96" x3="53.57" y3="49.08" textsize="1.778" layer="25" dtype="horizontal"/>
-<dimension x1="102.4" y1="87.46" x2="115.02" y2="47.34" x3="108.71" y3="47.34" textsize="1.778" layer="25" dtype="horizontal"/>
 <rectangle x1="58.2" y1="52.06" x2="102.34" y2="67.46" layer="46"/>
 <rectangle x1="58.17" y1="99.99" x2="102.4" y2="100.01" layer="46"/>
-<dimension x1="53.6" y1="57.81" x2="120.51" y2="48.41" x3="122.02" y3="53.11" textsize="1.778" layer="25" dtype="vertical"/>
 <rectangle x1="71.597775" y1="72.45223125" x2="72.58964375" y2="82.3572125" layer="29"/>
 <rectangle x1="85.68486875" y1="72.4573125" x2="86.6767375" y2="82.36229375" layer="29"/>
 <text x="15.37461875" y="54.968140625" size="1.27" layer="21">1 2 4 6 8

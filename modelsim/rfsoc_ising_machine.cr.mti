@@ -63,6 +63,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	delay_cal
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package ising_config
+
+Top level modules:
+	--none--
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_axis_writer.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_axis_writer.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling package gpio_axis_writer_sv_unit
@@ -132,6 +139,15 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 
 Top level modules:
 	shifter
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_fsm.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_fsm.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package experiment_fsm_sv_unit
+-- Importing package ising_config
+-- Compiling module experiment_fsm
+
+Top level modules:
+	experiment_fsm
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v {1 {vlog -work work -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021

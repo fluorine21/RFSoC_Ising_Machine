@@ -82,7 +82,7 @@ module experiment_fsm(
 	
 	//outputs to phi_lo and phi modulators
 	//TODO
-	output wire [15:0] phi_lo_val_out, phi_val_out//Output value to the phase modulators
+	output reg [15:0] phi_lo_val_out, phi_val_out//Output value to the phase modulators
 	
 );
 

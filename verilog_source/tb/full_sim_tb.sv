@@ -2,6 +2,10 @@
 
 module full_sim();
 
+//Filename for instruction listing and beta listing
+string i_f_n;//todo
+string b_f_n;//todo
+
 
 reg clk, rst;
 
@@ -61,17 +65,6 @@ wire s2_axis_tread;
 
 integer i, j, k;
 
-
-//Runtime variables
-
-//This is the full scale dac output times the amplifier gain divided by the full digital scale to normalize
-real scale_fac = (1.7*7)/(65535/2);
-//This is the position of the waveform we ultimately use as the voltage being sent to the chip
-integer wave_pos = 4;
-//This is the scaling factor we use to convert the current comming from the homodyne detection to the value returned by the ADCs////////////////
-real adc_scale_fac = 1;//TODO
-//Incident electric field amplitude at beginning of chip
-real E_in = 1;
 
 experiment_top_level_wrapper dut
 (
@@ -135,7 +128,16 @@ experiment_top_level_wrapper dut
 
 initial begin
 
-
+	//Load the program
+	load_program(i_f_n, b_f_n);
+	
+	//Set up all of the internal registers
+	
+	
+	//Write the output lookup tables
+	
+	
+	//Write the input lookup tables
 
 
 end

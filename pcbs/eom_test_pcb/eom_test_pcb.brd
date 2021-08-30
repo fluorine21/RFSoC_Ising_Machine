@@ -797,7 +797,7 @@ design rules under a new name.</description>
 <via x="77.060153125" y="80.802746875" extent="1-16" drill="0.35"/>
 <via x="76.29" y="79.79" extent="1-16" drill="0.35"/>
 <via x="75.170003125" y="80.645796875" extent="1-16" drill="0.35"/>
-<polygon width="2.54" layer="1" spacing="0.254" isolate="0.1524" thermals="no" rank="2">
+<polygon width="2.54" layer="1" spacing="0.254" isolate="0.1524" rank="2">
 <vertex x="0" y="100"/>
 <vertex x="0" y="51.97"/>
 <vertex x="160.01" y="51.97"/>
@@ -2707,6 +2707,8 @@ design rules under a new name.</description>
 <vertex x="72.898" y="80.01"/>
 <vertex x="21.336" y="80.01"/>
 </polygon>
+<wire x1="155.646" y1="96.812" x2="155.646" y2="96.812" width="0" layer="19" extent="1-16"/>
+<wire x1="4.95" y1="96.668" x2="4.95" y2="96.668" width="0" layer="19" extent="1-16"/>
 </signal>
 <signal name="N$3">
 <contactref element="U$3" pad="P$1"/>

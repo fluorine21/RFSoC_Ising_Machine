@@ -104,6 +104,19 @@ parameter phase_cal_tol = 10;//the num_bits-1 value returned by the ADC must be 
 
 
 
+//Runtime variables
+
+//This is the full scale dac output times the amplifier gain divided by the full digital scale to normalize
+real scale_fac = (1.7*7)/(65535/2);
+//This is the position of the waveform we ultimately use as the voltage being sent to the chip
+integer wave_pos = 4;
+//This is the scaling factor we use to convert the current comming from the homodyne detection to the value returned by the ADCs////////////////
+real adc_scale_fac = 1;//TODO
+//Incident electric field amplitude at beginning of chip
+real E_in_d = 1;
+
+
+
 
 
 
@@ -223,8 +236,8 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 	automatic cmp_num E_1 = cmp_mul(t_out, cmp_mul('{1/$sqrt(2),0}, last_arg2));
     
     //return eta * ((abs(E_1)^2)-(abs(E_2)^2));
-	//return eta.r * (cmp_sqr_mag(E_1) - cmp_sqr_mag(E_2));
-	return E_NLA.r;//For testing purposes
+	return eta.r * (cmp_sqr_mag(E_1) - cmp_sqr_mag(E_2));
+	//return E_NLA.r;//For testing purposes
 	//return 0;//For testing porpoises :)
 
 endfunction

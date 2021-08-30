@@ -27,7 +27,7 @@ initial begin
 end
 
 
-wire [((num_stages)*stage_width)-1:0] total_reg;
+reg [((num_stages)*stage_width)-1:0] total_reg;
 
 wire [15:0] sample_index_offset = {4'b0, shift_amt, 4'b0};
 
