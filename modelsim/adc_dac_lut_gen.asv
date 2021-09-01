@@ -217,9 +217,9 @@ function [zp, fz] = find_zp(v_in, i_in, peak_pos)
                first = 'p';
                fz = p_pos;
            end
-        elseif(abs( (i_in(p_pos)/i_in(peak_pos))) < 0.01 && first == 'n')
-            zp = p_pos;
-            break;%We're done
+        
+        elseif(abs( (i_in(p_pos) - i_in(peak_pos))/i_in(peak_pos) ) < 0.01 && first == 'n')
+            
         end
         
         %If we found a negative value on the negative side
@@ -231,9 +231,6 @@ function [zp, fz] = find_zp(v_in, i_in, peak_pos)
                first = 'n'; 
                fz = n_pos;
             end
-        elseif(abs( (i_in(n_pos)/i_in(peak_pos))) < 0.01 && first == 'p')
-            zp = n_pos;
-            break;%We're done
         end
         
         %If we can step further in the positive direction
