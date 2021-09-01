@@ -113,7 +113,7 @@ integer wave_pos = 4;
 //This is the scaling factor we use to convert the current comming from the homodyne detection to the value returned by the ADCs////////////////
 real adc_scale_fac = 1;//TODO
 //Incident electric field amplitude at beginning of chip
-real E_in_d = 1;
+real E_in_d = 20;
 
 
 
@@ -190,7 +190,7 @@ function real I_NLA(input real E_in, V_a, V_LO, V_alpha);
 	//NL Parameters
 	automatic cmp_num eta = '{1,0};
 	automatic cmp_num t_out = '{1,0};
-	automatic cmp_num kappa = '{510,0};
+	automatic cmp_num kappa = '{510*1,0};
 	//automatic cmp_num kappa = '{1,0};//For testing purposes
 	automatic cmp_num L = '{0.002,0};
 	//automatic cmp_num L = '{1,0};//For testing purposes

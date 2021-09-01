@@ -17,10 +17,10 @@ function void gen_nl_lut(nl_cal_state cal_state);
 	automatic int outfile = $fopen("nl_lut_gen_results.csv", "w");
 	$fwrite(outfile, "v_alpha, I_out_I\n");
 	
-	for(v = V_pi*-1; v <= V_pi; v = v + 0.1) begin
+	for(v = 0; v <= V_pi*2; v = v + 0.001) begin
 		V_in = {V_in, v};
-		//res1 = I_NLA(E_in_d, cal_state.V_a_max, cal_state.V_LO_max, v);
-		res1 = I_NLA(E_in_d, v, 0, 0);
+		res1 = I_NLA(E_in_d, cal_state.V_a_max, cal_state.V_LO_max, v);
+		//res1 = I_NLA(E_in_d, v, 0, 0);
 		I_out = {I_out, res1}; 
 		
 		$fwrite(outfile, "%f, %f\n", v, res1);
@@ -71,46 +71,46 @@ function nl_cal_state cal_nl_chip();
 		end
 	end
 	
-	$display("I_NLA for V_a = 0 was %f", I_NLA(1, 0, 0, 0));
-	// for (v_in = 0; v_in < 9; v_in += 0.01) begin
-		// res = abs(I_NLA(1, v_in, 7, 0));
-		// if(res > I_a_max) begin
-			// I_a_max = res;
-			// V_a_max = v_in;
-			// V_LO = 7;
-		// end
+	//$display("I_NLA for V_a = 0 was %f", I_NLA(1, 0, 0, 0));
+	for (v_in = 0; v_in < 9; v_in += 0.01) begin
+		res = abs(I_NLA(1, v_in, 7, 0));
+		if(res > I_a_max) begin
+			I_a_max = res;
+			V_a_max = v_in;
+			V_LO = 7;
+		end
 		
-		// if(res < I_a_min) begin
-			// I_a_min = res;
-			// V_a_min = v_in;
-		// end
-	// end
-	// for (v_in = 0; v_in < 9; v_in += 0.01) begin
-		// res = abs(I_NLA(1, v_in, 0, 7));
-		// if(res > I_a_max) begin
-			// I_a_max = res;
-			// V_a_max = v_in;
-			// V_LO = 0;
-		// end
+		if(res < I_a_min) begin
+			I_a_min = res;
+			V_a_min = v_in;
+		end
+	end
+	for (v_in = 0; v_in < 9; v_in += 0.01) begin
+		res = abs(I_NLA(1, v_in, 0, 7));
+		if(res > I_a_max) begin
+			I_a_max = res;
+			V_a_max = v_in;
+			V_LO = 0;
+		end
 		
-		// if(res < I_a_min) begin
-			// I_a_min = res;
-			// V_a_min = v_in;
-		// end
-	// end
-	// for (v_in = 0; v_in < 9; v_in += 0.01) begin
-		// res = abs(I_NLA(1, v_in, 7, 7));
-		// if(res > I_a_max) begin
-			// I_a_max = res;
-			// V_a_max = v_in;
-			// V_LO = 7;
-		// end
+		if(res < I_a_min) begin
+			I_a_min = res;
+			V_a_min = v_in;
+		end
+	end
+	for (v_in = 0; v_in < 9; v_in += 0.01) begin
+		res = abs(I_NLA(1, v_in, 7, 7));
+		if(res > I_a_max) begin
+			I_a_max = res;
+			V_a_max = v_in;
+			V_LO = 7;
+		end
 		
-		// if(res < I_a_min) begin
-			// I_a_min = res;
-			// V_a_min = v_in;
-		// end
-	// end
+		if(res < I_a_min) begin
+			I_a_min = res;
+			V_a_min = v_in;
+		end
+	end
 	
 	$display("V_a_max: %f, V_a_min: %f", V_a_max, V_a_min);
 	

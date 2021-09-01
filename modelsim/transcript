@@ -50,3 +50,904 @@ run -all
 # V_LO_max: 0.000000, V_LO_min: 7.000000
 # NL cal done
 # NL LUT gen finished!
+# Compile of chip_cal_alg.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# t
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 7.520000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# ><       :8  Hg
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# ><       :8  Hg
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+#   nl  (g
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 4.820000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+#  ÞÜ  Pè
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 5.750000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# t
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 7.520000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# l_MD  D:/_info
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 6.950000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of chip_cal_alg.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 6.950000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(178): NaN (not a number) resulted from a division operation.
+# ** Error (suppressible): (vsim-8604) D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv(179): NaN (not a number) resulted from a division operation.
+# NL LUT gen finished!
+# Compile of chip_cal_alg.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 6.950000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of adc_driver.sv was successful with warnings.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+# Compile of ising_config.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 2 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of adc_driver.sv was successful with warnings.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# o E˜  lg0npin }tglAœl otos{ opl_owM€l upr0cvrnsot0I„i odr1 otcmie0uˆr p  oe_tt0D/eqŒF _sn_ahn/eio_}°e /xeiettplvlty´c rtgl  lgpoete¸l yessevrlggopa¼  e_xtgl  oe_om   e_od0vo_95opi¤  gndbg0cvrfm0•¨_ pl 66920vo_o‘¬0 vrbac  odrt Ðe l0n0cvrecuee™Ô  lgdsbep  oe_…Øc s0vo_aad0vo_Üo e0cvrotee  oÀw od0vo_IOtos{‰Äg -vo_pin }cmiµÈ  kvo_pe  oe_o±Ì  opl_re 4dn_o½ð  oe_xr0cvrsm ¹ôr sRSCIigMciev¥øg uc/t/ofgrgs ¡ü_ ge0fl_yessev­àg opi  oe_xtgl©äo _oe  oe_od0vÕè9 optS lgndbg0Ñìr ac  lgnla  oÝr ls_opl 66158Ùr m0vo_nbeI  oÅx ddfut0vo_ialÁ0 vrcvrel  oe_Í v 3vo_aad0vo_hÉr 0vpfo  o  lgõp n }tgl  lgotñ{ opl_owr lgupý0c rnsot0cmieodù4d _opl  oe_xr0å8r m  :rpsRSCIiá<c evrlgsuc/t/xí f s oe_oge0fl_é$s evrlggopi  o(x gl  oe_oe  o,o 0vo_95optS lPd g0ls_opl 633Tc rfm0cvrbac  Xn a  odrrlcvre\e al  lgeal0n0@_ alot0cvrcvre	D  tlw1vo_hwore5Ho aad0cvrotee 1Lg -vo_IOtos{ o=po _ohr  lgupr09ti t okvo_pin }%xi odr1cvrep  o!|m e0cvrsm  :rp-`S IigMcievrlgs)d/ /d_rvrs oe_oUh0 l_yessevrlggQli  oe_xtgl  oeivóò`0PÜ
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of chip_cal_alg.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# ev¥øg UEDMI=AE-LO4¡ü_  ´
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+# Compile of ising_config.sv was successful.
+# ** Error: Acs sdne.
+#  côY{ /hpclagas
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# vl …n /hpclags_nt
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# Compile of adc_driver.sv was successful.
+# Compile of axis_fifos.sv was successful.
+# Compile of config_reg.sv was successful.
+# Compile of dac_driver.sv was successful.
+# Compile of fifo_wrappers.sv was successful.
+# Compile of ising_config.sv was successful.
+# Compile of output_scaler.sv was successful.
+# Compile of shifter.sv was successful.
+# Compile of adc_driver_tb.sv was successful.
+# Compile of dac_driver_tb.sv was successful.
+# Compile of delay_cal.sv was successful.
+# Compile of lookup_table.sv was successful.
+# Compile of experiment_fsm.sv was successful.
+# Compile of experiment_fsm_tb.sv was successful.
+# Compile of experiment_top_level_tb.sv was successful.
+# Compile of axis_selector.sv was successful.
+# Compile of counter_fifo.sv was successful.
+# Compile of gpio_reader.sv was successful.
+# Compile of gpio_axis_writer.sv was successful.
+# Compile of experiment_top_level_wrapper.v was successful.
+# Compile of experiment_top_level.sv was successful.
+# Compile of chip_cal_alg.sv was successful.
+# 22 compiles, 0 failed with no errors.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# $
+#        Unable to replace existing ini file (D:/repos/RFSoC_Ising_Machine/modelsim/rfsoc_ising_machine.mpf).  File can not be renamed.
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# Loading work.ising_config
+# Loading work.chip_cal_alg_sv_unit
+# Loading work.chip_cal_alg
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
+restart -f
+run -all
+# V_a_max: 3.990000, V_a_min: 0.000000
+# V_alpha_max: 0.000000, V_alpha_min: 7.000000
+# V_LO_max: 0.000000, V_LO_min: 7.000000
+# NL cal done
+# NL LUT gen finished!
