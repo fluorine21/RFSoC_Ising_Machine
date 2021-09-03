@@ -48,7 +48,9 @@ ylabel("I");
 legend("Input Curve", "Fitted Curve", "0", "-128", "127");
 
 
-
+t2 = readtable("mac_cal_diag.csv");
+figure();
+plot(t2{:,1}, t2{:,2}, 'linewidth', 2);
 
 
 
@@ -281,9 +283,6 @@ function [zp, fz] = find_zp(v_in, i_in, peak_pos)
         end
         
     end
-
-
-
 end
 
 

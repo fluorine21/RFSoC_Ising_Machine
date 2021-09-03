@@ -31,6 +31,58 @@ function void gen_nl_lut(nl_cal_state cal_state);
 endfunction
 
 
+
+function void gen_mac_lut(mac_cal_state cal_state);
+
+	
+
+	//Generate a sweep of alpha with beta and gamma shut
+	automatic real res1, v;
+	
+	automatic int outfile = $fopen("mac_as_bc_cc.csv", "w");
+	$fwrite(outfile, "v_alpha, I_out_I\n");
+
+	for(v = 0; v <= V_pi*2; v = v + 0.001) begin
+		res1 = I_MAC(E_in_d, cal_state.V_alpha_max, cal_state.V_LO_max, v, cal_state.V_b_min, cal_state.V_c_min, cal_state.V_phi_max);
+		$fwrite(outfile, "%f, %f\n", v, res1);
+	end
+	$fclose(outfile);
+	
+	//Generate a sweep of alpha with beta open, gamma open
+	outfile = $fopen("mac_as_bo_co.csv", "w");
+	$fwrite(outfile, "v_alpha, I_out_I\n");
+
+	for(v = 0; v <= V_pi*2; v = v + 0.001) begin
+		res1 = I_MAC(E_in_d, cal_state.V_alpha_max, cal_state.V_LO_max, v, cal_state.V_b_max, cal_state.V_c_max, cal_state.V_phi_max);
+		$fwrite(outfile, "%f, %f\n", v, res1);
+	end
+	$fclose(outfile);
+	
+	
+	//Generate a sweep of beta with gamma open, alpha shut
+	outfile = $fopen("mac_ac_bs_co.csv", "w");
+	$fwrite(outfile, "v_alpha, I_out_I\n");
+
+	for(v = 0; v <= V_pi*2; v = v + 0.001) begin
+		res1 = I_MAC(E_in_d, cal_state.V_alpha_max, cal_state.V_LO_max, cal_state.V_a_min, v, cal_state.V_c_max, cal_state.V_phi_max);
+		$fwrite(outfile, "%f, %f\n", v, res1);
+	end
+	$fclose(outfile);
+	
+	//Generate a sweep of gamma with beta open, alpha shut
+	outfile = $fopen("mac_ac_bo_cs.csv", "w");
+	$fwrite(outfile, "v_alpha, I_out_I\n");
+
+	for(v = 0; v <= V_pi*2; v = v + 0.001) begin
+		res1 = I_MAC(E_in_d, cal_state.V_alpha_max, cal_state.V_LO_max, cal_state.V_a_min, cal_state.V_b_max, v, cal_state.V_phi_max);
+		$fwrite(outfile, "%f, %f\n", v, res1);
+	end
+	$fclose(outfile);
+	
+	
+endfunction
+
+
 function nl_cal_state cal_nl_chip();
 
 	automatic real v_in;
@@ -469,18 +521,6 @@ function real cmp_num_test();
 endfunction
 
 
-initial begin
-
-	//automatic real r = cmp_num_test();
-	automatic nl_cal_state nl_state = cal_nl_chip();
-	gen_nl_lut(nl_state);
-	//automatic mac_cal_state mac_state = cal_mac_chip();
-	//test_nl_cal();
-	//test_mac_cal();
-	//sech_test();
-end
-
-
 function real check_val(real v1, v2);
 	automatic real err = v1-v2;
 	if(err < 0) begin
@@ -586,8 +626,215 @@ function void sech_test();
 
 endfunction
 
+//New mac cal alg
+function mac_cal_state cal_mac_chip_neu();
+
+	//First we sweep the input modulator (referred to as alpha here)
+	automatic real i_min, i_max, v_min, v_max, v_in, res1, v2, v3;
+	automatic real V_alpha_max, V_alpha_min;
+	automatic real V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max;
+	automatic real V_a_mi, V_a_ma, V_b_mi, V_b_ma, V_c_mi, V_c_ma;
+	automatic real V_LO_max, V_LO_min, V_phi_max, V_phi_min;
+	automatic real v_step = 0.1;
+	automatic int outfile, j;
+	
+	i_min = 999999999;
+	i_max = 0;
+	v2 = 0;
+	v3 = 0;
+	while(1) begin
+	
+		outfile = $fopen("mac_cal_diag.csv", "w");
+		$fwrite(outfile, "v, i\n");
+		
+		for(v_in = V_pi*-2; v_in <= V_pi*2; v_in = v_in + v_step) begin
+			res1 = abs(I_MAC(E_in_d, v_in, v2, 0, 0, 0, v3));
+			if(res1 > i_max) begin
+				i_max = res1;
+				V_alpha_max = v_in;
+			end
+			if(res1 < i_min) begin
+				i_min = res1;
+				V_alpha_min = v_in;
+			end
+			$fwrite(outfile, "%f, %f\n", v_in, res1);
+		end
+		//If the difference bewtween the min and max currents is too small
+		if(i_max == 0 || (i_max-i_min)/i_max < 0.5) begin
+			//We go to a different v2 and try again
+			if(v2 == 14 && v3 == 14) begin
+				$fatal("Error, could not find cal point for a modulator at beginning");
+			end
+			if(v2 == 14) begin
+				v2 = 0;
+				v3 = v3+(V_pi/2);
+			end
+			else begin
+				v2 = v2+(V_pi/2);
+			end
+			$display("Trying V_LO = %f, V_phi = %f", v2, v3);
+			$fclose(outfile);
+			continue;
+		end
+		else begin
+			$fclose(outfile);
+			break;//Otherwise we've found the cal points for alpha
+		end
+		$fclose(outfile);
+	end
+	
+	$display("V_alpha_max: %f, V_alpha_min: %f, V_phi_LO: %f", V_alpha_max, V_alpha_min, v2);
+	
+	
+	//Now sweep Phi until we get the most positive signal
+	i_min = 999999999;
+	i_max = 0;
+	//outfile = $fopen("mac_cal_diag.csv", "w");
+	//$fwrite(outfile, "v, i\n");
+	for(v_in = V_pi*-2; v_in <= V_pi*2; v_in = v_in + v_step) begin
+		res1 = I_MAC(E_in_d, V_alpha_max, v2, 0, 0, 0, v_in);//Use tentative values for the phis that we found last time
+		if(res1 > i_max) begin
+			i_max = res1;
+			V_phi_max = v_in;
+		end
+		if(res1 < i_min) begin
+			i_min = res1;
+			V_phi_min = v_in;
+		end
+		//$fwrite(outfile, "%f, %f\n", v_in, res1);
+	end
+	//$fclose(outfile);
+	$display("V_phi_max: %f, V_phi_min: %f", V_phi_max, V_phi_min);
+	
+	//Now sweep Phi_LO until we get most positive signal
+	i_min = 999999999;
+	i_max = 0;
+	//outfile = $fopen("mac_cal_diag.csv", "w");
+	//$fwrite(outfile, "v, i\n");
+	for(v_in = V_pi*-2; v_in <= V_pi*2; v_in = v_in + v_step) begin
+		res1 = I_MAC(E_in_d, V_alpha_max, v_in, 0, 0, 0, V_phi_max);//Use tentative values for the phis that we found last time
+		if(res1 > i_max) begin
+			i_max = res1;
+			V_LO_max = v_in;
+		end
+		if(res1 < i_min) begin
+			i_min = res1;
+			V_LO_min = v_in;
+		end
+		//$fwrite(outfile, "%f, %f\n", v_in, res1);
+	end
+	//$fclose(outfile);
+	$display("V_LO_max: %f, V_LO_min: %f", V_LO_max, V_LO_min);
+	
+	
+	
+	//ABC cal time :)
+	
+	//First we sweep B and C against several different values of A to see what we get
+	for(v2 = V_pi*-2; v2 <= V_pi*2; v2 = v2 + V_pi/4) begin
+	
+		//Sweep B
+		i_min = 999999999;
+		i_max = 0;
+		//outfile = $fopen("mac_cal_diag.csv", "w");
+		//$fwrite(outfile, "v, i\n");
+		for(v_in = V_pi*-2; v_in <= V_pi*2; v_in = v_in + v_step) begin
+			res1 = abs(I_MAC(E_in_d, V_alpha_max, V_LO_max, v2, v_in, V_c_max, V_phi_max));//Use tentative values for the phis that we found last time
+			if(res1 > i_max) begin
+				i_max = res1;
+				V_b_ma = v_in;
+			end
+			if(res1 < i_min) begin
+				i_min = res1;
+				V_b_mi = v_in;
+			end
+			//$fwrite(outfile, "%f, %f\n", v_in, res1);
+		end
+		//$fclose(outfile);
+		$display("V_b_max: %f, V_b_min: %f", V_b_ma, V_b_mi);
+		
+		//Sweep C
+		i_min = 999999999;
+		i_max = 0;
+		//outfile = $fopen("mac_cal_diag.csv", "w");
+		//$fwrite(outfile, "v, i\n");
+		for(v_in = V_pi*-2; v_in <= V_pi*2; v_in = v_in + v_step) begin
+			res1 = abs(I_MAC(E_in_d, V_alpha_max, V_LO_max, v2, V_b_max, v_in, V_phi_max));//Use tentative values for the phis that we found last time
+			if(res1 > i_max) begin
+				i_max = res1;
+				V_c_ma = v_in;
+			end
+			if(res1 < i_min) begin
+				i_min = res1;
+				V_c_mi = v_in;
+			end
+			//$fwrite(outfile, "%f, %f\n", v_in, res1);
+		end
+		//$fclose(outfile);
+		$display("V_c_max: %f, V_c_min: %f", V_c_ma, V_c_mi);
+		
+		
+		//If the min/max voltages have smaller separation than the last pair then keep them
+		if(abs(V_b_ma - V_b_mi) < abs(V_b_max - V_b_min) || v2 == V_pi*-2) begin
+			V_b_max = V_b_ma;
+			V_b_min = V_b_mi;
+		end
+		if(abs(V_c_ma - V_c_mi) < abs(V_c_max - V_c_min) || v2 == V_pi*-2) begin
+			V_c_max = V_c_ma;
+			V_c_min = V_c_mi;
+		end
+	
+	end
 
 
+	
+	//Now we sweep a (the accululant modulator named alpha in the doccumentation
+	i_min = 999999999;
+	i_max = 0;
+	outfile = $fopen("mac_cal_diag.csv", "w");
+	$fwrite(outfile, "v, i\n");
+	for(v_in = V_pi*-2; v_in <= V_pi*2; v_in = v_in + v_step) begin
+		res1 = abs(I_MAC(E_in_d, V_alpha_max, V_LO_max, v_in, V_b_min, V_c_min, V_phi_max));//Use tentative values for the phis that we found last time
+		if(res1 > i_max) begin
+			i_max = res1;
+			V_a_max = v_in;
+		end
+		if(res1 < i_min) begin
+			i_min = res1;
+			V_a_min = v_in;
+		end
+		$fwrite(outfile, "%f, %f\n", v_in, res1);
+	end
+	$fclose(outfile);
+	$display("V_a_max: %f, V_a_min: %f", V_a_ma, V_a_mi);
+
+		
+
+	$display("Final ABC cal state:");
+	$display("V_a_max: %f, V_a_min: %f", V_a_max, V_a_min);
+	$display("V_b_max: %f, V_b_min: %f", V_b_max, V_b_min);
+	$display("V_c_max: %f, V_c_min: %f", V_c_max, V_c_min);
+	$display("Final Phi and alpha cal state:");
+	$display("V_alpha_max: %f, V_alpha_min: %f, V_phi_LO: %f", V_alpha_max, V_alpha_min, v2);
+	$display("V_phi_max: %f, V_phi_min: %f", V_phi_max, V_phi_min);
+	$display("V_LO_max: %f, V_LO_min: %f", V_LO_max, V_LO_min);
+	
+	
+	
+	
+endfunction
+
+
+initial begin
+
+	//automatic real r = cmp_num_test();
+	//automatic nl_cal_state nl_state = cal_nl_chip();
+	//gen_nl_lut(nl_state);
+	automatic mac_cal_state mac_state = cal_mac_chip_neu();
+	//test_nl_cal();
+	//test_mac_cal();
+	//sech_test();
+end
 
 
 endmodule 
