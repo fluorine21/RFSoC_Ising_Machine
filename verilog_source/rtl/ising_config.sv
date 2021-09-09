@@ -107,11 +107,11 @@ parameter phase_cal_tol = 10;//the num_bits-1 value returned by the ADC must be 
 //Runtime variables
 
 //This is the full scale dac output times the amplifier gain divided by the full digital scale to normalize
-real scale_fac = (1.7*7)/(65535/2);
+real dac_scale_fac = (1.7*14)/(65535);
 //This is the position of the waveform we ultimately use as the voltage being sent to the chip
-integer wave_pos = 4;
+const integer wave_pos = 4;
 //This is the scaling factor we use to convert the current comming from the homodyne detection to the value returned by the ADCs////////////////
-real adc_scale_fac = 1;//TODO
+real adc_scale_fac = 65535/400;//TODO
 //Incident electric field amplitude at beginning of chip
 real E_in_d = 20;
 

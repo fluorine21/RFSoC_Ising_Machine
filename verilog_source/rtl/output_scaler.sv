@@ -33,7 +33,7 @@ lookup_table #(addr_reg,data_reg,num_bits,16) output_lookup_table_inst
 );
 
 //output process
-always @ (posedge clk or negedge rst) begin
+always @ * begin//Combo logic
 	if(!rst) begin
 		dac_word_out <= 0;
 	end

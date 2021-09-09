@@ -42,6 +42,13 @@ Top level modules:
 	axis_fifo
 	axis_async_fifo_def
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/waveform_assembler.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/waveform_assembler.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling module waveform_assembler
+
+Top level modules:
+	waveform_assembler
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/adc_driver_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling module adc_driver_tb
@@ -62,6 +69,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 
 Top level modules:
 	delay_cal
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package ising_config
+
+Top level modules:
+	--none--
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_axis_writer.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_axis_writer.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
@@ -167,14 +181,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	output_scaler
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv {0 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling package chip_cal_alg_sv_unit
 -- Importing package ising_config
 -- Compiling module chip_cal_alg
-** Error (suppressible): (vlog-13276) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv(46): Could not find field/method name (V_beta_min) in 'cal_state' of 'cal_state.V_beta_min'.
-** Error (suppressible): (vlog-13276) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv(46): Could not find field/method name (V_gamma_min) in 'cal_state' of 'cal_state.V_gamma_min'.
-** Error (suppressible): (vlog-13276) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv(56): Could not find field/method name (V_beta_max) in 'cal_state' of 'cal_state.V_beta_max'.
-** Error (suppressible): (vlog-13276) D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv(56): Could not find field/method name (V_gamma_max) in 'cal_state' of 'cal_state.V_gamma_max'.
+
+Top level modules:
+	chip_cal_alg
 
 } {} {}}

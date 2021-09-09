@@ -38,7 +38,7 @@ always @(posedge clk or negedge rst) begin
 		total_reg <= 0;
 	end
 	else begin//Update the internal register state
-		total_reg <= {total_reg[0:+((num_stages-1)*stage_width)], dac_word_in};
+		total_reg <= {total_reg[((num_stages-1)*stage_width)-1:0], dac_word_in};
 	end
 end
 

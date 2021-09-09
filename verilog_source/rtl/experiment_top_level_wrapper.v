@@ -93,6 +93,26 @@ experiment_top_level ex_top_level_inst_in_wrapper
 	m3_axis_tdata, //A NL
 	m3_axis_tvalid,
 	m3_axis_tready,
+	
+	m4_axis_tdata, 
+	m4_axis_tvalid,
+	m4_axis_tready,
+	
+	m5_axis_tdata, 
+	m5_axis_tvalid,
+	m5_axis_tready,
+	
+	m6_axis_tdata, 
+	m6_axis_tvalid,
+	m6_axis_tready,
+	
+	m7_axis_tdata, 
+	m7_axis_tvalid,
+	m7_axis_tready,
+	
+	m8_axis_tdata, 
+	m8_axis_tvalid,
+	m8_axis_tready,
 	//////////////////////////////////
 	
 	//Inputs from ADCs////////////////

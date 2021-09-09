@@ -58,6 +58,16 @@ function void gen_mac_lut(mac_cal_state cal_state);
 	end
 	$fclose(outfile);
 	
+	//Do this same sweep but with the phase of alpha shifted 180 to make it negative
+	outfile = $fopen("mac_asn_bo_co.csv", "w");
+	$fwrite(outfile, "v_alpha, I_out_I\n");
+
+	for(v = 0; v <= V_pi*2; v = v + 0.001) begin
+		res1 = I_MAC(E_in_d, cal_state.V_alpha_max, cal_state.V_LO_max+ (V_pi*2), v, cal_state.V_b_max+ (V_pi*2), cal_state.V_c_max+ (V_pi*2), cal_state.V_phi_max+ (V_pi*2));
+		$fwrite(outfile, "%f, %f\n", v, res1);
+	end
+	$fclose(outfile);
+	
 	
 	//Generate a sweep of beta with gamma open, alpha shut
 	outfile = $fopen("mac_ac_bs_co.csv", "w");
@@ -78,6 +88,8 @@ function void gen_mac_lut(mac_cal_state cal_state);
 		$fwrite(outfile, "%f, %f\n", v, res1);
 	end
 	$fclose(outfile);
+	
+	$display("MAC LUT GEN finished");
 	
 	
 endfunction
@@ -215,265 +227,6 @@ function nl_cal_state cal_nl_chip();
 	
 endfunction
 
-
-
-function mac_cal_state cal_mac_chip();
-
-	//First we sweep a with a combo of 4 different set points for b and c ( [0,0], [7,0], [0,7], [7,7])
-	
-	automatic real v_in;
-	automatic real res;
-	
-	automatic real V_a_min = 0;
-	automatic real V_a_max = 0;
-	
-	automatic real I_min = 99999;
-	automatic real I_max = 0;
-	
-	automatic real V_b = 0; 
-	automatic real V_c = 0;
-	
-	automatic real V_LO = 0;
-	
-	automatic real V_LO_min = 0;
-	automatic real V_LO_max = 0;
-	
-	automatic real V_b_min = 0;
-	automatic real V_b_max = 0;
-	
-	automatic real V_c_min = 0;
-	automatic real V_c_max = 0;
-	
-	automatic real V_alpha_min = 0;
-	automatic real V_alpha_max = 0;
-	
-	automatic real V_phi_min = 0;
-	automatic real V_phi_max = 0;
-	
-	for(v_in = 0; v_in < 9; v_in += 0.01) begin
-	
-		//0, 0
-		res = abs(I_MAC(1, v_in, 0, 0, 0, 0, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 0;
-			V_c = 0;
-		end
-		//7, 0
-		res = abs(I_MAC(1, v_in, 0, 0, 7, 0, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 7;
-			V_c = 0;
-		end
-		//0, 7
-		res = abs(I_MAC(1, v_in, 0, 0, 0, 7, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 0;
-			V_c = 7;
-		end
-		//7, 7
-		res = abs(I_MAC(1, v_in, 0, 0, 7, 7, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 7;
-			V_c = 7;
-		end
-	
-	end
-	
-	//Now we repeat the whole thing with a different V_LO and see if anything changes
-	
-	
-	for(v_in = 0; v_in < 9; v_in += 0.01) begin
-		//0, 0
-		res = abs(I_MAC(1, v_in, 7, 0, 0, 0, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 0;
-			V_c = 0;
-			V_LO = 7;
-		end
-		//7, 0
-		res = abs(I_MAC(1, v_in, 7, 0, 7, 0, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 7;
-			V_c = 0;
-			V_LO = 7;
-		end
-		//0, 7
-		res = abs(I_MAC(1, v_in, 7, 0, 0, 7, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 0;
-			V_c = 7;
-			V_LO = 7;
-		end
-		//7, 7
-		res = abs(I_MAC(1, v_in, 7, 0, 7, 7, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_a_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_a_max = v_in;
-			V_b = 7;
-			V_c = 7;
-			V_LO = 7;
-		end
-	end
-	
-	$display("After a cal: V_b: %f, V_c: %f, V_LO: %f", V_b, V_c, V_LO);
-	
-	//Now we know the bias points for A, we'll bias B and C to their more open points (either 0 or 7) and then find the right bias for V_LO_max
-	
-	I_min = 9999;
-	I_max = 0;
-	
-	for(v_in = -9; v_in < 9; v_in += 0.01) begin
-		res = abs(I_MAC(1, V_a_max, 0, 0, V_b, V_c, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_LO_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_LO_max = v_in;
-		end
-	end
-	
-	//Now we have the bias points for a, phi_lo
-	//We will now sweep B and C to find their bias points
-	
-	I_min = 99999;
-	I_max = 0;
-	
-	for(v_in = 0; v_in < 9; v_in += 0.01) begin
-		//Using whatever the higher transmittance value was for C here
-		res = abs(I_MAC(1, V_a_max, V_LO_max, 0, v_in, V_c, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_b_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_b_max = v_in;
-		end
-	end
-	
-	I_min = 99999;
-	I_max = 0;
-	
-	for(v_in = 0; v_in < 9; v_in += 0.01) begin
-		
-		res = abs(I_MAC(1, V_a_max, V_LO_max, 0, V_b_max, v_in, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_c_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_c_max = v_in;
-		end
-	end
-	
-	//Now we have the bias points for a, b, c, and phi_lo
-	
-	//Next we'll close the b/c path and sweep alpha and phi together to get a rough idea of their bias points
-	
-	I_min = 99999;
-	I_max = 0;
-	
-	//Sweep once with phi set to 0
-	for(v_in = 0; v_in < 9; v_in += 0.01) begin
-		res = abs(I_MAC(1, V_a_max, V_LO_max, v_in, V_b_min, V_c_min, 0));
-		if(res < I_min) begin
-			I_min = res;
-			V_alpha_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_alpha_max = v_in;
-		end
-	end
-	
-	//Do it again with a different phi
-	for(v_in = 0; v_in < 9; v_in += 0.01) begin
-		res = abs(I_MAC(1, V_a_max, V_LO_max, v_in, V_b_min, V_c_min, 7));
-		if(res < I_min) begin
-			I_min = res;
-			V_alpha_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_alpha_max = v_in;
-		end
-	end
-	
-	//Now we know the bias points for alpha
-	//When we calibrated phi_LO, we locked it to the quadrature produced by the BC path (the positive value)
-	//Therefore, we will now sweep phi with the BC path closed and alpha open such that we can lock phi to phi_LO and therefore the bc path, finding the positive and negative values simultaniously
-	
-	I_min = 99999;
-	I_max = 0;
-	
-	for(v_in = -9; v_in < 9; v_in += 0.01) begin
-		res = abs(I_MAC(1, V_a_max, V_LO_max, V_alpha_max, V_b_min, V_c_min, v_in));
-		if(res < I_min) begin
-			I_min = res;
-			V_phi_min = v_in;
-		end
-		if(res > I_max) begin
-			I_max = res;
-			V_phi_max = v_in;
-		end
-	end
-	
-	$display("V_a_min: %f, V_a_max: %f\nV_b_min: %f, V_b_max: %f\nV_c_min: %f, V_c_max: %f\nV_alpha_min: %f, V_alpha_max: %f\nV_phi_min: %f, V_phi_max: %f\nV_LO_min: %f, V_LO_max: %f", V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max, V_alpha_min, V_alpha_max, V_phi_min, V_phi_max, V_LO_min, V_LO_max);
-	$display("MAC cal done");
-	
-	//and now we've found everything so we're done!
-	return '{V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max, V_alpha_min, V_alpha_max, V_phi_min, V_phi_max, V_LO_min, V_LO_max};
-
-endfunction
 
 
 function real cmp_num_test();
@@ -627,7 +380,7 @@ function void sech_test();
 endfunction
 
 //New mac cal alg
-function mac_cal_state cal_mac_chip_neu();
+function mac_cal_state cal_mac_chip();
 
 	//First we sweep the input modulator (referred to as alpha here)
 	automatic real i_min, i_max, v_min, v_max, v_in, res1, v2, v3;
@@ -815,11 +568,11 @@ function mac_cal_state cal_mac_chip_neu();
 	$display("V_b_max: %f, V_b_min: %f", V_b_max, V_b_min);
 	$display("V_c_max: %f, V_c_min: %f", V_c_max, V_c_min);
 	$display("Final Phi and alpha cal state:");
-	$display("V_alpha_max: %f, V_alpha_min: %f, V_phi_LO: %f", V_alpha_max, V_alpha_min, v2);
+	$display("V_alpha_max: %f, V_alpha_min: %f", V_alpha_max, V_alpha_min);
 	$display("V_phi_max: %f, V_phi_min: %f", V_phi_max, V_phi_min);
 	$display("V_LO_max: %f, V_LO_min: %f", V_LO_max, V_LO_min);
 	
-	
+	return '{V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max, V_alpha_min, V_alpha_max, V_phi_min, V_phi_max, V_LO_min, V_LO_max}; 
 	
 	
 endfunction
@@ -830,7 +583,8 @@ initial begin
 	//automatic real r = cmp_num_test();
 	//automatic nl_cal_state nl_state = cal_nl_chip();
 	//gen_nl_lut(nl_state);
-	automatic mac_cal_state mac_state = cal_mac_chip_neu();
+	automatic mac_cal_state mac_state = cal_mac_chip();
+	gen_mac_lut(mac_state);
 	//test_nl_cal();
 	//test_mac_cal();
 	//sech_test();
