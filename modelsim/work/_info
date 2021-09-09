@@ -703,27 +703,27 @@ R15
 vfull_sim
 R0
 R1
-DXx4 work 19 full_sim_tb_sv_unit 0 22 JWzAhJI;MdmDSa8gIfoaD1
-Z74 !s110 1631213010
+DXx4 work 19 full_sim_tb_sv_unit 0 22 4^>0;o3P`FIkhQK66cXR`1
+Z74 !s110 1631221503
 R4
 r1
 !s85 0
 !i10b 1
-!s100 @hWbJBOb5fcCca7<WGQj32
-ITUHdE7N[?aKF_d5I^YmNi1
+!s100 8k4fY`MaQ]zjlfGGCi6jz3
+IYiWaPV5LJLH9;L?UgRbj?1
 !s105 full_sim_tb_sv_unit
 S1
 R6
-Z75 w1631212770
+Z75 w1631221488
 Z76 8D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv
 Z77 FD:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv
-!i122 962
-L0 3 340
+!i122 963
+L0 3 347
 R10
 31
-Z78 !s108 1631213009.000000
-!s107 D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
-Z79 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
+Z78 !s108 1631221502.000000
+Z79 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
+Z80 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
 !i113 1
 R14
 R15
@@ -731,25 +731,25 @@ Xfull_sim_tb_sv_unit
 R0
 R1
 R74
-VJWzAhJI;MdmDSa8gIfoaD1
+V4^>0;o3P`FIkhQK66cXR`1
 r1
 !s85 0
 !i10b 1
-!s100 RdbG0`O[7HkYOnnJVIzn[1
-IJWzAhJI;MdmDSa8gIfoaD1
+!s100 Y=C4kmIkf3?aoMj6zBhGf3
+I4^>0;o3P`FIkhQK66cXR`1
 !i103 1
 S1
 R6
 R75
 R76
 R77
-!i122 962
-Z80 L0 1 0
+!i122 963
+Z81 L0 1 0
 R10
 31
 R78
-Z81 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
 R79
+R80
 !i113 1
 R14
 R15
@@ -797,7 +797,7 @@ R82
 R83
 R84
 !i122 949
-R80
+R81
 R10
 31
 R32
@@ -886,53 +886,53 @@ R15
 vlookup_table
 R0
 R1
-DXx4 work 20 lookup_table_sv_unit 0 22 AbiUOGK5R^ei?H:>O29n]0
-R53
+DXx4 work 20 lookup_table_sv_unit 0 22 Zj_TY_fjP[;YQhCcPzCOE2
+Z97 !s110 1631223010
 R4
 r1
 !s85 0
 !i10b 1
-!s100 [Tn<?dXGEMJB6HHZcGNI21
-I?G@IEiIjOEOGl6T3_O][N1
+!s100 <Xj]Z6[FfOCK0bEE0o4=h3
+I8PK3c^]QN_IHmPNJV>gNh3
 !s105 lookup_table_sv_unit
 S1
 R6
-R31
-Z97 8D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv
-Z98 FD:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv
-!i122 942
-L0 6 102
+Z98 w1631223003
+Z99 8D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv
+Z100 FD:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv
+!i122 965
+L0 6 104
 R10
 31
-R57
-Z99 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
-Z100 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
+Z101 !s108 1631223010.000000
+!s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
+Z102 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
 !i113 1
 R14
 R15
 Xlookup_table_sv_unit
 R0
 R1
-R53
-VAbiUOGK5R^ei?H:>O29n]0
+R97
+VZj_TY_fjP[;YQhCcPzCOE2
 r1
 !s85 0
 !i10b 1
-!s100 21khPl`KddMbcSZf7UCN41
-IAbiUOGK5R^ei?H:>O29n]0
+!s100 g@fEj[EQWNPBX0_G_S:Z50
+IZj_TY_fjP[;YQhCcPzCOE2
 !i103 1
 S1
 R6
-R31
-R97
 R98
-!i122 942
+R99
+R100
+!i122 965
 R44
 R10
 31
-R57
-R99
-R100
+R101
+Z103 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
+R102
 !i113 1
 R14
 R15
@@ -950,16 +950,16 @@ I8k@AfgkDP0XfQ;25CK7>O3
 !s105 output_scaler_sv_unit
 S1
 R6
-Z101 w1631206497
-Z102 8D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
-Z103 FD:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
+Z104 w1631206497
+Z105 8D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
+Z106 FD:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
 !i122 937
 L0 9 43
 R10
 31
 R23
-Z104 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv|
-Z105 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv|
+Z107 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv|
+Z108 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv|
 !i113 1
 R14
 R15
@@ -976,16 +976,16 @@ I8;`aa>ZlGCj<gg8=JR6J^0
 !i103 1
 S1
 R6
-R101
-R102
-R103
+R104
+R105
+R106
 !i122 937
 L0 6 0
 R10
 31
 R23
-R104
-R105
+R107
+R108
 !i113 1
 R14
 R15

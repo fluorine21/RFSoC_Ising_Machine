@@ -38,6 +38,8 @@ reg wr_cnt;
 
 wire [15:0] lut_next_word = {i_scaler_data, gpio_data};
 
+wire [in_bits-1:0] eff_addr = i_scaler_addr[in_bits-1:0];
+
 
 always @ (posedge clk or negedge rst) begin
 	if(!rst) begin
@@ -67,7 +69,7 @@ always @ (posedge clk or negedge rst) begin
 				end
 				//Otherwise write to memory
 				else begin
-					lut_mem[i_scaler_addr] <= lut_next_word[out_bits-1:0];//Select the lowest bits if we're working on an output word smaller than 8 bits
+					lut_mem[eff_addr] <= lut_next_word[out_bits-1:0];//Select the lowest bits if we're working on an output word smaller than 8 bits
 					wr_cnt <= 0;
 					//Increment the address
 					i_scaler_addr <= i_scaler_addr + 1;

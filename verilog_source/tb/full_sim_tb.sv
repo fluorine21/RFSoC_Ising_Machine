@@ -157,6 +157,13 @@ initial begin
 	s2_axis_tdata <= 0;
 	s2_axis_tvalid <= 0;
 	
+	//Reset everything
+	repeat(10) clk_cycle();
+	rst <= 0;
+	repeat(10) clk_cycle();
+	rst <= 1;
+	repeat(10); clk_cycle();
+	
 	//Load the program
 	//load_program(i_f_n, b_f_n);
 	
