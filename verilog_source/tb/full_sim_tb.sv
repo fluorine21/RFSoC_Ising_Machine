@@ -176,16 +176,48 @@ initial begin
  
 end
 
+task init_registers();
+begin
+	
+	//Get the MAC and NL cal states
+	automatic mac_cal_state cal_mac_chip();
+	automatic nl_cal_state cal_nl_chip();
+	
+	//Set phi_lo, phi, and phi_nl and the "alpha" modulators
+	automatic reg [15:0] phi_lo_val = mac_cal_state.V_LO_max*dac_scale_fac;
+	automatic reg [15:0] phi_val = mac_cal_state.V_phi_max*dac_scale_fac;
+	automatic reg [15:0] phi_nl_val = nl_cal_state.V_LO_max*dac_scale_fac;
+	
+	automatic reg [15:0] a_mac_val = mac_cal_state.V_alpha_max*dac_scale_fac;
+	automatic reg [15:0] a_nl_val = nl_cal_state.V_a_max*dac_scale_fac;
+
+	//Neet to also get full waves for a_mac, a_nl, and phi_nl
+
+
+	gpio_write(phi_lo_start_reg, phi_lo_val[15:8]);
+	gpio_write(phi_lo_start_reg, phi_lo_val[7:0]);
+	gpio_write(phi_start_reg, phi_val[15:8]);
+	gpio_write(phi_start_reg, phi_val[7:0]);
+	
+	
+
+
+end
+endtask
+
 task load_luts();
 begin
 	//Load the DAC luts
+	$display("Loading DAC LUTs...");
 	load_lut("lut_matlab_outputs\\lut_dac_a.csv", 0, a_output_scaler_addr_reg, a_output_scaler_data_reg);
-	load_lut("lut_matlab_outputs\lut_dac_a_nl.csv", 0, a_nl_output_scaler_addr_reg, a_output_scaler_data_reg);
-	load_lut("lut_matlab_outputs\lut_dac_b.csv", 0, b_output_scaler_addr_reg, b_output_scaler_data_reg);
-	load_lut("lut_matlab_outputs\lut_dac_c.csv", 0, c_output_scaler_addr_reg, c_output_scaler_data_reg);
+	load_lut("lut_matlab_outputs\\lut_dac_a_nl.csv", 0, a_nl_output_scaler_addr_reg, a_nl_output_scaler_data_reg);
+	load_lut("lut_matlab_outputs\\lut_dac_b.csv", 0, b_output_scaler_addr_reg, b_output_scaler_data_reg);
+	load_lut("lut_matlab_outputs\\lut_dac_c.csv", 0, c_output_scaler_addr_reg, c_output_scaler_data_reg);
 	//Then the ADC luts
-	load_lut("lut_matlab_outputs\lut_adc_mac.csv", 1, mac_driver_addr_reg, mac_driver_data_reg);
-	load_lut("lut_matlab_outputs\lut_adc_nl.csv", 1, nl_driver_addr_reg, nl_driver_data_reg);
+	$display("Loading MAC ADC LUT");
+	load_lut("lut_matlab_outputs\\lut_adc_mac.csv", 1, mac_driver_addr_reg, mac_driver_data_reg);
+	$display("Loading NL ADC LUT");
+	load_lut("lut_matlab_outputs\\lut_adc_nl.csv", 1, nl_driver_addr_reg, nl_driver_data_reg);
 end
 endtask
 
@@ -322,23 +354,23 @@ begin
 
 	//First we take the modulator 16-bit values for a, alpha, etc and turn them into floating point numbers
 
-	automatic real alpha_v = dac_scale_fac * m0_axis_tdata[(wave_pos*16)+:16];
-	automatic real beta_v = dac_scale_fac * m1_axis_tdata[(wave_pos*16)+:16];
-	automatic real gamma_v = dac_scale_fac * m2_axis_tdata[(wave_pos*16)+:16];
-	automatic real alpha_nl_v = dac_scale_fac * m3_axis_tdata[(wave_pos*16)+:16];
-	automatic real phi_lo_v = dac_scale_fac * m4_axis_tdata[(wave_pos*16)+:16];
-	automatic real phi_v = dac_scale_fac * m5_axis_tdata[(wave_pos*16)+:16];
-	automatic real a_v = dac_scale_fac * m6_axis_tdata[(wave_pos*16)+:16];
-	automatic real a_nl_v = dac_scale_fac * m7_axis_tdata[(wave_pos*16)+:16];
-	automatic real phi_nl_v = dac_scale_fac * m8_axis_tdata[(wave_pos*16)+:16];
+	automatic real alpha_v = (1/dac_scale_fac) * m0_axis_tdata[(wave_pos*16)+:16];
+	automatic real beta_v = (1/dac_scale_fac) * m1_axis_tdata[(wave_pos*16)+:16];
+	automatic real gamma_v = (1/dac_scale_fac) * m2_axis_tdata[(wave_pos*16)+:16];
+	automatic real alpha_nl_v = (1/dac_scale_fac) * m3_axis_tdata[(wave_pos*16)+:16];
+	automatic real phi_lo_v = (1/dac_scale_fac) * m4_axis_tdata[(wave_pos*16)+:16];
+	automatic real phi_v = (1/dac_scale_fac) * m5_axis_tdata[(wave_pos*16)+:16];
+	automatic real a_v = (1/dac_scale_fac) * m6_axis_tdata[(wave_pos*16)+:16];
+	automatic real a_nl_v = (1/dac_scale_fac) * m7_axis_tdata[(wave_pos*16)+:16];
+	automatic real phi_nl_v = (1/dac_scale_fac) * m8_axis_tdata[(wave_pos*16)+:16];
 	
 	//Compute the resulting currents
 	automatic real I_N = I_NLA(E_in_d, a_nl_v, phi_nl_v, alpha_nl_v);
 	automatic real I_M = I_MAC(E_in_d, a_v, phi_lo_v, alpha_v, beta_v, gamma_v, phi_v);
 	
 	//Convert the currents into results for the ADC and push them onto the bus
-	automatic reg [15:0] I_N_D = I_N * adc_scale_fac;
-	automatic reg [15:0] I_M_D = I_M * adc_scale_fac;
+	automatic reg [15:0] I_N_D = 16'(I_N * adc_scale_fac);
+	automatic reg [15:0] I_M_D = 16'(I_M * adc_scale_fac);
 	
 	s0_axis_tdata = { {3{16'b0}}, I_M_D, {4{16'b0}} };
 	s1_axis_tdata = { {3{16'b0}}, I_N_D, {4{16'b0}} };

@@ -7,7 +7,8 @@ module adc_driver
 #(
 parameter addr_reg = 0,
 parameter data_reg = 1,
-parameter shift_amt_reg_base_addr = 2
+parameter shift_amt_reg_base_addr = 2,
+parameter sample_selector_addr = 3
 )
 (
 	input wire clk, rst,
@@ -63,15 +64,28 @@ clk, rst, shift_amt, s_axis_tdata, shifted_adc_word
 
 //peak detector instantiation
 wire [15:0] peak_out;
-wire [2:0] peak_pos;
-wire peak_out_valid;
-peak_detector peak_detector_inst
-(
-	clk, rst,
-	shifted_adc_word,
-	adc_input_scaler_run,
+// wire [2:0] peak_pos;
+wire peak_out_valid = 1;
+// peak_detector peak_detector_inst
+// (
+	// clk, rst,
+	// shifted_adc_word,
+	// adc_input_scaler_run,
 	
-	peak_out, peak_out_valid, peak_pos
+	// peak_out, peak_out_valid, peak_pos
+// );
+
+//Sample Selector
+sample_selector
+#(sample_selector_addr) sample_selector_inst
+(
+	clk, rst
+	
+	gpio_in,
+	
+	shifted_adc_word,
+	
+	peak_out //Might not actually be the peak but ya know, probably better this way
 );
 
 //Lookup table for input

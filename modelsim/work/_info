@@ -704,26 +704,26 @@ vfull_sim
 R0
 R1
 DXx4 work 19 full_sim_tb_sv_unit 0 22 4^>0;o3P`FIkhQK66cXR`1
-Z74 !s110 1631221503
+Z74 !s110 1631224115
 R4
 r1
 !s85 0
 !i10b 1
-!s100 8k4fY`MaQ]zjlfGGCi6jz3
-IYiWaPV5LJLH9;L?UgRbj?1
+!s100 N3i3e@IY8S]1[UzWfK6VE0
+I@@?<CK5C9kMJbk9?2UQU:0
 !s105 full_sim_tb_sv_unit
 S1
 R6
-Z75 w1631221488
+Z75 w1631224105
 Z76 8D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv
 Z77 FD:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv
-!i122 963
+!i122 967
 L0 3 347
 R10
 31
-Z78 !s108 1631221502.000000
-Z79 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
-Z80 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
+Z78 !s108 1631224115.000000
+!s107 D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
+Z79 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
 !i113 1
 R14
 R15
@@ -743,13 +743,13 @@ R6
 R75
 R76
 R77
-!i122 963
-Z81 L0 1 0
+!i122 967
+Z80 L0 1 0
 R10
 31
 R78
+Z81 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv|
 R79
-R80
 !i113 1
 R14
 R15
@@ -797,7 +797,7 @@ R82
 R83
 R84
 !i122 949
-R81
+R80
 R10
 31
 R32
@@ -905,8 +905,8 @@ L0 6 104
 R10
 31
 Z101 !s108 1631223010.000000
-!s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
-Z102 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
+Z102 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
+Z103 !s90 -reportprogress|300|-work|work|-sv|-stats=none|D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
 !i113 1
 R14
 R15
@@ -931,8 +931,8 @@ R44
 R10
 31
 R101
-Z103 !s107 D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/lookup_table.sv|
 R102
+R103
 !i113 1
 R14
 R15

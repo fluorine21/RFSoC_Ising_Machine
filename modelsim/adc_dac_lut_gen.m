@@ -135,7 +135,7 @@ function lut_out = gen_full_adc_lut(lut_in)
     lut_out = [];
     for i = mi:mo
         [~, m_e_p] = min(abs(lut_in(:,2)-i));
-        lut_out = [lut_out;i,lut_in(m_e_p,1)];
+        lut_out = [lut_out;lut_in(m_e_p,1),i];
     end
 end
 

@@ -252,7 +252,8 @@ adc_driver
 #(
 mac_driver_addr_reg,
 mac_driver_data_reg,
-mac_driver_shift_amt_reg_base_addr
+mac_driver_shift_amt_reg_base_addr,
+mac_sample_selector_reg
 ) mac_driver_inst
 (
 	clk, rst,
@@ -283,7 +284,8 @@ adc_driver
 #(
 nl_driver_addr_reg,
 nl_driver_data_reg,
-nl_driver_shift_amt_reg_base_addr
+nl_driver_shift_amt_reg_base_addr,
+nl_sample_selector_reg
 ) nl_driver_inst
 (
 	clk, rst,
@@ -466,6 +468,10 @@ counter_fifo
 //Runtime phase calibration signals
 wire [num_bits-1:0] a_phase_cal, b_phase_cal, c_phase_cal, mac_phase_exp, nl_phase_exp;
 wire [15:0] phi_lo_start, phi_start;
+
+//Config regs for phi_lo_start and phi_start
+config_reg #(8,1,16,phi_lo_start_reg) phi_lo_start_reg_inst (clk, rst, gpio_in,phi_lo_start);
+config_reg #(8,1,16,phi_start_reg) phi_start_reg_inst (clk, rst, gpio_in,phi_start);
 
 wire halted;
 
