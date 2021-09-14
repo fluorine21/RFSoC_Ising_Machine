@@ -79,7 +79,7 @@ wire peak_out_valid = 1;
 sample_selector
 #(sample_selector_addr) sample_selector_inst
 (
-	clk, rst
+	clk, rst,
 	
 	gpio_in,
 	

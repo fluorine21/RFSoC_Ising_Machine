@@ -74,6 +74,9 @@ wire s2_axis_tread;
 integer i, j, k;
 
 
+int a_del_mac_res, a_del_nl_res, bc_del_mac_res, bc_del_nl_res;
+
+
 experiment_top_level_wrapper dut
 (
 	clk, 
@@ -164,43 +167,256 @@ initial begin
 	rst <= 1;
 	repeat(10); clk_cycle();
 	
-	//Load the program
-	//load_program(i_f_n, b_f_n);
-	
 	//Set up all of the internal registers
-	
+	init_registers();
 	
 	//Write all the luts
 	load_luts();
 
+	//Do a delay calibration measurement
+	del_cal();
+	
+	
+	
  
 end
 
 task init_registers();
 begin
+
+	automatic reg [255:0] a_wave;
+	automatic reg [255:0] a_nl_wave;
+	automatic reg [255:0] phi_nl_wave;
 	
 	//Get the MAC and NL cal states
-	automatic mac_cal_state cal_mac_chip();
-	automatic nl_cal_state cal_nl_chip();
+	automatic mac_cal_state mcs = cal_mac_chip();
+	automatic nl_cal_state nlcs = cal_nl_chip();
 	
 	//Set phi_lo, phi, and phi_nl and the "alpha" modulators
-	automatic reg [15:0] phi_lo_val = mac_cal_state.V_LO_max*dac_scale_fac;
-	automatic reg [15:0] phi_val = mac_cal_state.V_phi_max*dac_scale_fac;
-	automatic reg [15:0] phi_nl_val = nl_cal_state.V_LO_max*dac_scale_fac;
+	automatic reg [15:0] phi_lo_val = mcs.V_LO_max*dac_scale_fac;
+	automatic reg [15:0] phi_val = mcs.V_phi_max*dac_scale_fac;
+	automatic reg [15:0] phi_nl_val = nlcs.V_LO_max*dac_scale_fac;
 	
-	automatic reg [15:0] a_mac_val = mac_cal_state.V_alpha_max*dac_scale_fac;
-	automatic reg [15:0] a_nl_val = nl_cal_state.V_a_max*dac_scale_fac;
+	automatic reg [15:0] a_mac_val = mcs.V_alpha_max*dac_scale_fac;
+	automatic reg [15:0] a_nl_val = nlcs.V_a_max*dac_scale_fac;
 
 	//Neet to also get full waves for a_mac, a_nl, and phi_nl
-
 
 	gpio_write(phi_lo_start_reg, phi_lo_val[15:8]);
 	gpio_write(phi_lo_start_reg, phi_lo_val[7:0]);
 	gpio_write(phi_start_reg, phi_val[15:8]);
 	gpio_write(phi_start_reg, phi_val[7:0]);
 	
+	//Just start setting the shite out of everything
+	gpio_write(run_trig_reg, 0);
+	gpio_write(del_trig_reg, 0);
+	gpio_write(halt_reg, 0);
+	gpio_write(del_meas_val_reg, 127);
+	gpio_write(del_meas_thresh_reg, 10);
+	gpio_write(adc_run_reg, 0);
+	//The shift should be 0 and we'll write the correct pulse position back
+	gpio_write(mac_driver_shift_amt_reg_base_addr, 0);
+	gpio_write(nl_driver_shift_amt_reg_base_addr, 0);
+
+	//Set the shift amounts for the DACs
+	set_dac_shift_amts();
+	
+	//Set up the ADC variables
+	gpio_write(mac_sample_selector_reg, 3);
+	gpio_write(nl_sample_selector_reg, 3);
+	
+	
+	//Set up the waveforms for a, a_nl, and phi_nl (where a is the modulator at the very beginning
+	a_wave = get_wave(a_mac_val);
+	a_nl_wave = get_wave(a_nl_val);
+	phi_nl_wave = get_wave(phi_nl_val);
+	
+	for(i = 16; i < 256; i = i + 16) begin
+		gpio_write(a_output_reg, a_wave[i+:16]);
+		gpio_write(a_nl_output_reg, a_nl_wave[i+:16]);
+		gpio_write(phi_nl_output_reg, phi_nl_wave[i+:16]);
+	end
+	
 	
 
+end
+endtask
+
+
+task set_dac_shift_amts();
+begin
+
+	//Start with A MAC's output first
+	automatic reg [15:0] wave_val = 16'(22000);
+	//Get the right waveform
+	automatic reg [255:0] a_wave = get_wave(wave_val);
+	
+	//Set up the MUX correctly
+	gpio_write(a_dac_mux_sel_reg_base_addr, 1);
+	
+	//Write it to the static wave register
+	for(i = 0; i < 256; i = i + 16) begin
+		gpio_write(a_static_output_reg_base_addr, a_wave[i+:16]);
+	end
+	
+	//Now look at the actual DAC output and change the shift amount until both the target sample and the sample on either side are the correct value
+	j = 0;
+	while(1) begin
+	
+		gpio_write(a_shift_amt_reg_base_addr, j);
+		repeat(10) clk_cycle();
+	
+		if(m0_axis_tdata[(wave_pos*16)+:16] == wave_val && 
+		   m0_axis_tdata[((wave_pos+1)*16)+:16] == wave_val &&
+		   m0_axis_tdata[((wave_pos-1)*16)+:16] == wave_val) begin
+			break;
+		end
+		
+		
+		if(j > 10) begin
+			$fatal("Unable to perform shift calibration");
+		end
+		else begin
+			j = j + 1;
+		end
+	end
+	
+	//Onto B MAC
+	gpio_write(b_dac_mux_sel_reg_base_addr, 1);
+	for(i = 0; i < 256; i = i + 16) begin
+		gpio_write(b_static_output_reg_base_addr, a_wave[i+:16]);
+	end
+	
+	j = 0;
+	while(1) begin
+	
+		gpio_write(b_shift_amt_reg_base_addr, j);
+		repeat(10) clk_cycle();
+	
+		if(m1_axis_tdata[(wave_pos*16)+:16] == wave_val && 
+		   m1_axis_tdata[((wave_pos+1)*16)+:16] == wave_val &&
+		   m1_axis_tdata[((wave_pos-1)*16)+:16] == wave_val) begin
+			break;
+		end
+		
+		
+		if(j > 10) begin
+			$fatal("Unable to perform shift calibration");
+		end
+		else begin
+			j = j + 1;
+		end
+	end
+	
+	//Onto C MAC
+	gpio_write(c_dac_mux_sel_reg_base_addr, 1);
+	for(i = 0; i < 256; i = i + 16) begin
+		gpio_write(c_static_output_reg_base_addr, a_wave[i+:16]);
+	end
+	
+	j = 0;
+	while(1) begin
+	
+		gpio_write(c_shift_amt_reg_base_addr, j);
+		repeat(10) clk_cycle();
+	
+		if(m2_axis_tdata[(wave_pos*16)+:16] == wave_val && 
+		   m2_axis_tdata[((wave_pos+1)*16)+:16] == wave_val &&
+		   m2_axis_tdata[((wave_pos-1)*16)+:16] == wave_val) begin
+			break;
+		end
+		
+		
+		if(j > 10) begin
+			$fatal("Unable to perform shift calibration");
+		end
+		else begin
+			j = j + 1;
+		end
+	end
+	
+	//Onto A NL
+	gpio_write(a_nl_dac_mux_sel_reg_base_addr, 1);
+	for(i = 0; i < 256; i = i + 16) begin
+		gpio_write(a_nl_static_output_reg_base_addr, a_wave[i+:16]);
+	end
+	
+	j = 0;
+	while(1) begin
+	
+		gpio_write(a_nl_shift_amt_reg_base_addr, j);
+		repeat(10) clk_cycle();
+	
+		if(m3_axis_tdata[(wave_pos*16)+:16] == wave_val && 
+		   m3_axis_tdata[((wave_pos+1)*16)+:16] == wave_val &&
+		   m3_axis_tdata[((wave_pos-1)*16)+:16] == wave_val) begin
+			break;
+		end
+		
+		
+		if(j > 10) begin
+			$fatal("Unable to perform shift calibration");
+		end
+		else begin
+			j = j + 1;
+		end
+	end
+end
+endtask
+
+task del_cal();
+begin
+
+	//Start the "a" delay calibration going
+	gpio_write(del_trig_reg, 1);
+	gpio_write(del_trig_reg, 0);
+	
+	i = 0;
+	while(1) begin
+		
+		if(i > 1000) begin
+			$fatal("Error, a delay measurement took more than 1000 cycles, something is wrong");
+		end
+		gpio_write(ex_state_reg, 0);
+		if(gpio_out_bus == 0) begin//Other
+			break;
+		end
+		i = i + 1;
+	end
+	
+	//Readback the result
+	gpio_write(del_meas_mac_result, 0);
+	a_del_mac_res = gpio_out_bus;
+	gpio_write(del_meas_nl_result, 0);
+	a_del_nl_res = gpio_out_bus;
+	$display("A MAC delay: %0d, A NL delay: %0d", a_del_mac_res, a_del_nl_res);
+	
+	
+	//Do the same thing for BC
+	gpio_write(del_trig_reg, 2);
+	gpio_write(del_trig_reg, 0);
+	
+	i = 0;
+	while(1) begin
+		
+		if(i > 1000) begin
+			$fatal("Error, bc delay measurement took more than 1000 cycles, something is wrong");
+		end
+		gpio_write(ex_state_reg, 0);
+		if(gpio_out_bus == 0) begin//Other
+			break;
+		end
+		i = i + 1;
+	end
+	
+	//Readback the result
+	gpio_write(del_meas_mac_result, 0);
+	bc_del_mac_res = gpio_out_bus;
+	gpio_write(del_meas_nl_result, 0);
+	bc_del_nl_res = gpio_out_bus;
+	$display("A MAC delay: %0d, A NL delay: %0d", a_del_mac_res, a_del_nl_res);
+	
+	
 
 end
 endtask
@@ -369,8 +585,8 @@ begin
 	automatic real I_M = I_MAC(E_in_d, a_v, phi_lo_v, alpha_v, beta_v, gamma_v, phi_v);
 	
 	//Convert the currents into results for the ADC and push them onto the bus
-	automatic reg [15:0] I_N_D = 16'(I_N * adc_scale_fac);
-	automatic reg [15:0] I_M_D = 16'(I_M * adc_scale_fac);
+	automatic reg [15:0] I_N_D = 16'(int'(I_N * adc_scale_fac));
+	automatic reg [15:0] I_M_D = 16'(int'(I_M * adc_scale_fac));
 	
 	s0_axis_tdata = { {3{16'b0}}, I_M_D, {4{16'b0}} };
 	s1_axis_tdata = { {3{16'b0}}, I_N_D, {4{16'b0}} };

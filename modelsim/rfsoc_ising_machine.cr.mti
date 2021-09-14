@@ -121,15 +121,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	shifter
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_fsm.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_fsm.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
--- Compiling package experiment_fsm_sv_unit
--- Importing package ising_config
--- Compiling module experiment_fsm
-
-Top level modules:
-	experiment_fsm
-
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v {1 {vlog -work work -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling module experiment_top_level_wrapper

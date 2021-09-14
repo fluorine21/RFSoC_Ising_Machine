@@ -153,13 +153,16 @@ function [lut_dac_a, lut_dac_b, lut_dac_c, lut_adc] = gen_mac_luts(v_a_in, i_a_o
     
     %We may want to use the i_a_out table only for this calibration and
     %truncate to min/max anything outside of that range, stay tuned kiddos!
-    I_max = max(i_o1_out);
-    I_min = min(i_o2_out);
+    
+    %Update: we're actually calibrating to BC since we need 127*127=127
+    %(i.e 1*1=1)
+    I_max = max(i_b_out);
+    I_min = min(i_b_out);
     if(abs(abs(I_max)-abs(I_min))/abs(I_min) > 0.1)
        fprintf("Warning, the maximum and minimum current values for the MAC calibration data differ by more than 10 percent, this may lead to a faulty calibration. Consult your local FPGA wizard\n"); 
     end
-    I_step = (I_max-I_min)/255;
-    lut_adc = [-128:1:127;I_min:I_step:I_max]';
+    I_step = (I_max-I_min)/254;
+    lut_adc = [-127:1:127;I_min:I_step:I_max]';
     
     
     %Now we do the calibration for beta
@@ -231,8 +234,8 @@ function [lut_dac, lut_adc] = gen_nl_luts(V_in, I_out)
     %distributing the output points uniformly
     [I_max, I_max_pos] = max(I_out);
     [I_min, I_min_pos] = min(I_out);
-    I_step = (I_max-I_min)/255;
-    lut_adc = [-128:1:127;I_min:I_step:I_max]';
+    I_step = (I_max-I_min)/254;
+    lut_adc = [-127:1:127;I_min:I_step:I_max]';
 
     %Find the position of the furthest and closest 0
     [zero_pos, fz] = find_zp(V_in, I_out, I_min_pos);

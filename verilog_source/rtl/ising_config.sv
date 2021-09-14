@@ -26,11 +26,11 @@ parameter instr_fifo_depth = 16;
 
 //Config Reg Address table
 parameter run_trig_reg = 16'h0000;
-parameter del_trig_reg = 16'h0001;
+parameter del_trig_reg = 16'h0001;//Bit 0 is for a, bit 1 is for bc
 parameter halt_reg = 16'h0002;
 parameter del_meas_val_reg = 16'h0003;
 parameter del_meas_thresh_reg = 16'h0004;
-parameter adc_run_reg = 17'h0005;
+parameter adc_run_reg = 17'h0005;//Bit 0 starts MAC fifo, bit 1 for NL
 //Address table for configuration registers (0 to 65535)
 //parameter mac_input_scaler_addr_reg = 16'h0002;
 //parameter mac_input_scaler_data_reg = 16'h0003;
@@ -742,7 +742,7 @@ endfunction
 
 
 
-function [255:0] get_wave(input [15:0] val_in)
+function [255:0] get_wave(input [15:0] val_in);
 	automatic reg [15:0] val_inv = ~(val_in)+1;
 	get_wave = { {8{val_in}}, {8{val_inv}} };
 endfunction

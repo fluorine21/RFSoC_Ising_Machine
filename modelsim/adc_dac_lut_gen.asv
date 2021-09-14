@@ -14,7 +14,7 @@ xlabel("V");
 ylabel("I");
 
 %Generate the LUTS
-[lut_dac, lut_adc_] = gen_nl_luts(V_nl_in, I_nl_out);
+[lut_dac, lut_adc_nl] = gen_nl_luts(V_nl_in, I_nl_out);
 %Interpolate the voltage points used
 v_dac = lut_dac(:,2);
 i_dac = [];
@@ -78,7 +78,7 @@ legend("High Sweep", "Low Sweep");
 
 
 %Call the calibration algorithm
-[lut_dac_a, lut_dac_b, lut_dac_c, lut_adc] = gen_mac_luts(t3{:,1}, t3{:,2},t4{:,1}, t4{:,2}, t5{:,1}, t5{:,2}, t6{:,1}, t6{:,2}, t7{:,1}, t7{:,2});
+[lut_dac_a, lut_dac_b, lut_dac_c, lut_adc_mac] = gen_mac_luts(t3{:,1}, t3{:,2},t4{:,1}, t4{:,2}, t5{:,1}, t5{:,2}, t6{:,1}, t6{:,2}, t7{:,1}, t7{:,2});
 
 
 %And now plot the results
@@ -105,24 +105,38 @@ title("C cal");
 %We also need to rescale the DAC luts into being based on DAC values, not
 %voltages
 
-dac_scale_fac = (1.7*14)/(65535);
-adc_scale_fac = 65535/400;
+lut_dac_a_nl = lut_dac;
+
+dac_scale_fac = 1/((3*14)/(66000));
+adc_scale_fac = 66000/(400*2);
 
 lut_dac_a(:,2) = lut_dac_a(:,2).*dac_scale_fac; 
 lut_dac_b(:,2) = lut_dac_b(:,2).*dac_scale_fac; 
 lut_dac_c(:,2) = lut_dac_c(:,2).*dac_scale_fac; 
-lut_adc(:,2) = lut_adc
+lut_dac_a_nl(:,2) = lut_dac_a_nl(:,2).*dac_scale_fac;
+lut_adc_mac(:,2) = lut_adc_mac(:,2).*adc_scale_fac;
+lut_adc_nl(:,2) = lut_adc_nl(:,2).*adc_scale_fac;
 
+lut_adc_mac = gen_full_adc_lut(lut_adc_mac);
+lut_adc_nl = gen_full_adc_lut(lut_adc_nl);
 
+csvwrite("lut_matlab_outputs\lut_dac_a.csv", lut_dac_a);
+csvwrite("lut_matlab_outputs\lut_dac_b.csv", lut_dac_b);
+csvwrite("lut_matlab_outputs\lut_dac_c.csv", lut_dac_c);
+csvwrite("lut_matlab_outputs\lut_dac_a_nl.csv", lut_dac_a_nl);
+csvwrite("lut_matlab_outputs\lut_adc_mac.csv", lut_adc_mac);
+csvwrite("lut_matlab_outputs\lut_adc_nl.csv", lut_adc_nl);
+fprintf("\n====================================\nFinished generating and writing LUTs\n====================================\n");
+
+%output lut is [adc_reading, fsm_val]
 function lut_out = gen_full_adc_lut(lut_in)
-
-    for i = 0:65535
-        
-        
+    mi = (65536/2)*-1;
+    mo = (65536/2)-1;
+    lut_out = [];
+    for i = mi:mo
+        [~, m_e_p] = min(abs(lut_in(:,2)-i));
+        lut_out = [lut_out;lut_in(m_e_p,1),i];
     end
-
-
-
 end
 
 
@@ -139,13 +153,15 @@ function [lut_dac_a, lut_dac_b, lut_dac_c, lut_adc] = gen_mac_luts(v_a_in, i_a_o
     
     %We may want to use the i_a_out table only for this calibration and
     %truncate to min/max anything outside of that range, stay tuned kiddos!
-    I_max = max(i_o1_out);
-    I_min = min(i_o2_out);
+    
+    %Upda
+    I_max = max(i_b_out);
+    I_min = min(i_b_out);
     if(abs(abs(I_max)-abs(I_min))/abs(I_min) > 0.1)
        fprintf("Warning, the maximum and minimum current values for the MAC calibration data differ by more than 10 percent, this may lead to a faulty calibration. Consult your local FPGA wizard\n"); 
     end
-    I_step = (I_max-I_min)/255;
-    lut_adc = [-128:1:127;I_min:I_step:I_max]';
+    I_step = (I_max-I_min)/254;
+    lut_adc = [-127:1:127;I_min:I_step:I_max]';
     
     
     %Now we do the calibration for beta
@@ -217,8 +233,8 @@ function [lut_dac, lut_adc] = gen_nl_luts(V_in, I_out)
     %distributing the output points uniformly
     [I_max, I_max_pos] = max(I_out);
     [I_min, I_min_pos] = min(I_out);
-    I_step = (I_max-I_min)/255;
-    lut_adc = [-128:1:127;I_min:I_step:I_max]';
+    I_step = (I_max-I_min)/254;
+    lut_adc = [-127:1:127;I_min:I_step:I_max]';
 
     %Find the position of the furthest and closest 0
     [zero_pos, fz] = find_zp(V_in, I_out, I_min_pos);
