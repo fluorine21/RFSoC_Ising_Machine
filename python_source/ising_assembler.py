@@ -11,6 +11,8 @@ def hex_format(val):
         return hex_str[0:2] + '0' + hex_str[2:5]
     elif(len(hex_str) == 2+2):#if it's missing two zeros
         return hex_str[0:2] + "00" + hex_str[2:4]
+    elif(len(hex_str) == 2+1):#If it's missing three zeros
+        return hex_str[0:2] + "000" + hex_str[2:4]
     else:
         raise RuntimeError("Unable to format hex string")
 
@@ -22,8 +24,8 @@ def check_inst(inst):
     if(inst & (1<<4) and inst & (1<<6)):
         print("Warning, instruction " + hex(inst) + "adds 0 to c and the result to c, adding 0 takes priority")
 
-infile = ""
-outfile = ""
+infile = "D:\\repos\RFSoC_Ising_Machine\gordon_stuff\data\in.txt"
+outfile = "output_program.txt"
 
 file_ob = open(infile, 'r')
 lines = file_ob.readlines()
@@ -51,6 +53,9 @@ for l in lines:
         elif(l[pos] == " "):
             pos += 1;
             continue
+        #If it's the end of the line we're done
+        elif(l[pos] == "\n"):
+            break
         #Otherwise try to match it to an instruction
         else:
             
@@ -106,5 +111,7 @@ file_ob = open(outfile, "w")
 
 for inst in instr_list:
     file_ob.write(hex_format(inst))
+    file_ob.write("\n")
     
 file_ob.close()
+print("Assembler finished, processed " + str(len(instr_list)) + " instructions.")
