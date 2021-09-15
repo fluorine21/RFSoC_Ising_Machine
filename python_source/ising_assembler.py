@@ -1,4 +1,23 @@
+infile = "D:\\repos\RFSoC_Ising_Machine\gordon_stuff\data\in.txt"
+instr_outfile = "instr_list.txt"
+a_outfile = "a_list.txt"
+b_outfile = "b_list.txt"
+c_outfile = "c_list.txt"
+a_infile = ""
+b_infile = ""
+c_infile = ""
 
+
+def write_var_file(i_f, o_f):
+    file_ob = open(outfile, "r")
+    lines = file_ob.readlines()
+    file_ob.close()
+
+    file_ob = open(outfile, "w")
+    for ln in lines:
+        file_ob.write(hex_format(ln))
+        file_ob.write("\n")
+    file_ob.close()
 
 
 def hex_format(val):
@@ -24,8 +43,6 @@ def check_inst(inst):
     if(inst & (1<<4) and inst & (1<<6)):
         print("Warning, instruction " + hex(inst) + "adds 0 to c and the result to c, adding 0 takes priority")
 
-infile = "D:\\repos\RFSoC_Ising_Machine\gordon_stuff\data\in.txt"
-outfile = "output_program.txt"
 
 file_ob = open(infile, 'r')
 lines = file_ob.readlines()
@@ -107,7 +124,7 @@ for l in lines:
                 raise RuntimeError("Syntax error at line " + str(line_cnt) + ": " + l + ", unexpected character: " + l[pos+3] + "\n")
 
 #Write the instruction list to a file
-file_ob = open(outfile, "w")
+file_ob = open(instr_outfile, "w")
 
 for inst in instr_list:
     file_ob.write(hex_format(inst))
@@ -115,3 +132,9 @@ for inst in instr_list:
     
 file_ob.close()
 print("Assembler finished, processed " + str(len(instr_list)) + " instructions.")
+
+
+#Now work on A, B, and C initializers
+write_var_file(a_outfile)
+write_var_file(b_outfile)
+write_var_file(c_outfile)
