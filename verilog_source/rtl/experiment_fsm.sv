@@ -429,6 +429,15 @@ always @ (posedge clk or negedge rst) begin
 				instr_axis_tready <= 1;
 				
 			end
+			else begin
+				//Just set everything to 0
+				a_valid <= 1;
+				b_valid <= 1;
+				c_valid <= 1;
+				a_out <= 0;
+				b_out <= 0;
+				c_out <= 0;
+			end
 		end
 		
 		

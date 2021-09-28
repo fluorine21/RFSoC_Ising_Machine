@@ -3,7 +3,7 @@
 module sample_selector
 #(parameter addr = 0)
 (
-	input wire clk, rst
+	input wire clk, rst,
 	
 	input wire [31:0] gpio_in,
 	

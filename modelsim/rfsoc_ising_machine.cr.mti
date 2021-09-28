@@ -1,4 +1,15 @@
-D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv
+D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/adc_driver.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package adc_driver_sv_unit
+-- Importing package ising_config
+-- Compiling module adc_driver
+-- Compiling module peak_detector
+
+Top level modules:
+	adc_driver
+	peak_detector
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/experiment_top_level_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling package experiment_top_level_tb_sv_unit
 -- Importing package ising_config
@@ -60,6 +71,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	delay_cal
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/ising_config.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package ising_config
+
+Top level modules:
+	--none--
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_axis_writer.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_axis_writer.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling package gpio_axis_writer_sv_unit
@@ -87,14 +105,14 @@ Top level modules:
 	axis_sync_fifo
 	axis_async_fifo
 
-} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/gpio_reader.sv
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
--- Compiling package gpio_reader_sv_unit
+-- Compiling package experiment_top_level_sv_unit
 -- Importing package ising_config
--- Compiling module gpio_reader
+-- Compiling module experiment_top_level
 
 Top level modules:
-	gpio_reader
+	experiment_top_level
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/dac_driver.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
@@ -104,6 +122,15 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 
 Top level modules:
 	dac_driver
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/full_sim_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package full_sim_tb_sv_unit
+-- Importing package ising_config
+-- Compiling module full_sim_tb
+
+Top level modules:
+	full_sim_tb
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/dac_driver_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
@@ -121,6 +148,15 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 Top level modules:
 	shifter
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_fsm.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_fsm.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package experiment_fsm_sv_unit
+-- Importing package ising_config
+-- Compiling module experiment_fsm
+
+Top level modules:
+	experiment_fsm
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v {1 {vlog -work work -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
 -- Compiling module experiment_top_level_wrapper
@@ -136,6 +172,22 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb 
 
 Top level modules:
 	lookup_table
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/sample_selector.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/sample_selector.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling module sample_selector
+
+Top level modules:
+	sample_selector
+
+} {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/tb/chip_cal_alg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021
+-- Compiling package chip_cal_alg_sv_unit
+-- Importing package ising_config
+-- Compiling module chip_cal_alg
+
+Top level modules:
+	chip_cal_alg
 
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/output_scaler.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 2021.1 Compiler 2021.02 Feb  3 2021

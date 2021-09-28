@@ -10,8 +10,9 @@ module gpio_reader
 	
 	input wire [31:0] gpio_in,
 	
-	output reg [31:0] gpio_out,
+	output reg [31:0] gpio_out_f,
 	
+	//This is also the MSB of gpio_out
 	output wire valid,//1 if read was successful (if data was available in the a/c fifo)
 
 	//Inputs to be read out over gpio
@@ -38,7 +39,6 @@ module gpio_reader
 	input wire [2:0] ex_state
 );
 
-
 wire w_clk = gpio_in[gpio_w_clk_bit];
 wire [gpio_addr_width-1:0] gpio_addr = gpio_in[gpio_addr_start:gpio_addr_end];
 
@@ -52,6 +52,11 @@ wire reg_access = (gpio_addr == a_read_reg) ||
 				  (gpio_addr == mac_adc_read_reg) || 
 				  (gpio_addr == nl_adc_read_reg);
 assign valid = reg_access ? ac_valid : 1;//Always valid if not accessing an axis bus
+
+//We're sneaking that valid bit in to be the MSB iff there is a reg access happening
+reg [31:0] gpio_out;
+assign gpio_out_f = reg_access ? {valid, gpio_out[30:0]} : gpio_out;
+
 
 reg [2:0] mac_adc_cnt, nl_adc_cnt;
 reg state;
@@ -96,7 +101,7 @@ always @ (posedge clk or negedge rst) begin
 					if(mac_adc_cnt == 3'b111) begin
 						mac_adc_ready <= 1;
 					end
-					ac_reg <= mac_adc_data[(mac_adc_cnt*32)+:32];
+					ac_reg <= mac_adc_data[(mac_adc_cnt*16)+:16];
 					mac_adc_cnt <= mac_adc_cnt + 1;
 					ac_valid <= 1;
 				end
@@ -105,7 +110,7 @@ always @ (posedge clk or negedge rst) begin
 					if(nl_adc_cnt == 3'b111) begin
 						nl_adc_ready <= 1;
 					end
-					ac_reg <= nl_adc_data[(nl_adc_cnt*32)+:32];
+					ac_reg <= nl_adc_data[(nl_adc_cnt*16)+:16];
 					nl_adc_cnt <= nl_adc_cnt + 1;
 					ac_valid <= 1;
 				end
@@ -133,6 +138,12 @@ always @ * begin
 			gpio_out <= ac_reg;
 		end
 		c_read_reg: begin
+			gpio_out <= ac_reg;
+		end
+		mac_adc_read_reg: begin
+			gpio_out <= ac_reg;
+		end
+		nl_adc_read_reg: begin
 			gpio_out <= ac_reg;
 		end
 		

@@ -24,83 +24,75 @@ parameter instr_fifo_depth = 16;
 
 
 
-//Config Reg Address table
+//Config Reg Address table/////////////////////////////////////////////////////////////////////////
 parameter run_trig_reg = 16'h0000;
 parameter del_trig_reg = 16'h0001;//Bit 0 is for a, bit 1 is for bc
 parameter halt_reg = 16'h0002;
 parameter del_meas_val_reg = 16'h0003;
 parameter del_meas_thresh_reg = 16'h0004;
 parameter adc_run_reg = 17'h0005;//Bit 0 starts MAC fifo, bit 1 for NL
-//Address table for configuration registers (0 to 65535)
-//parameter mac_input_scaler_addr_reg = 16'h0002;
-//parameter mac_input_scaler_data_reg = 16'h0003;
-//parameter nl_input_scaler_addr_reg = 16'h0004;
-//parameter nl_input_scaler_data_reg = 16'h0005;
-parameter mac_driver_addr_reg = 16'h000C;
-parameter mac_driver_data_reg = 16'h000D;
-parameter mac_driver_shift_amt_reg_base_addr = 16'h000E;
-parameter nl_driver_addr_reg = 16'h000F;
-parameter nl_driver_data_reg = 16'h0010;
-parameter nl_driver_shift_amt_reg_base_addr = 16'h0011;
+parameter mac_driver_addr_reg = 16'h0006;
+parameter mac_driver_data_reg = 16'h0007;
+parameter mac_driver_shift_amt_reg_base_addr = 16'h0008;
+parameter nl_driver_addr_reg = 16'h0009;
+parameter nl_driver_data_reg = 16'h000A;
+parameter nl_driver_shift_amt_reg_base_addr = 16'h000B;
 
-//Readback registers
-parameter del_meas_mac_result = 16'h0006;
-parameter del_meas_nl_result = 16'h0007;
-parameter a_read_reg = 16'h0008;
-parameter c_read_reg = 16'h0009;
-parameter mac_adc_read_reg = 16'h000A;
-parameter nl_adc_read_reg = 16'h000B;
-parameter instr_count_reg = 16'h0012;
-parameter b_count_reg = 16'h0013;
-parameter ex_state_reg = 16'h0014;
+parameter a_output_scaler_addr_reg = 16'h000C;
+parameter a_output_scaler_data_reg = 16'h000D;
+parameter a_static_output_reg_base_addr = 16'h000E;//Static dac word to output
+parameter a_dac_mux_sel_reg_base_addr = 16'h000F;//Selects between input from output scaler, static word, or delay cal
+parameter a_shift_amt_reg_base_addr = 16'h0010;//Selects how much to shift output by
 
+parameter a_nl_output_scaler_addr_reg = 16'h0011;
+parameter a_nl_output_scaler_data_reg = 16'h0012;
+parameter a_nl_static_output_reg_base_addr = 16'h0013;//Static dac word to output
+parameter a_nl_dac_mux_sel_reg_base_addr = 16'h0014;//Selects between input from output scaler, static word, or delay cal
+parameter a_nl_shift_amt_reg_base_addr = 16'h0015;//Selects how much to shift output by
 
-parameter a_output_scaler_addr_reg = 16'h0015;
-parameter a_output_scaler_data_reg = 16'h0016;
-parameter a_static_output_reg_base_addr = 16'h0017;//Static dac word to output
-parameter a_dac_mux_sel_reg_base_addr = 16'h0018;//Selects between input from output scaler, static word, or delay cal
-parameter a_shift_amt_reg_base_addr = 16'h0019;//Selects how much to shift output by
+parameter b_output_scaler_addr_reg = 16'h0016;
+parameter b_output_scaler_data_reg = 16'h0017;
+parameter b_static_output_reg_base_addr = 16'h0018;//Static dac word to output
+parameter b_dac_mux_sel_reg_base_addr = 16'h0019;//Selects between input from output scaler, static word, or delay cal
+parameter b_shift_amt_reg_base_addr = 16'h001A;//Selects how much to shift output by
 
-parameter a_nl_output_scaler_addr_reg = 16'h0027;
-parameter a_nl_output_scaler_data_reg = 16'h0028;
-parameter a_nl_static_output_reg_base_addr = 16'h0029;//Static dac word to output
-parameter a_nl_dac_mux_sel_reg_base_addr = 16'h002A;//Selects between input from output scaler, static word, or delay cal
-parameter a_nl_shift_amt_reg_base_addr = 16'h002B;//Selects how much to shift output by
+parameter c_output_scaler_addr_reg = 16'h001B;
+parameter c_output_scaler_data_reg = 16'h001C;
+parameter c_static_output_reg_base_addr = 16'h001D;//Static dac word to output
+parameter c_dac_mux_sel_reg_base_addr = 16'h001E;//Selects between input from output scaler, static word, or delay cal
+parameter c_shift_amt_reg_base_addr = 16'h001F;//Selects how much to shift output by
 
-parameter b_output_scaler_addr_reg = 16'h001A;
-parameter b_output_scaler_data_reg = 16'h001B;
-parameter b_static_output_reg_base_addr = 16'h001C;//Static dac word to output
-parameter b_dac_mux_sel_reg_base_addr = 16'h001D;//Selects between input from output scaler, static word, or delay cal
-parameter b_shift_amt_reg_base_addr = 16'h001E;//Selects how much to shift output by
+parameter a_write_reg = 16'h0020;
+parameter c_write_reg = 16'h0021;
 
-parameter c_output_scaler_addr_reg = 16'h001F;
-parameter c_output_scaler_data_reg = 16'h0020;
-parameter c_static_output_reg_base_addr = 16'h0021;//Static dac word to output
-parameter c_dac_mux_sel_reg_base_addr = 16'h0022;//Selects between input from output scaler, static word, or delay cal
-parameter c_shift_amt_reg_base_addr = 16'h0023;//Selects how much to shift output by
+parameter instr_b_sel_reg = 16'h0022;
 
-parameter a_write_reg = 16'h0024;
-parameter c_write_reg = 16'h0025;
+parameter phi_lo_shift_amt_reg = 16'h0023;
+parameter phi_shift_amt_reg = 16'h0024;
 
-parameter instr_b_sel_reg = 16'h0026;
+parameter a_output_reg = 16'h0025;
+parameter a_nl_output_reg = 16'h0026;
+parameter phi_nl_output_reg = 16'h0027;
+
+parameter phi_lo_start_reg = 16'h0028;
+parameter phi_start_reg = 16'h0029;
+
+parameter mac_sample_selector_reg = 16'h002A;
+parameter nl_sample_selector_reg = 16'h002B;
 
 
+//Readback registers (most significant nibble is 1)
+parameter del_meas_mac_result = 16'h1000;
+parameter del_meas_nl_result = 16'h1001;
+parameter a_read_reg = 16'h1002;
+parameter c_read_reg = 16'h1003;
+parameter mac_adc_read_reg = 16'h1004;
+parameter nl_adc_read_reg = 16'h1005;
+parameter instr_count_reg = 16'h1006;
+parameter b_count_reg = 16'h1007;
+parameter ex_state_reg = 16'h1008;
 
-parameter phi_lo_shift_amt_reg = 16'h0027;
-parameter phi_shift_amt_reg = 16'h0028;
-
-
-parameter a_output_reg = 16'h0029;
-parameter a_nl_output_reg = 16'h002A;
-parameter phi_nl_output_reg = 16'h002B;
-
-parameter phi_lo_start_reg = 16'h002C;
-parameter phi_start_reg = 16'h002D;
-
-parameter mac_sample_selector_reg = 16'h002E;
-parameter nl_sample_selector_reg = 16'h002F;
-
-
+/////Config Reg Addr Table End//////////////////////////////////////////////////////////////
 
 //Runtime calibration parameters
 parameter phase_cal_avgs = 1; //How many samples to average together when doing the measurement for each point
@@ -112,7 +104,7 @@ parameter phase_cal_tol = 10;//the num_bits-1 value returned by the ADC must be 
 //Runtime variables
 
 //This is the full scale dac output times the amplifier gain divided by the full digital scale to normalize
-real dac_scale_fac = 1/((3*14)/(66000));//Multiply to go from voltage to dac value
+real dac_scale_fac = 66000/(3*14);//Multiply to go from voltage to dac value
 //This is the position of the waveform we ultimately use as the voltage being sent to the chip
 const integer wave_pos = 4;
 //This is the scaling factor we use to convert the current comming from the homodyne detection to the value returned by the ADCs////////////////
@@ -422,6 +414,8 @@ function mac_cal_state cal_mac_chip();
 	automatic real v_step = 0.1;
 	automatic int outfile, j;
 	
+	$display("%%%%%%%%%%%%%%%%MAC cal start%%%%%%%%%%%%%%%%");
+	
 	i_min = 999999999;
 	i_max = 0;
 	v2 = 0;
@@ -456,7 +450,7 @@ function mac_cal_state cal_mac_chip();
 			else begin
 				v2 = v2+(V_pi/2);
 			end
-			$display("Trying V_LO = %f, V_phi = %f", v2, v3);
+			//$display("Trying V_LO = %f, V_phi = %f", v2, v3);
 			$fclose(outfile);
 			continue;
 		end
@@ -535,7 +529,7 @@ function mac_cal_state cal_mac_chip();
 			//$fwrite(outfile, "%f, %f\n", v_in, res1);
 		end
 		//$fclose(outfile);
-		$display("V_b_max: %f, V_b_min: %f", V_b_ma, V_b_mi);
+		//$display("V_b_max: %f, V_b_min: %f", V_b_ma, V_b_mi);
 		
 		//Sweep C
 		i_min = 999999999;
@@ -555,7 +549,7 @@ function mac_cal_state cal_mac_chip();
 			//$fwrite(outfile, "%f, %f\n", v_in, res1);
 		end
 		//$fclose(outfile);
-		$display("V_c_max: %f, V_c_min: %f", V_c_ma, V_c_mi);
+		//$display("V_c_max: %f, V_c_min: %f", V_c_ma, V_c_mi);
 		
 		
 		//If the min/max voltages have smaller separation than the last pair then keep them
@@ -602,6 +596,7 @@ function mac_cal_state cal_mac_chip();
 	$display("V_alpha_max: %f, V_alpha_min: %f", V_alpha_max, V_alpha_min);
 	$display("V_phi_max: %f, V_phi_min: %f", V_phi_max, V_phi_min);
 	$display("V_LO_max: %f, V_LO_min: %f", V_LO_max, V_LO_min);
+	$display("%%%%%%%%%%%%%%%%MAC cal done%%%%%%%%%%%%%%%%");
 	
 	return '{V_a_min, V_a_max, V_b_min, V_b_max, V_c_min, V_c_max, V_alpha_min, V_alpha_max, V_phi_min, V_phi_max, V_LO_min, V_LO_max}; 
 	
@@ -634,6 +629,8 @@ function nl_cal_state cal_nl_chip();
 	
 	automatic real I_LO_min = 99999;
 	automatic real I_LO_max = 0;
+	
+	$display("%%%%%%%%%%%%%%%%NL cal start%%%%%%%%%%%%%%%%");
 	
 	//We're going to sweep 4 times with 0 to 7 for alpha and LO to give us the best chance of seeing something we can use to calibrate
 	for (v_in = 0; v_in < 9; v_in += 0.01) begin
@@ -732,7 +729,7 @@ function nl_cal_state cal_nl_chip();
 	end
 	
 	$display("V_LO_max: %f, V_LO_min: %f", V_LO_max, V_LO_min);
-	$display("NL cal done");
+	$display("%%%%%%%%%%%%%%%%NL cal done%%%%%%%%%%%%%%%%");
 	
 	//And we're done! We have all of the bias points for the a, alpha, and LO modulators
 	
@@ -741,13 +738,19 @@ function nl_cal_state cal_nl_chip();
 endfunction
 
 
-
+//Creates the 256-bit wave from a single sample
 function [255:0] get_wave(input [15:0] val_in);
 	automatic reg [15:0] val_inv = ~(val_in)+1;
 	get_wave = { {8{val_in}}, {8{val_inv}} };
 endfunction
 
-
+//Reverses the order of the samples in a 256-bit word wave
+function [255:0] reverse_wave(input [255:0] wave_in);
+	automatic int i = 0;
+	for(i = 0; i < 256; i = i + 16) begin
+		reverse_wave[i+:16] = wave_in[(256-16-i)+:16];
+	end
+endfunction
 
 
 endpackage

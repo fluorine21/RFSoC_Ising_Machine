@@ -470,14 +470,14 @@ wire [num_bits-1:0] a_phase_cal, b_phase_cal, c_phase_cal, mac_phase_exp, nl_pha
 wire [15:0] phi_lo_start, phi_start;
 
 //Config regs for phi_lo_start and phi_start
-config_reg #(8,1,16,phi_lo_start_reg) phi_lo_start_reg_inst (clk, rst, gpio_in,phi_lo_start);
-config_reg #(8,1,16,phi_start_reg) phi_start_reg_inst (clk, rst, gpio_in,phi_start);
+config_reg #(8,2,16,phi_lo_start_reg) phi_lo_start_reg_inst (clk, rst, gpio_in,phi_lo_start);
+config_reg #(8,2,16,phi_start_reg) phi_start_reg_inst (clk, rst, gpio_in,phi_start);
 
 wire halted;
 
 wire [15:0] phi_lo_out, phi_out;
 
-experiment_fsm dut(
+experiment_fsm experiment_fsm_inst(
 	clk, rst,
 	
 	//Run trigger for starting experiment

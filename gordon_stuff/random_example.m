@@ -7,7 +7,7 @@
 clear all;
 rng default; % for reproducibility
 filepath_pre = 'data'; % folder to save files
-d = 3; % number of delay time steps
+d = 5; % number of delay time steps
 w = 1; % all data values are in [-w,w]
 M = (rand(8,8)*2-1)/3; % random 8x8 matrix with values in [-1,1]/3
 v = (rand(8,1)*2-1)/3; % random 8x1 column vector with values in [-1,1]/3

@@ -1,24 +1,33 @@
-infile = "D:\\repos\RFSoC_Ising_Machine\gordon_stuff\data\in.txt"
+infile = "..\gordon_stuff\data\in.txt"
 instr_outfile = "instr_list.txt"
 a_outfile = "a_list.txt"
 b_outfile = "b_list.txt"
 c_outfile = "c_list.txt"
-a_infile = ""
-b_infile = ""
-c_infile = ""
+a_infile = "..\gordon_stuff\data\\a.txt"
+b_infile = "..\gordon_stuff\data\\b.txt"
+c_infile = "..\gordon_stuff\data\\c.txt"
 
 
 def write_var_file(i_f, o_f):
-    file_ob = open(outfile, "r")
+    file_ob = open(i_f, "r")
     lines = file_ob.readlines()
     file_ob.close()
 
-    file_ob = open(outfile, "w")
+    file_ob = open(o_f, "w")
     for ln in lines:
-        file_ob.write(hex_format(ln))
+        val = int(ln)
+        str_l = ""
+        if(val < 0):
+            str_l = tohex(val, 16)
+        else:
+            str_l = hex_format(val)
+        file_ob.write(str_l)
         file_ob.write("\n")
     file_ob.close()
 
+
+def tohex(val, nbits):
+  return hex((val + (1 << nbits)) % (1 << nbits))
 
 def hex_format(val):
 
@@ -135,6 +144,6 @@ print("Assembler finished, processed " + str(len(instr_list)) + " instructions."
 
 
 #Now work on A, B, and C initializers
-write_var_file(a_outfile)
-write_var_file(b_outfile)
-write_var_file(c_outfile)
+write_var_file(a_infile, a_outfile)
+write_var_file(b_infile, b_outfile)
+write_var_file(c_infile, c_outfile)

@@ -1,10 +1,12 @@
 import ising_config::*;
 
-module full_sim();
+module full_sim_tb();
 
 //Filename for instruction listing and beta listing
-string i_f_n = "";//todo
-string b_f_n = "";//todo
+string i_f_n = "..\\python_source\\instr_list.txt";
+string b_f_n = "..\\python_source\\b_list.txt";
+string a_f_n = "..\\python_source\\a_list.txt";
+string c_f_n = "..\\python_source\\c_list.txt";
 
 
 reg clk, rst;
@@ -76,6 +78,9 @@ integer i, j, k;
 
 int a_del_mac_res, a_del_nl_res, bc_del_mac_res, bc_del_nl_res;
 
+//These are needed to swap a value in the LUT during delay calibration
+reg [15:0] a_nl_127_val;
+reg [15:0] a_nl_target_val;
 
 experiment_top_level_wrapper dut
 (
@@ -171,15 +176,66 @@ initial begin
 	init_registers();
 	
 	//Write all the luts
-	load_luts();
+	//load_luts();
 
 	//Do a delay calibration measurement
-	del_cal();
+	//del_cal();
 	
+	//Load the program
+	load_program(i_f_n, b_f_n, a_f_n, c_f_n);
 	
+	//Run the program
+	run_program();
 	
  
 end
+
+
+
+task run_program();
+begin
+
+	$display("Running program...");
+	
+	//Set and reset the run bit
+	gpio_write(run_trig_reg, 1);
+	gpio_write(run_trig_reg, 0);
+	
+	//Wait until the program halts
+	i = 0;
+	while(1) begin
+		gpio_write(ex_state_reg, 0);
+		if(gpio_out_bus == 0) begin
+			break;
+		end
+		i = i + 1;
+		if(i > 10000) begin
+			$fatal("Error, FSM did not halt after 10,000 cycles");
+		end
+	end
+	
+	//Read out the contense of the a and c registers
+	$display("A results:");
+	while(1) begin
+		gpio_write(a_read_reg, 0);
+		if(gpio_out_bus[31]) begin//If that last read was invalid
+			break;
+		end
+		$write("%0d,",integer'(gpio_out_bus[30:0]));
+	end
+	$display("C results:");
+	while(1) begin
+		gpio_write(c_read_reg, 0);
+		if(gpio_out_bus[31]) begin//If that last read was invalid
+			break;
+		end
+		$write("%0d,",integer'(gpio_out_bus[30:0]));
+	end
+	
+	$display("Program finished");
+
+end
+endtask
 
 task init_registers();
 begin
@@ -222,8 +278,8 @@ begin
 	set_dac_shift_amts();
 	
 	//Set up the ADC variables
-	gpio_write(mac_sample_selector_reg, 3);
-	gpio_write(nl_sample_selector_reg, 3);
+	gpio_write(mac_sample_selector_reg, 4);
+	gpio_write(nl_sample_selector_reg, 4);
 	
 	
 	//Set up the waveforms for a, a_nl, and phi_nl (where a is the modulator at the very beginning
@@ -231,14 +287,21 @@ begin
 	a_nl_wave = get_wave(a_nl_val);
 	phi_nl_wave = get_wave(phi_nl_val);
 	
-	for(i = 16; i < 256; i = i + 16) begin
-		gpio_write(a_output_reg, a_wave[i+:16]);
-		gpio_write(a_nl_output_reg, a_nl_wave[i+:16]);
-		gpio_write(phi_nl_output_reg, phi_nl_wave[i+:16]);
-	end
-	
-	
+	write_static_dac_reg(reverse_wave(a_wave), a_output_reg);
+	write_static_dac_reg(reverse_wave(a_nl_wave), a_nl_output_reg);
+	write_static_dac_reg(reverse_wave(phi_nl_wave), phi_nl_output_reg);
 
+end
+endtask
+
+
+task write_static_dac_reg(input [255:0] wave_in, input [15:0] addr_in);
+begin
+	//Need to write the samples in backwards so they're the correct way around relative to how the waveforms are generated in output scaler
+	for(i = (256-16); i >= 0; i = i - 16) begin
+		gpio_write(addr_in, wave_in[(i+8)+:8]);
+		gpio_write(addr_in, wave_in[i+:8]);
+	end
 end
 endtask
 
@@ -247,7 +310,7 @@ task set_dac_shift_amts();
 begin
 
 	//Start with A MAC's output first
-	automatic reg [15:0] wave_val = 16'(22000);
+	automatic reg [15:0] wave_val = 16'h7FFF;
 	//Get the right waveform
 	automatic reg [255:0] a_wave = get_wave(wave_val);
 	
@@ -255,9 +318,7 @@ begin
 	gpio_write(a_dac_mux_sel_reg_base_addr, 1);
 	
 	//Write it to the static wave register
-	for(i = 0; i < 256; i = i + 16) begin
-		gpio_write(a_static_output_reg_base_addr, a_wave[i+:16]);
-	end
+	write_static_dac_reg(a_wave, a_static_output_reg_base_addr);
 	
 	//Now look at the actual DAC output and change the shift amount until both the target sample and the sample on either side are the correct value
 	j = 0;
@@ -283,9 +344,7 @@ begin
 	
 	//Onto B MAC
 	gpio_write(b_dac_mux_sel_reg_base_addr, 1);
-	for(i = 0; i < 256; i = i + 16) begin
-		gpio_write(b_static_output_reg_base_addr, a_wave[i+:16]);
-	end
+	write_static_dac_reg(a_wave, b_static_output_reg_base_addr);
 	
 	j = 0;
 	while(1) begin
@@ -310,9 +369,7 @@ begin
 	
 	//Onto C MAC
 	gpio_write(c_dac_mux_sel_reg_base_addr, 1);
-	for(i = 0; i < 256; i = i + 16) begin
-		gpio_write(c_static_output_reg_base_addr, a_wave[i+:16]);
-	end
+	write_static_dac_reg(a_wave, c_static_output_reg_base_addr);
 	
 	j = 0;
 	while(1) begin
@@ -337,9 +394,8 @@ begin
 	
 	//Onto A NL
 	gpio_write(a_nl_dac_mux_sel_reg_base_addr, 1);
-	for(i = 0; i < 256; i = i + 16) begin
-		gpio_write(a_nl_static_output_reg_base_addr, a_wave[i+:16]);
-	end
+	write_static_dac_reg(a_wave, a_nl_static_output_reg_base_addr);
+	
 	
 	j = 0;
 	while(1) begin
@@ -361,11 +417,24 @@ begin
 			j = j + 1;
 		end
 	end
+	
+	//Reset all of the selection registers
+	gpio_write(a_dac_mux_sel_reg_base_addr, 0);
+	gpio_write(b_dac_mux_sel_reg_base_addr, 0);
+	gpio_write(c_dac_mux_sel_reg_base_addr, 0);
+	gpio_write(a_nl_dac_mux_sel_reg_base_addr, 0);
+	
 end
 endtask
 
 task del_cal();
 begin
+
+	//Need a quick fix here for A nl
+	gpio_write(a_nl_output_scaler_addr_reg, 0);
+	gpio_write(a_nl_output_scaler_addr_reg, 127);
+	gpio_write(a_nl_output_scaler_data_reg, a_nl_target_val[15:8]);
+	gpio_write(a_nl_output_scaler_data_reg, a_nl_target_val[7:0]);
 
 	//Start the "a" delay calibration going
 	gpio_write(del_trig_reg, 1);
@@ -414,9 +483,13 @@ begin
 	bc_del_mac_res = gpio_out_bus;
 	gpio_write(del_meas_nl_result, 0);
 	bc_del_nl_res = gpio_out_bus;
-	$display("A MAC delay: %0d, A NL delay: %0d", a_del_mac_res, a_del_nl_res);
+	$display("BC MAC delay: %0d, BC NL delay: %0d", bc_del_mac_res, bc_del_nl_res);
 	
-	
+	//Fix the LUT for A NL
+	gpio_write(a_nl_output_scaler_addr_reg, 0);
+	gpio_write(a_nl_output_scaler_addr_reg, 127);
+	gpio_write(a_nl_output_scaler_data_reg, a_nl_127_val[15:8]);
+	gpio_write(a_nl_output_scaler_data_reg, a_nl_127_val[7:0]);
 
 end
 endtask
@@ -424,6 +497,7 @@ endtask
 task load_luts();
 begin
 	//Load the DAC luts
+	$display("%%%%%%%%Starting LUT load%%%%%%%%");
 	$display("Loading DAC LUTs...");
 	load_lut("lut_matlab_outputs\\lut_dac_a.csv", 0, a_output_scaler_addr_reg, a_output_scaler_data_reg);
 	load_lut("lut_matlab_outputs\\lut_dac_a_nl.csv", 0, a_nl_output_scaler_addr_reg, a_nl_output_scaler_data_reg);
@@ -434,6 +508,7 @@ begin
 	load_lut("lut_matlab_outputs\\lut_adc_mac.csv", 1, mac_driver_addr_reg, mac_driver_data_reg);
 	$display("Loading NL ADC LUT");
 	load_lut("lut_matlab_outputs\\lut_adc_nl.csv", 1, nl_driver_addr_reg, nl_driver_data_reg);
+	$display("%%%%%%%%Finished LUT load%%%%%%%%");
 end
 endtask
 
@@ -479,6 +554,17 @@ begin
 			gpio_write(addr_reg, fsm_val[7:0]);
 			gpio_write(data_reg, dac_val[15:8]);
 			gpio_write(data_reg, dac_val[7:0]);
+			
+			//Quick check for a NL fix during del cal
+			if(addr_reg == a_nl_output_scaler_addr_reg && fsm_val == 127) begin
+				//Need to save the value that should be here
+				a_nl_127_val = dac_val;
+			end
+			if(addr_reg == a_nl_output_scaler_addr_reg && fsm_val == 64) begin
+				//This is what we will set addr 127 to when we do del cal
+				a_nl_target_val = dac_val;
+			end
+			
 		end
 		else begin//Other way around for adc
 			gpio_write(addr_reg, dac_val[15:8]);
@@ -494,11 +580,15 @@ end
 endtask
 
 
-task load_program(string instr_filename, beta_filename);
+task load_program(string instr_filename, beta_filename, alpha_filename, gamma_filename);
 begin
+
 	//Load the instructions from disk
 	integer instr_listing[];
 	integer beta_listing[];
+	integer var_listing[];
+	reg [15:0] l_var;
+	$display("%%%%%%%%%%%%%%%%Load program start%%%%%%%%%%%%%%%%");
 	instr_listing = {};
 	$readmemh(instr_filename, instr_listing);
 	if($size(instr_listing) > 2**instr_fifo_depth) begin
@@ -516,7 +606,7 @@ begin
 	gpio_write(instr_b_sel_reg, 0);
 	s2_axis_tvalid <= 1;
 	for(i = 0; i < $size(instr_listing); i = i + 1) begin
-		s2_axis_tdata <= instr_listing[i];
+		s2_axis_tdata <= instr_listing[i]&16'hFFFF;
 		clk_cycle();
 	end
 	s2_axis_tvalid <= 0;
@@ -525,10 +615,29 @@ begin
 	gpio_write(instr_b_sel_reg, 1);
 	s2_axis_tvalid <= 1;
 	for(i = 0; i < $size(beta_listing); i = i + 1) begin
-		s2_axis_tdata <= beta_listing[i];
+		s2_axis_tdata <= beta_listing[i]&16'hFFFF;
 		clk_cycle();
 	end
 	s2_axis_tvalid <= 0;
+	
+	 
+	//Load up the initialization values for a and c
+	var_listing = {};
+	$readmemh(alpha_filename, var_listing);
+	for(i = 0; i < $size(var_listing); i = i + 1) begin
+		l_var = var_listing[i];
+		gpio_write(a_write_reg, l_var[15:8]);
+		gpio_write(a_write_reg, l_var[7:0]);
+	end
+	var_listing = {};
+	$readmemh(gamma_filename, var_listing);
+	for(i = 0; i < $size(var_listing); i = i + 1) begin
+		l_var = var_listing[i];
+		gpio_write(c_write_reg, l_var[15:8]);
+		gpio_write(c_write_reg, l_var[7:0]);
+	end
+	
+	$display("%%%%%%%%%%%%%%%%Load program finish%%%%%%%%%%%%%%%%");
 
 end
 endtask
@@ -569,16 +678,16 @@ task update_chip_state();
 begin
 
 	//First we take the modulator 16-bit values for a, alpha, etc and turn them into floating point numbers
-
-	automatic real alpha_v = (1/dac_scale_fac) * m0_axis_tdata[(wave_pos*16)+:16];
-	automatic real beta_v = (1/dac_scale_fac) * m1_axis_tdata[(wave_pos*16)+:16];
-	automatic real gamma_v = (1/dac_scale_fac) * m2_axis_tdata[(wave_pos*16)+:16];
-	automatic real alpha_nl_v = (1/dac_scale_fac) * m3_axis_tdata[(wave_pos*16)+:16];
-	automatic real phi_lo_v = (1/dac_scale_fac) * m4_axis_tdata[(wave_pos*16)+:16];
-	automatic real phi_v = (1/dac_scale_fac) * m5_axis_tdata[(wave_pos*16)+:16];
-	automatic real a_v = (1/dac_scale_fac) * m6_axis_tdata[(wave_pos*16)+:16];
-	automatic real a_nl_v = (1/dac_scale_fac) * m7_axis_tdata[(wave_pos*16)+:16];
-	automatic real phi_nl_v = (1/dac_scale_fac) * m8_axis_tdata[(wave_pos*16)+:16];
+	automatic real dsf = (1/dac_scale_fac);//Doing this to fix NaN errors
+	automatic real alpha_v = dsf * signed'(m0_axis_tdata[(wave_pos*16)+:16]);
+	automatic real beta_v = dsf * signed'(m1_axis_tdata[(wave_pos*16)+:16]);
+	automatic real gamma_v = dsf * signed'(m2_axis_tdata[(wave_pos*16)+:16]);
+	automatic real alpha_nl_v = dsf * signed'(m3_axis_tdata[(wave_pos*16)+:16]);
+	automatic real phi_lo_v = dsf * signed'(m4_axis_tdata[(wave_pos*16)+:16]);
+	automatic real phi_v = dsf * signed'(m5_axis_tdata[(wave_pos*16)+:16]);
+	automatic real a_v = dsf * signed'(m6_axis_tdata[(wave_pos*16)+:16]);
+	automatic real a_nl_v = dsf * signed'(m7_axis_tdata[(wave_pos*16)+:16]);
+	automatic real phi_nl_v = dsf * signed'(m8_axis_tdata[(wave_pos*16)+:16]);
 	
 	//Compute the resulting currents
 	automatic real I_N = I_NLA(E_in_d, a_nl_v, phi_nl_v, alpha_nl_v);

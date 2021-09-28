@@ -1,5 +1,8 @@
 clear; close all; clc;
 
+dac_scale_fac = 66000/(3*14);
+adc_scale_fac = 66000/(400*2);
+
 
 t1 = readtable("nl_lut_gen_results.csv");
 
@@ -107,8 +110,7 @@ title("C cal");
 
 lut_dac_a_nl = lut_dac;
 
-dac_scale_fac = 1/((3*14)/(66000));
-adc_scale_fac = 66000/(400*2);
+
 
 lut_dac_a(:,2) = lut_dac_a(:,2).*dac_scale_fac; 
 lut_dac_b(:,2) = lut_dac_b(:,2).*dac_scale_fac; 
@@ -156,6 +158,7 @@ function [lut_dac_a, lut_dac_b, lut_dac_c, lut_adc] = gen_mac_luts(v_a_in, i_a_o
     
     %Update: we're actually calibrating to BC since we need 127*127=127
     %(i.e 1*1=1)
+    fprintf("Assuming 127*127 = 127 (i.e 1*1=1\n");
     I_max = max(i_b_out);
     I_min = min(i_b_out);
     if(abs(abs(I_max)-abs(I_min))/abs(I_min) > 0.1)
@@ -183,11 +186,11 @@ function [lut_dac_a, lut_dac_b, lut_dac_c, lut_adc] = gen_mac_luts(v_a_in, i_a_o
     for i = 1:max(size(lut_adc))
         [~, min_pos] = min(abs(i_a_out-lut_adc(i,2)));
         lut_dac_a = [lut_dac_a; lut_adc(i,1), v_a_in(min_pos)];
+        if(lut_adc(i,1) == -127)
+            lut_dac_a = [lut_dac_a; -128, v_a_in(min_pos)];
+        end
     end
-    
     %and we are done!
-    
-
 end
 
 
