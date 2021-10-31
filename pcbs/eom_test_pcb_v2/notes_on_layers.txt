@@ -1,0 +1,1 @@
+We would like to have the high frequency material (Rogers 4350B) in between layers 1 and 2. The material in between layers 2-3 and 3-4 can be FR4, pre-preg, or something else. Whatever is easiest on your end, we are not concerned with impedance control on these layers, only structural rigidity. 
