@@ -6,10 +6,10 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="100" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="0.000123031496" altunitdist="mil" altunit="mil"/>
+<grid distance="10" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="0.000123031496" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="Route2" color="16" fill="1" visible="no" active="yes"/>
+<layer number="2" name="Route2" color="16" fill="1" visible="yes" active="yes"/>
 <layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
 <layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
 <layer number="5" name="Route5" color="19" fill="1" visible="no" active="no"/>
@@ -22,7 +22,7 @@
 <layer number="12" name="Route12" color="20" fill="1" visible="no" active="no"/>
 <layer number="13" name="Route13" color="21" fill="1" visible="no" active="no"/>
 <layer number="14" name="Route14" color="22" fill="1" visible="no" active="no"/>
-<layer number="15" name="Route15" color="23" fill="1" visible="no" active="yes"/>
+<layer number="15" name="Route15" color="23" fill="1" visible="yes" active="yes"/>
 <layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
@@ -156,40 +156,44 @@
 </layers>
 <board>
 <plain>
-<wire x1="29.972" y1="65.612890625" x2="54.01915" y2="65.628446875" width="0" layer="20"/>
-<wire x1="54.01915" y1="65.628446875" x2="54.1454375" y2="65.626121875" width="0" layer="20"/>
-<wire x1="54.1454375" y1="65.626121875" x2="54.27275" y2="65.628003125" width="0" layer="20"/>
-<wire x1="54.27275" y1="65.628003125" x2="54.2821125" y2="72.8430875" width="0" layer="20"/>
+<wire x1="29.972" y1="63.5" x2="54.045459375" y2="63.5" width="0" layer="20"/>
+<wire x1="54.045459375" y1="63.5" x2="54.1980625" y2="63.65263125" width="0" layer="20"/>
+<wire x1="54.1980625" y1="63.65263125" x2="54.1986" y2="65.037534375" width="0" layer="20"/>
+<wire x1="54.1986" y1="65.037534375" x2="54.2821125" y2="72.8430875" width="0" layer="20"/>
 <wire x1="54.2821125" y1="72.8430875" x2="102.2619" y2="72.87275" width="0" layer="20"/>
 <wire x1="102.2619" y1="72.87275" x2="102.2578875" y2="65.66059375" width="0" layer="20"/>
 <wire x1="102.2578875" y1="65.66059375" x2="103.44505625" y2="65.67294375" width="0" layer="20"/>
 <wire x1="103.44505625" y1="65.67294375" x2="103.96575" y2="65.67411875" width="0" layer="20"/>
-<wire x1="103.96575" y1="65.67411875" x2="146.099559375" y2="65.688865625" width="0" layer="20"/>
-<wire x1="146.099559375" y1="65.688865625" x2="146.10156875" y2="88.578421875" width="0" layer="20"/>
-<wire x1="146.10156875" y1="88.578421875" x2="107.84965625" y2="88.55718125" width="0" layer="20"/>
+<wire x1="103.96575" y1="65.67411875" x2="128.319559375" y2="65.688865625" width="0" layer="20"/>
+<wire x1="128.319559375" y1="65.688865625" x2="128.32156875" y2="88.578421875" width="0" layer="20"/>
+<wire x1="128.32156875" y1="88.578421875" x2="107.84965625" y2="88.55718125" width="0" layer="20"/>
 <wire x1="107.84965625" y1="88.55718125" x2="102.56933125" y2="88.553278125" width="0" layer="20"/>
 <wire x1="102.56933125" y1="88.553278125" x2="102.0669375" y2="88.552321875" width="0" layer="20"/>
 <wire x1="102.0669375" y1="88.552321875" x2="102.059584375" y2="81.339640625" width="0" layer="20"/>
-<wire x1="102.059584375" y1="81.339640625" x2="74.65836875" y2="81.365196875" width="0" layer="20"/>
-<wire x1="74.65836875" y1="81.365196875" x2="73.1472" y2="82.8363375" width="0" layer="20"/>
-<wire x1="73.1472" y1="82.8363375" x2="55.9919" y2="84.896296875" width="0" layer="20"/>
-<wire x1="55.9919" y1="84.896296875" x2="53.875903125" y2="84.12465625" width="0" layer="20"/>
-<wire x1="53.875903125" y1="84.12465625" x2="52.95095" y2="84.125" width="0" layer="20"/>
-<wire x1="52.95095" y1="84.125" x2="29.972" y2="88.57" width="0" layer="20"/>
-<wire x1="29.972" y1="88.57" x2="29.972" y2="65.612890625" width="0" layer="20"/>
+<wire x1="102.059584375" y1="81.339640625" x2="54.33836875" y2="81.365196875" width="0" layer="20"/>
+<wire x1="54.33836875" y1="81.365196875" x2="54.0972" y2="81.5663375" width="0" layer="20"/>
+<wire x1="54.0972" y1="81.5663375" x2="54.103303125" y2="88.57046875" width="0" layer="20"/>
+<wire x1="54.103303125" y1="88.57046875" x2="53.875903125" y2="88.56965625" width="0" layer="20"/>
+<wire x1="53.875903125" y1="88.56965625" x2="53.58595" y2="88.57" width="0" layer="20"/>
+<wire x1="53.58595" y1="88.57" x2="29.972" y2="88.57" width="0" layer="20"/>
+<wire x1="29.972" y1="88.57" x2="29.972" y2="63.5" width="0" layer="20"/>
 <rectangle x1="72.59" y1="72.39" x2="85.671" y2="82.423" layer="21"/>
 <rectangle x1="71.597775" y1="72.45223125" x2="72.58964375" y2="82.3572125" layer="29"/>
 <rectangle x1="85.68486875" y1="72.4573125" x2="86.6767375" y2="82.36229375" layer="29"/>
 <rectangle x1="70.538034375" y1="72.451975" x2="71.597821875" y2="82.35688125" layer="29"/>
 <rectangle x1="86.676075" y1="72.457234375" x2="87.7358625" y2="82.362140625" layer="29"/>
+<dimension x1="72.589675" y1="76.77720625" x2="29.972" y2="76.708" x3="51.2808375" y3="45.72" textsize="1.778" layer="47" dtype="horizontal"/>
 <dimension x1="128.31790625" y1="74.9635125" x2="85.70023125" y2="74.89430625" x3="107.00906875" y3="43.90630625" textsize="1.778" layer="47" dtype="horizontal"/>
+<dimension x1="54.342634375" y1="81.36466875" x2="54.082009375" y2="88.570234375" x3="59.182" y3="84.96745" textsize="1.778" layer="47" dtype="vertical"/>
 <dimension x1="95.351771875" y1="81.340215625" x2="95.091146875" y2="88.54578125" x3="100.1911375" y3="84.942996875" textsize="1.778" layer="47" dtype="vertical"/>
 <dimension x1="97.058384375" y1="65.665490625" x2="96.797759375" y2="72.87105625" x3="101.89775" y3="69.268271875" textsize="1.778" layer="47" dtype="vertical"/>
+<dimension x1="29.972325" y1="88.570234375" x2="54.102" y2="88.646" x3="42.0371625" y3="91.44" textsize="1.778" layer="47" dtype="horizontal"/>
 <dimension x1="102.074440625" y1="88.55064375" x2="126.204115625" y2="88.626409375" x3="114.139278125" y3="91.420409375" textsize="1.778" layer="47" dtype="horizontal"/>
 <rectangle x1="69.479109375" y1="72.4517625" x2="70.538896875" y2="82.35666875" layer="29"/>
 <rectangle x1="68.419753125" y1="72.45194375" x2="69.479540625" y2="82.35685" layer="29"/>
 <rectangle x1="88.7952" y1="72.45756875" x2="89.8549875" y2="82.362475" layer="29"/>
 <rectangle x1="87.73528125" y1="72.457509375" x2="88.79506875" y2="82.362415625" layer="29"/>
+<dimension x1="34.98888125" y1="80.391084375" x2="151.892" y2="70.358" x3="157.988" y3="75.374540625" textsize="1.778" layer="47" dtype="vertical"/>
 </plain>
 <libraries>
 <library name="adafruit">
@@ -248,75 +252,6 @@ MELF 0.25 W</description>
 </package>
 </packages>
 </library>
-<library name="adafruit" urn="urn:adsk.eagle:library:420">
-<packages>
-<package name="R0402" urn="urn:adsk.eagle:footprint:6239918/1" library_version="2">
-<description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;
-chip</description>
-<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
-<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
-<wire x1="-1.473" y1="0.483" x2="1.473" y2="0.483" width="0.0508" layer="39"/>
-<wire x1="1.473" y1="0.483" x2="1.473" y2="-0.483" width="0.0508" layer="39"/>
-<wire x1="1.473" y1="-0.483" x2="-1.473" y2="-0.483" width="0.0508" layer="39"/>
-<wire x1="-1.473" y1="-0.483" x2="-1.473" y2="0.483" width="0.0508" layer="39"/>
-<smd name="1" x="-0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
-<smd name="2" x="0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
-<text x="-0.635" y="0.762" size="1.27" layer="25">&gt;NAME</text>
-<text x="-0.635" y="-2.032" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
-<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
-<rectangle x1="-0.1999" y1="-0.4001" x2="0.1999" y2="0.4001" layer="35"/>
-</package>
-<package name="1X03" urn="urn:adsk.eagle:footprint:6240064/1" library_version="2">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
-<wire x1="-3.175" y1="1.27" x2="-1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="1.27" x2="-1.27" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="0.635" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="-0.635" x2="-1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-1.27" y1="0.635" x2="-0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="1.27" x2="0.635" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="1.27" x2="1.27" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="0.635" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="-0.635" x2="0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="0.635" y1="-1.27" x2="-0.635" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-0.635" y1="-1.27" x2="-1.27" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-3.81" y1="0.635" x2="-3.81" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="-3.175" y1="1.27" x2="-3.81" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="-3.81" y1="-0.635" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="-1.905" y1="-1.27" x2="-3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="1.27" y1="0.635" x2="1.905" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="1.27" x2="3.175" y2="1.27" width="0.1524" layer="21"/>
-<wire x1="3.175" y1="1.27" x2="3.81" y2="0.635" width="0.1524" layer="21"/>
-<wire x1="3.81" y1="0.635" x2="3.81" y2="-0.635" width="0.1524" layer="21"/>
-<wire x1="3.81" y1="-0.635" x2="3.175" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="3.175" y1="-1.27" x2="1.905" y2="-1.27" width="0.1524" layer="21"/>
-<wire x1="1.905" y1="-1.27" x2="1.27" y2="-0.635" width="0.1524" layer="21"/>
-<pad name="1" x="-2.54" y="0" drill="1.016" rot="R90"/>
-<pad name="2" x="0" y="0" drill="1.016" rot="R90"/>
-<pad name="3" x="2.54" y="0" drill="1.016" rot="R90"/>
-<text x="-3.8862" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.81" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
-<rectangle x1="-2.794" y1="-0.254" x2="-2.286" y2="0.254" layer="51"/>
-<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-</package>
-</packages>
-<packages3d>
-<package3d name="R0402" urn="urn:adsk.eagle:package:6240564/1" type="box" library_version="2">
-<description>&lt;b&gt;RESISTOR&lt;/b&gt;&lt;p&gt;
-chip</description>
-<packageinstances>
-<packageinstance name="R0402"/>
-</packageinstances>
-</package3d>
-<package3d name="1X03" urn="urn:adsk.eagle:package:6240710/1" type="box" library_version="2">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt;</description>
-<packageinstances>
-<packageinstance name="1X03"/>
-</packageinstances>
-</package3d>
-</packages3d>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -341,13 +276,13 @@ a wide range of applications. Your particular design
 may have different requirements, so please make the
 necessary adjustments and save your customized
 design rules under a new name.</description>
-<param name="layerSetup" value="(1*2+15*16)"/>
+<param name="layerSetup" value="(1*2+15+16)"/>
 <param name="mtCopper" value="0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm"/>
-<param name="mtIsolate" value="0.083mm 1.264mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.083mm"/>
-<param name="mdWireWire" value="6mil"/>
-<param name="mdWirePad" value="6mil"/>
+<param name="mtIsolate" value="4mil 1.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm"/>
+<param name="mdWireWire" value="3mil"/>
+<param name="mdWirePad" value="3mil"/>
 <param name="mdWireVia" value="6mil"/>
-<param name="mdPadPad" value="6mil"/>
+<param name="mdPadPad" value="4mil"/>
 <param name="mdPadVia" value="6mil"/>
 <param name="mdViaVia" value="6mil"/>
 <param name="mdSmdPad" value="6mil"/>
@@ -355,7 +290,7 @@ design rules under a new name.</description>
 <param name="mdSmdSmd" value="6mil"/>
 <param name="mdViaViaSameLayer" value="6mil"/>
 <param name="mnLayersViaInSmd" value="2"/>
-<param name="mdCopperDimension" value="40mil"/>
+<param name="mdCopperDimension" value="30mil"/>
 <param name="mdDrill" value="6mil"/>
 <param name="mdSmdStop" value="0mil"/>
 <param name="msWidth" value="6mil"/>
@@ -510,108 +445,106 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="R1" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="41.272153125" y="78.491125" smashed="yes" rot="R180">
-<attribute name="NAME" x="42.542153125" y="77.221125" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="42.542153125" y="81.031125" size="1.27" layer="27" rot="R180"/>
+<element name="R1" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="44.322" y="76.578" smashed="yes" rot="R270">
+<attribute name="NAME" x="45.592" y="77.848" size="1.27" layer="25" rot="R270"/>
+<attribute name="VALUE" x="41.782" y="77.848" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="U$1" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.11063125" y="79.807121875" smashed="yes" rot="R90"/>
-<element name="U$2" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.110271875" y="73.657903125" smashed="yes" rot="R90"/>
-<element name="J1" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="109.47415625" y="90.424009375" smashed="yes">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="109.47415625" y="90.424009375" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="109.47415625" y="90.424009375" size="1.778" layer="27" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="109.47415625" y="90.424009375" size="1.778" layer="27" display="off"/>
+<element name="U$1" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.136" y="81.153" smashed="yes" rot="R90"/>
+<element name="U$2" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.136" y="74.009" smashed="yes" rot="R90"/>
+<element name="J1" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="43.688" y="90.424" smashed="yes">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="43.688" y="90.424" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="43.688" y="90.424" size="1.778" layer="27" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="43.688" y="90.424" size="1.778" layer="27" display="off"/>
 </element>
-<element name="U$3" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.10965625" y="79.07075" smashed="yes" rot="R90"/>
-<element name="U$4" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.1106" y="80.5434" smashed="yes" rot="R90"/>
-<element name="R2" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="48.892175" y="75.95088125" smashed="yes" rot="R180">
-<attribute name="NAME" x="50.162175" y="74.68088125" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="50.162175" y="78.49088125" size="1.27" layer="27" rot="R180"/>
+<element name="U$3" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-4.064" y="33.528" smashed="yes"/>
+<element name="U$4" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-2.032" y="33.528" smashed="yes"/>
+<element name="R2" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="-7.62" y="31.496" smashed="yes">
+<attribute name="NAME" x="-8.89" y="32.766" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-8.89" y="28.956" size="1.27" layer="27"/>
 </element>
-<element name="J2" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="134.87415" y="90.42405" smashed="yes">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="122.17415" y="98.80605" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="122.17415" y="98.80605" size="1.778" layer="27" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="122.17415" y="98.80605" size="1.778" layer="27" display="off"/>
+<element name="J2" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="27.94" y="81.28" smashed="yes" rot="R90">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="19.558" y="68.58" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="19.558" y="68.58" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="19.558" y="68.58" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="U$5" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.110453125" y="75.13103125" smashed="yes" rot="R90"/>
-<element name="U$6" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.110434375" y="78.333859375" smashed="yes" rot="R90"/>
-<element name="R3" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="56.646171875" y="78.488553125" smashed="yes" rot="R180">
-<attribute name="NAME" x="57.916171875" y="77.218553125" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="57.916171875" y="81.028553125" size="1.27" layer="27" rot="R180"/>
+<element name="U$5" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-4.064" y="14.224" smashed="yes"/>
+<element name="U$6" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-2.032" y="14.224" smashed="yes"/>
+<element name="R3" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="-7.62" y="12.192" smashed="yes">
+<attribute name="NAME" x="-8.89" y="13.462" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-8.89" y="9.652" size="1.27" layer="27"/>
 </element>
-<element name="J3" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="122.169165625" y="63.758378125" smashed="yes" rot="R180">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="134.869165625" y="55.122378125" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="134.869165625" y="55.122378125" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="134.869165625" y="55.122378125" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="J3" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="27.94" y="70.612" smashed="yes" rot="R90">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="19.304" y="57.912" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="19.304" y="57.912" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="19.304" y="57.912" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="U$7" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.11045" y="74.3943" smashed="yes" rot="R90"/>
-<element name="U$8" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="72.110328125" y="75.86731875" smashed="yes" rot="R90"/>
-<element name="R4" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="56.645546875" y="75.948675" smashed="yes" rot="R180">
-<attribute name="NAME" x="57.915546875" y="74.678675" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="57.915546875" y="78.488675" size="1.27" layer="27" rot="R180"/>
+<element name="U$7" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-4.064" y="-5.08" smashed="yes"/>
+<element name="U$8" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-2.032" y="-5.08" smashed="yes"/>
+<element name="R4" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="-7.62" y="-7.112" smashed="yes">
+<attribute name="NAME" x="-8.89" y="-5.842" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-8.89" y="-9.652" size="1.27" layer="27"/>
 </element>
-<element name="J4" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="134.869190625" y="63.758525" smashed="yes" rot="R180">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="147.569190625" y="55.122525" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="147.569190625" y="55.122525" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="147.569190625" y="55.122525" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="J4" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="43.688" y="61.468" smashed="yes" rot="R180">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="56.388" y="52.832" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="56.388" y="52.832" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="56.388" y="52.832" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="U$9" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="6.096" y="-38.862" smashed="yes"/>
 <element name="U$10" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="8.128" y="-38.862" smashed="yes"/>
-<element name="R5" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="48.89300625" y="78.490965625" smashed="yes" rot="R180">
-<attribute name="NAME" x="50.16300625" y="77.220965625" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="50.16300625" y="81.030965625" size="1.27" layer="27" rot="R180"/>
+<element name="R5" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="12.192" y="-26.416" smashed="yes">
+<attribute name="NAME" x="10.922" y="-25.146" size="1.27" layer="25"/>
+<attribute name="VALUE" x="10.922" y="-28.956" size="1.27" layer="27"/>
 </element>
-<element name="J5" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="148.082" y="82.804" smashed="yes" rot="R270">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="156.718" y="95.504" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="156.718" y="95.504" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="156.718" y="95.504" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="J5" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="-5.334" y="-15.748" smashed="yes">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="-18.034" y="-7.112" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="-18.034" y="-7.112" size="1.778" layer="27" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="-18.034" y="-7.112" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U$11" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="10.16" y="-38.862" smashed="yes"/>
 <element name="U$12" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="12.192" y="-38.862" smashed="yes"/>
-<element name="R6" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="41.271259375" y="75.95085" smashed="yes" rot="R180">
-<attribute name="NAME" x="42.541259375" y="74.68085" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="42.541259375" y="78.49085" size="1.27" layer="27" rot="R180"/>
+<element name="R6" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="-7.62" y="-40.894" smashed="yes">
+<attribute name="NAME" x="-8.89" y="-39.624" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-8.89" y="-43.434" size="1.27" layer="27"/>
 </element>
-<element name="J6" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="148.082" y="71.374" smashed="yes" rot="R270">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="150.622" y="106.68" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="150.622" y="106.68" size="1.778" layer="27" rot="R270" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="150.622" y="106.68" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="J6" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="4.572" y="-15.748" smashed="yes">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="-30.734" y="-13.208" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="-30.734" y="-13.208" size="1.778" layer="27" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="-30.734" y="-13.208" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U$13" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="14.224" y="-38.862" smashed="yes"/>
 <element name="U$14" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-9.144" y="-43.434" smashed="yes"/>
-<element name="R7" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="64.132228125" y="78.491109375" smashed="yes" rot="R180">
-<attribute name="NAME" x="65.402228125" y="77.221109375" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="65.402228125" y="81.031109375" size="1.27" layer="27" rot="R180"/>
+<element name="R7" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="-2.54" y="-40.894" smashed="yes">
+<attribute name="NAME" x="-3.81" y="-39.624" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-3.81" y="-43.434" size="1.27" layer="27"/>
 </element>
-<element name="J7" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="109.474" y="63.754" smashed="yes" rot="R180">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="147.574" y="52.832" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="147.574" y="52.832" size="1.778" layer="27" rot="R180" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="147.574" y="52.832" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="J7" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="-5.334" y="-30.226" smashed="yes">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="-43.434" y="-19.304" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="-43.434" y="-19.304" size="1.778" layer="27" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="-43.434" y="-19.304" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U$15" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-7.112" y="-43.434" smashed="yes"/>
 <element name="U$16" library="eom_chip_lib" package="SIGNAL_BONDING_PAD" value="SIGNAL_BONDING_DEVICE" x="-5.08" y="-43.434" smashed="yes"/>
-<element name="R8" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="64.132109375" y="75.950975" smashed="yes" rot="R180">
-<attribute name="NAME" x="65.402109375" y="74.680975" size="1.27" layer="25" rot="R180"/>
-<attribute name="VALUE" x="65.402109375" y="78.490975" size="1.27" layer="27" rot="R180"/>
+<element name="R8" library="adafruit" package="M1206" package3d_urn="urn:adsk.eagle:package:6240588/1" value="" x="2.54" y="-40.894" smashed="yes">
+<attribute name="NAME" x="1.27" y="-39.624" size="1.27" layer="25"/>
+<attribute name="VALUE" x="1.27" y="-43.434" size="1.27" layer="27"/>
 </element>
-<element name="J8" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="122.174" y="90.424" smashed="yes">
-<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="61.468" y="95.25" size="1.778" layer="27" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="61.468" y="95.25" size="1.778" layer="27" display="off"/>
-<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="61.468" y="95.25" size="1.778" layer="27" display="off"/>
-</element>
-<element name="R9" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="R0402" package3d_urn="urn:adsk.eagle:package:6240564/1" value="" x="70.17090625" y="77.098959375" smashed="yes">
-<attribute name="NAME" x="69.53590625" y="77.860959375" size="1.27" layer="25"/>
-<attribute name="VALUE" x="69.53590625" y="75.066959375" size="1.27" layer="27"/>
-</element>
-<element name="R10" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="R0402" package3d_urn="urn:adsk.eagle:package:6240564/1" value="" x="-8.6614" y="-50.6476" smashed="yes">
-<attribute name="NAME" x="-9.2964" y="-49.8856" size="1.27" layer="25"/>
-<attribute name="VALUE" x="-9.2964" y="-52.6796" size="1.27" layer="27"/>
-</element>
-<element name="JP1" library="adafruit" library_urn="urn:adsk.eagle:library:420" package="1X03" package3d_urn="urn:adsk.eagle:package:6240710/1" value="" x="-5.7658" y="-55.3212" smashed="yes">
-<attribute name="NAME" x="-9.652" y="-53.4924" size="1.27" layer="25" ratio="10"/>
-<attribute name="VALUE" x="-9.5758" y="-58.4962" size="1.27" layer="27"/>
+<element name="J8" library="eom_chip_lib" package="CONN_142-0711-821_CIN" value="142-0711-821" x="4.572" y="-30.226" smashed="yes">
+<attribute name="COPYRIGHT" value="Copyright (C) 2021 Ultra Librarian. All rights reserved." x="-56.134" y="-25.4" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="142-0711-821" x="-56.134" y="-25.4" size="1.778" layer="27" display="off"/>
+<attribute name="MFR_NAME" value="Cinch Connectivity Solutions" x="-56.134" y="-25.4" size="1.778" layer="27" display="off"/>
 </element>
 </elements>
 <signals>
+<signal name="N$1">
+<contactref element="U$1" pad="P$1"/>
+<contactref element="J1" pad="1"/>
+<wire x1="43.688" y1="85.471" x2="72.136" y2="81.153" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$2">
+<contactref element="U$2" pad="P$1"/>
+<contactref element="R1" pad="1"/>
+<wire x1="44.322" y1="77.978" x2="72.136" y2="74.009" width="0" layer="19" extent="1-1"/>
+</signal>
 <signal name="GND">
 <contactref element="R1" pad="2"/>
 <contactref element="J1" pad="2"/>
@@ -637,61 +570,99 @@ design rules under a new name.</description>
 <contactref element="R8" pad="2"/>
 <contactref element="J8" pad="2"/>
 <contactref element="J8" pad="3"/>
-<contactref element="R9" pad="2"/>
-<contactref element="R10" pad="2"/>
-<contactref element="JP1" pad="2"/>
-<wire x1="138.36665" y1="85.47105" x2="143.129" y2="86.2965" width="0" layer="19" extent="1-1"/>
-<wire x1="143.129" y1="79.3115" x2="143.129" y2="86.2965" width="0" layer="19" extent="1-1"/>
-<wire x1="143.129" y1="74.8665" x2="143.129" y2="79.3115" width="0" layer="19" extent="1-1"/>
-<wire x1="131.38165" y1="85.47105" x2="138.36665" y2="85.47105" width="0" layer="19" extent="1-1"/>
-<wire x1="125.6665" y1="85.471" x2="131.38165" y2="85.47105" width="0" layer="19" extent="1-1"/>
-<wire x1="143.129" y1="67.8815" x2="143.129" y2="74.8665" width="0" layer="19" extent="1-1"/>
-<wire x1="138.361690625" y1="68.711525" x2="143.129" y2="67.8815" width="0" layer="19" extent="1-1"/>
-<wire x1="118.6815" y1="85.471" x2="125.6665" y2="85.471" width="0" layer="19" extent="1-1"/>
-<wire x1="112.96665625" y1="85.471009375" x2="118.6815" y2="85.471" width="0" layer="19" extent="1-1"/>
-<wire x1="131.376690625" y1="68.711525" x2="138.361690625" y2="68.711525" width="0" layer="19" extent="1-1"/>
-<wire x1="125.661665625" y1="68.711378125" x2="131.376690625" y2="68.711525" width="0" layer="19" extent="1-1"/>
-<wire x1="105.98165625" y1="85.471009375" x2="112.96665625" y2="85.471009375" width="0" layer="19" extent="1-1"/>
-<wire x1="118.676665625" y1="68.711378125" x2="125.661665625" y2="68.711378125" width="0" layer="19" extent="1-1"/>
-<wire x1="112.9665" y1="68.707" x2="118.676665625" y2="68.711378125" width="0" layer="19" extent="1-1"/>
-<wire x1="105.9815" y1="68.707" x2="112.9665" y2="68.707" width="0" layer="19" extent="1-1"/>
-<wire x1="70.82090625" y1="77.098959375" x2="105.98165625" y2="85.471009375" width="0" layer="19" extent="1-1"/>
-<wire x1="62.732109375" y1="75.950975" x2="70.82090625" y2="77.098959375" width="0" layer="19" extent="1-1"/>
-<wire x1="39.872153125" y1="78.491125" x2="62.732109375" y2="75.950975" width="0" layer="19" extent="1-1"/>
-<wire x1="55.246171875" y1="78.488553125" x2="39.872153125" y2="78.491125" width="0" layer="19" extent="1-1"/>
-<wire x1="55.245546875" y1="75.948675" x2="55.246171875" y2="78.488553125" width="0" layer="19" extent="1-1"/>
-<wire x1="47.49300625" y1="78.490965625" x2="55.246171875" y2="78.488553125" width="0" layer="19" extent="1-1"/>
-<wire x1="47.492175" y1="75.95088125" x2="47.49300625" y2="78.490965625" width="0" layer="19" extent="1-1"/>
-<wire x1="39.871259375" y1="75.95085" x2="47.492175" y2="75.95088125" width="0" layer="19" extent="1-1"/>
-<wire x1="62.732228125" y1="78.491109375" x2="39.871259375" y2="75.95085" width="0" layer="19" extent="1-1"/>
-<wire x1="-8.0114" y1="-50.6476" x2="62.732228125" y2="78.491109375" width="0" layer="19" extent="1-1"/>
-<wire x1="-5.7658" y1="-55.3212" x2="-8.0114" y2="-50.6476" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="TM1">
-<contactref element="JP1" pad="3"/>
-<contactref element="R9" pad="1"/>
-<wire x1="-3.2258" y1="-55.3212" x2="69.52090625" y2="77.098959375" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="TM2">
-<contactref element="JP1" pad="1"/>
-<contactref element="R10" pad="1"/>
-<wire x1="-9.3114" y1="-50.6476" x2="-8.3058" y2="-55.3212" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$19">
-<via x="71.8567375" y="81.567659375" extent="1-16" drill="0.35" diameter="0.254"/>
-</signal>
-<signal name="N$1">
-<contactref element="U$6" pad="P$1"/>
-<contactref element="R7" pad="1"/>
-<wire x1="65.532228125" y1="78.491109375" x2="72.110434375" y2="78.333859375" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$2">
-<contactref element="U$8" pad="P$1"/>
-<contactref element="R8" pad="1"/>
-<wire x1="65.532109375" y1="75.950975" x2="72.110328125" y2="75.86731875" width="0" layer="19" extent="1-1"/>
+<wire x1="47.1805" y1="85.471" x2="44.322" y2="75.178" width="0" layer="19" extent="1-1"/>
+<wire x1="40.1955" y1="85.471" x2="47.1805" y2="85.471" width="0" layer="19" extent="1-1"/>
+<wire x1="32.893" y1="84.7725" x2="47.1805" y2="85.471" width="0" layer="19" extent="1-1"/>
+<wire x1="32.893" y1="77.7875" x2="32.893" y2="84.7725" width="0" layer="19" extent="1-1"/>
+<wire x1="-6.22" y1="31.496" x2="32.893" y2="77.7875" width="0" layer="19" extent="1-1"/>
+<wire x1="32.893" y1="67.1195" x2="-6.22" y2="31.496" width="0" layer="19" extent="1-1"/>
+<wire x1="-6.22" y1="12.192" x2="32.893" y2="67.1195" width="0" layer="19" extent="1-1"/>
+<wire x1="32.893" y1="74.1045" x2="32.893" y2="67.1195" width="0" layer="19" extent="1-1"/>
+<wire x1="47.1805" y1="66.421" x2="-6.22" y2="12.192" width="0" layer="19" extent="1-1"/>
+<wire x1="-6.22" y1="-7.112" x2="47.1805" y2="66.421" width="0" layer="19" extent="1-1"/>
+<wire x1="40.1955" y1="66.421" x2="47.1805" y2="66.421" width="0" layer="19" extent="1-1"/>
+<wire x1="-8.8265" y1="-20.701" x2="-6.22" y2="-7.112" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.8415" y1="-20.701" x2="-8.8265" y2="-20.701" width="0" layer="19" extent="1-1"/>
+<wire x1="1.0795" y1="-20.701" x2="-1.8415" y2="-20.701" width="0" layer="19" extent="1-1"/>
+<wire x1="8.0645" y1="-20.701" x2="1.0795" y2="-20.701" width="0" layer="19" extent="1-1"/>
+<wire x1="13.592" y1="-26.416" x2="8.0645" y2="-20.701" width="0" layer="19" extent="1-1"/>
+<wire x1="8.0645" y1="-35.179" x2="13.592" y2="-26.416" width="0" layer="19" extent="1-1"/>
+<wire x1="1.0795" y1="-35.179" x2="8.0645" y2="-35.179" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.8415" y1="-35.179" x2="1.0795" y2="-35.179" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.14" y1="-40.894" x2="-1.8415" y2="-35.179" width="0" layer="19" extent="1-1"/>
+<wire x1="-6.22" y1="-40.894" x2="-1.14" y2="-40.894" width="0" layer="19" extent="1-1"/>
+<wire x1="3.94" y1="-40.894" x2="-1.14" y2="-40.894" width="0" layer="19" extent="1-1"/>
+<wire x1="-8.8265" y1="-35.179" x2="-6.22" y2="-40.894" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$3">
-<via x="68.472503125" y="77.090334375" extent="1-16" drill="0.35" diameter="0.254"/>
+<contactref element="U$3" pad="P$1"/>
+<contactref element="J2" pad="1"/>
+<wire x1="32.893" y1="81.28" x2="-4.064" y2="33.528" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$4">
+<contactref element="U$4" pad="P$1"/>
+<contactref element="R2" pad="1"/>
+<wire x1="-9.02" y1="31.496" x2="-2.032" y2="33.528" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$5">
+<contactref element="U$5" pad="P$1"/>
+<contactref element="J3" pad="1"/>
+<wire x1="-4.064" y1="14.224" x2="32.893" y2="70.612" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$6">
+<contactref element="U$6" pad="P$1"/>
+<contactref element="R3" pad="1"/>
+<wire x1="-9.02" y1="12.192" x2="-2.032" y2="14.224" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$7">
+<contactref element="U$7" pad="P$1"/>
+<contactref element="J4" pad="1"/>
+<wire x1="43.688" y1="66.421" x2="-4.064" y2="-5.08" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$8">
+<contactref element="U$8" pad="P$1"/>
+<contactref element="R4" pad="1"/>
+<wire x1="-2.032" y1="-5.08" x2="-9.02" y2="-7.112" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$9">
+<contactref element="U$9" pad="P$1"/>
+<contactref element="J5" pad="1"/>
+<wire x1="-5.334" y1="-20.701" x2="6.096" y2="-38.862" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$10">
+<contactref element="U$10" pad="P$1"/>
+<contactref element="R5" pad="1"/>
+<wire x1="10.792" y1="-26.416" x2="8.128" y2="-38.862" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$11">
+<contactref element="U$11" pad="P$1"/>
+<contactref element="J6" pad="1"/>
+<wire x1="4.572" y1="-20.701" x2="10.16" y2="-38.862" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$12">
+<contactref element="U$12" pad="P$1"/>
+<contactref element="R6" pad="1"/>
+<wire x1="12.192" y1="-38.862" x2="-9.02" y2="-40.894" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$13">
+<contactref element="U$13" pad="P$1"/>
+<contactref element="J7" pad="1"/>
+<wire x1="14.224" y1="-38.862" x2="-5.334" y2="-35.179" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$14">
+<contactref element="U$14" pad="P$1"/>
+<contactref element="R7" pad="1"/>
+<wire x1="-3.94" y1="-40.894" x2="-9.144" y2="-43.434" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$15">
+<contactref element="U$15" pad="P$1"/>
+<contactref element="J8" pad="1"/>
+<wire x1="4.572" y1="-35.179" x2="-7.112" y2="-43.434" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$16">
+<contactref element="U$16" pad="P$1"/>
+<contactref element="R8" pad="1"/>
+<wire x1="1.14" y1="-40.894" x2="-5.08" y2="-43.434" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
@@ -704,11 +675,6 @@ design rules under a new name.</description>
 </board>
 </drawing>
 <compatibility>
-<note version="8.2" severity="warning">
-Since Version 8.2, EAGLE supports online libraries. The ids
-of those online libraries will not be understood (or retained)
-with this version.
-</note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library
 assets (packages, symbols, and devices). The URNs of those assets
