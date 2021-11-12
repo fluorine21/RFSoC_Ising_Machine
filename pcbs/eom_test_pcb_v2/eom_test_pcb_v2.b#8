@@ -742,7 +742,7 @@ design rules under a new name.</description>
 <via x="54.781809375" y="81.50515625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="53.523209375" y="81.468771875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="52.2937125" y="81.11221875" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="51.39159375" y="80.5082625" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="51.39765625" y="80.5688875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="50.387625" y="80.217196875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="52.533790625" y="79.62779375" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="51.951778125" y="78.674559375" extent="1-16" drill="0.35" diameter="0.254"/>
@@ -793,8 +793,8 @@ design rules under a new name.</description>
 <via x="69.4295625" y="75.291728125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="68.38971875" y="75.262253125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="67.32040625" y="75.2748875" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="62.46796875" y="74.13374375" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="63.61378125" y="74.1761875" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="62.447759375" y="74.159003125" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="63.628934375" y="74.262071875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="64.68078125" y="74.218628125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="65.84478125" y="74.224690625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="66.851153125" y="74.36414375" extent="1-16" drill="0.35" diameter="0.254"/>
@@ -823,12 +823,12 @@ design rules under a new name.</description>
 <via x="68.066215625" y="72.045578125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="67.069521875" y="71.7326875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="66.014625" y="71.6308125" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="64.97428125" y="71.54349375" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="64.97428125" y="71.57986875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="63.897559375" y="71.47800625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="62.893590625" y="71.41979375" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="61.860521875" y="71.37613125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="60.76925" y="71.4489" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="59.69689375" y="71.5755125" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="59.69689375" y="71.621821875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="58.68419375" y="71.889859375" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="57.723875" y="72.300259375" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="56.693715625" y="72.684465625" extent="1-16" drill="0.35" diameter="0.254"/>
@@ -1054,13 +1054,13 @@ design rules under a new name.</description>
 <via x="134.58494375" y="75.83013125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="135.606471875" y="75.826925" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="136.601625" y="75.827321875" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="137.593165625" y="75.8234" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="138.577703125" y="75.82105" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="139.58706875" y="75.82041875" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="140.5810875" y="75.823521875" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="141.564890625" y="75.824203125" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="137.593165625" y="75.843609375" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="138.582753125" y="75.83620625" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="139.58706875" y="75.830521875" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="140.5810875" y="75.833628125" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="141.564890625" y="75.83430625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="142.554615625" y="75.824575" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="143.573659375" y="75.8212625" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="143.56860625" y="75.846525" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="144.5623125" y="75.826078125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="139.532228125" y="77.0878" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="140.52088125" y="77.092615625" extent="1-16" drill="0.35" diameter="0.254"/>
@@ -1784,12 +1784,9 @@ design rules under a new name.</description>
 <signal name="N$11">
 <contactref element="U$16" pad="P$1"/>
 <contactref element="J4" pad="1"/>
-<wire x1="86.334359375" y1="75.130846875" x2="88.6308875" y2="75.20751875" width="0.1524" layer="1"/>
-<wire x1="89.530059375" y1="75.22205625" x2="89.4067625" y2="75.217496875" width="0.1524" layer="1"/>
-<wire x1="89.4067625" y1="75.217496875" x2="89.136871875" y2="75.20751875" width="0.1524" layer="1"/>
-<wire x1="88.6308875" y1="75.20751875" x2="89.136871875" y2="75.20751875" width="0.1524" layer="1" curve="0.410593"/>
-<wire x1="89.4067625" y1="75.217496875" x2="143.764" y2="75.217496875" width="0.1524" layer="1"/>
+<wire x1="143.764" y1="75.217496875" x2="89.4067625" y2="75.217496875" width="0.1524" layer="1"/>
 <wire x1="143.764" y1="75.217496875" x2="150.109190625" y2="68.711525" width="0.1524" layer="1" curve="-91.433576"/>
+<wire x1="89.4067625" y1="75.217496875" x2="86.334359375" y2="75.130846875" width="0.1524" layer="1" curve="3.230933"/>
 </signal>
 <signal name="N$12">
 <contactref element="U$15" pad="P$1"/>
@@ -1826,7 +1823,6 @@ design rules under a new name.</description>
 <signal name="N$16">
 <contactref element="U$13" pad="P$1"/>
 <contactref element="J1" pad="1"/>
-<wire x1="89.3666" y1="81.525525" x2="89.408" y2="81.525525" width="0.1524" layer="1"/>
 <wire x1="121.82390625" y1="81.525525" x2="89.408" y2="81.525525" width="0.1524" layer="1"/>
 <wire x1="121.82390625" y1="81.525525" x2="124.71415625" y2="85.471009375" width="0.1524" layer="1" curve="107.551006"/>
 <wire x1="89.408" y1="81.525525" x2="86.334471875" y2="80.543621875" width="0.1524" layer="1" curve="35.434351"/>
