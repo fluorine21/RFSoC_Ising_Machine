@@ -8,8 +8,8 @@
 </settings>
 <grid distance="1" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="0.000123031496" altunitdist="mil" altunit="mil"/>
 <layers>
-<layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
-<layer number="2" name="Route2" color="16" fill="1" visible="no" active="yes"/>
+<layer number="1" name="Top" color="4" fill="1" visible="no" active="yes"/>
+<layer number="2" name="Route2" color="16" fill="1" visible="yes" active="yes"/>
 <layer number="3" name="Route3" color="17" fill="1" visible="no" active="no"/>
 <layer number="4" name="Route4" color="18" fill="1" visible="no" active="no"/>
 <layer number="5" name="Route5" color="19" fill="1" visible="no" active="no"/>
@@ -22,8 +22,8 @@
 <layer number="12" name="Route12" color="20" fill="1" visible="no" active="no"/>
 <layer number="13" name="Route13" color="21" fill="1" visible="no" active="no"/>
 <layer number="14" name="Route14" color="22" fill="1" visible="no" active="no"/>
-<layer number="15" name="Route15" color="23" fill="1" visible="no" active="yes"/>
-<layer number="16" name="Bottom" color="1" fill="1" visible="no" active="yes"/>
+<layer number="15" name="Route15" color="23" fill="1" visible="yes" active="yes"/>
+<layer number="16" name="Bottom" color="1" fill="1" visible="yes" active="yes"/>
 <layer number="17" name="Pads" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
@@ -32,12 +32,12 @@
 <layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
-<layer number="25" name="tNames" color="7" fill="1" visible="no" active="yes"/>
-<layer number="26" name="bNames" color="7" fill="1" visible="no" active="yes"/>
+<layer number="25" name="tNames" color="7" fill="1" visible="yes" active="yes"/>
+<layer number="26" name="bNames" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="27" name="tValues" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="28" name="bValues" color="7" fill="1" visible="yes" active="yes"/>
-<layer number="29" name="tStop" color="7" fill="3" visible="no" active="yes"/>
-<layer number="30" name="bStop" color="7" fill="6" visible="no" active="yes"/>
+<layer number="29" name="tStop" color="7" fill="3" visible="yes" active="yes"/>
+<layer number="30" name="bStop" color="7" fill="6" visible="yes" active="yes"/>
 <layer number="31" name="tCream" color="7" fill="4" visible="yes" active="yes"/>
 <layer number="32" name="bCream" color="7" fill="5" visible="yes" active="yes"/>
 <layer number="33" name="tFinish" color="6" fill="3" visible="yes" active="yes"/>
@@ -192,10 +192,10 @@
 <wire x1="121.747440625" y1="65.426884375" x2="161.593559375" y2="65.434865625" width="0" layer="20"/>
 <wire x1="161.593559375" y1="65.434865625" x2="161.59556875" y2="88.832421875" width="0" layer="20"/>
 <wire x1="161.59556875" y1="88.832421875" x2="117.309434375" y2="88.8141125" width="0" layer="20"/>
-<wire x1="117.309434375" y1="88.8141125" x2="117.307209375" y2="88.56824375" width="0" layer="20"/>
-<wire x1="117.307209375" y1="88.56824375" x2="117.307784375" y2="88.558884375" width="0" layer="20"/>
-<wire x1="117.307784375" y1="88.558884375" x2="117.3069375" y2="88.552321875" width="0" layer="20"/>
-<wire x1="117.3069375" y1="88.552321875" x2="112.455028125" y2="83.696878125" width="0" layer="20"/>
+<wire x1="117.309434375" y1="88.8141125" x2="117.01333125" y2="88.316365625" width="0" layer="20"/>
+<wire x1="117.01333125" y1="88.316365625" x2="117.011028125" y2="88.312196875" width="0" layer="20"/>
+<wire x1="117.011028125" y1="88.312196875" x2="116.994121875" y2="88.2901" width="0" layer="20"/>
+<wire x1="116.994121875" y1="88.2901" x2="112.455028125" y2="83.696878125" width="0" layer="20"/>
 <wire x1="112.455028125" y1="83.696878125" x2="88.7251625" y2="83.704021875" width="0" layer="20"/>
 <wire x1="88.7251625" y1="83.704021875" x2="85.983403125" y2="82.183478125" width="0" layer="20"/>
 <wire x1="85.983403125" y1="82.183478125" x2="85.751675" y2="82.024096875" width="0" layer="20"/>
@@ -388,10 +388,10 @@ a wide range of applications. Your particular design
 may have different requirements, so please make the
 necessary adjustments and save your customized
 design rules under a new name.</description>
-<param name="layerSetup" value="(1*2+15*16)"/>
+<param name="layerSetup" value="(1*2+15+16)"/>
 <param name="mtCopper" value="0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm"/>
-<param name="mtIsolate" value="0.083mm 1.264mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.083mm"/>
-<param name="mdWireWire" value="6mil"/>
+<param name="mtIsolate" value="4mil 1.2454mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.083mm"/>
+<param name="mdWireWire" value="3mil"/>
 <param name="mdWirePad" value="6mil"/>
 <param name="mdWireVia" value="6mil"/>
 <param name="mdPadPad" value="6mil"/>
@@ -702,7 +702,7 @@ design rules under a new name.</description>
 <via x="61.1635625" y="76.43045625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="61.11118125" y="75.330234375" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="61.250865625" y="74.1339625" extent="1-16" drill="0.35" diameter="0.254"/>
-<via x="68.25079375" y="80.61798125" extent="1-16" drill="0.35" diameter="0.254"/>
+<via x="68.2788625" y="80.77588125" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="69.252746875" y="80.48745625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="67.396184375" y="81.2242875" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="66.407775" y="81.642275" extent="1-16" drill="0.35" diameter="0.254"/>
@@ -1497,19 +1497,19 @@ design rules under a new name.</description>
 <via x="95.775984375" y="72.006109375" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="96.7597875" y="72.006790625" extent="1-16" drill="0.35" diameter="0.254"/>
 <via x="97.7495125" y="72.0071625" extent="1-16" drill="0.35" diameter="0.254"/>
-<polygon width="0.1524" layer="1" spacing="0.1524" isolate="0.1524">
+<polygon width="0.1524" layer="1" spacing="0.1524" isolate="0.0762">
 <vertex x="76.2" y="86.36"/>
 <vertex x="30.48" y="86.36"/>
 <vertex x="30.48" y="66.04"/>
 <vertex x="76.2" y="66.04"/>
 </polygon>
-<polygon width="0.1524" layer="1" spacing="0.1524" isolate="0.1524">
+<polygon width="0.1524" layer="1" spacing="0.1524" isolate="0.0762">
 <vertex x="76.2" y="86.36"/>
 <vertex x="76.2" y="66.04"/>
 <vertex x="116.84" y="66.04"/>
 <vertex x="116.84" y="86.36"/>
 </polygon>
-<polygon width="0.1524" layer="1" spacing="0.1524" isolate="0.1524">
+<polygon width="0.1524" layer="1" spacing="0.1524" isolate="0.0762">
 <vertex x="116.84" y="66.04"/>
 <vertex x="116.84" y="60.96"/>
 <vertex x="162.56" y="60.96"/>
@@ -1691,9 +1691,8 @@ design rules under a new name.</description>
 <wire x1="58.046171875" y1="78.488553125" x2="61.468" y2="80.772" width="0.1524" layer="1"/>
 <wire x1="61.468" y1="80.772" x2="62.23" y2="81.026" width="0.1524" layer="1" curve="-30.561864"/>
 <wire x1="62.23" y1="81.026" x2="66.3825125" y2="80.95514375" width="0.1524" layer="1" curve="-8.263154"/>
-<wire x1="66.3825125" y1="80.95514375" x2="67.494859375" y2="80.2813" width="0.1524" layer="1" curve="-52.195538"/>
-<wire x1="67.494859375" y1="80.2813" x2="68.094765625" y2="79.90238125" width="0.1524" layer="1" curve="50.053849"/>
-<wire x1="68.094765625" y1="79.90238125" x2="69.22675625" y2="79.78803125" width="0.1524" layer="1" curve="2.965092"/>
+<wire x1="66.3825125" y1="80.95514375" x2="67.0814" y2="80.645" width="0.1524" layer="1" curve="-37.641965"/>
+<wire x1="67.0814" y1="80.645" x2="69.22675625" y2="79.78803125" width="0.1524" layer="1" curve="41.953411"/>
 </signal>
 <signal name="N$4">
 <contactref element="U$5" pad="P$1"/>
