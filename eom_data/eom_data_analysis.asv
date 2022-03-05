@@ -1,7 +1,7 @@
 clear; close all; clc;
 
 %list of directories
-dir_list = ["long_1"];
+dir_list = ["2022_2_27/group5_1", "2022_2_27/group4_3", "2022_1_27/long_1"];
 
 res_list = {};
 
@@ -41,7 +41,7 @@ end
 
 b = sortrows([freq_l',rat_l]);
 
-res_list{1,i} = b;
+res_list{1,k} = b;
 
 end
 
@@ -49,15 +49,21 @@ figure();
 hold on
 
 for k = 1:max(size(res_list))
-    b = res_list{1,i};
-    plot(b(:,1), b(:,2), 'linewidth', 2);
-    plot(b(:,1), b(:,3), 'linewidth', 2);
+    b = res_list{1,k};
+    %plot(b(:,1), b(:,2), 'linewidth', 2);
+    err = b(:,2)*0.3;
+    errorbar(b(:,1), b(:,2), err, 'linewidth', 2);
+    plot(b(:,1), b(:,3), '--', 'linewidth', 2);
 end
 title("Transfer measurement");
 xlabel("Frequency (Hz)");
 ylabel("Extinction Ratio (dB)");
 set(gca, 'XScale', 'log')
-legend("long 1", "long 1 fit");
+legend("long 1 (DC)", "long 1 fit (DC)", "short rf", "short rf fit", "long rf" ,"long rf fit");
+
+t2 = readtable();
+figure();
+plot(t2{:,1}, t2{:,2}
 
 
 function [mi, ma, gain_fit] = get_min_max(t, freq)
@@ -97,12 +103,12 @@ p_o = peak_list;
 
 sr = abs(t{1,1}-t{2,1});
 %resample before lowpass
-t_vec = t{1,1}:sr:t{max(size(t)),1};
+t_vec = t{1,1}:4e-9:t{max(size(t)),1};
 peak_resample = interp1(peak_list(:,1), peak_list(:,2), t_vec);
-
+peak_resample(isnan(peak_resample)) = 0;
 
 %Lowpass filter to remove noise
-peak_list(:,2) = lowpass(peak_list(:,2), freq*5, 1/sr);
+peak_resample = lowpass(peak_resample, freq*5, 1/sr);
 
 %Fit to the function A*cos(B*sin(x) + C)
 fo = fitoptions('Method','NonlinearLeastSquares',...
@@ -111,24 +117,29 @@ fo = fitoptions('Method','NonlinearLeastSquares',...
                'StartPoint',[ma, 1, 2*pi*freq, pi,pi, mi]);
 ft = fittype('(a*sin(b*cos((c*x)+d)+e))+f','options',fo);
 
-[curve,gof] = fit(peak_list(:,1),peak_list(:,2),ft);
+[curve,gof] = fit(t_vec',peak_resample',ft);
 
 f_fit = @(a,b,c,d,e,f,dt) (a.*sin(b.*cos(c*dt + d)+e))+f;
 f_fit_p = @(dt) f_fit(curve.a, curve.b, curve.c, curve.d, curve.e, curve.f, dt);
 figure();
 hold on
 plot(t{:,1}, t{:,2});
-plot(peak_list(:,1), peak_list(:,2), "r*");
 plot(p_o(:,1), p_o(:,2), "g*");
+plot(t_vec, peak_resample, "r*");
 fplot(f_fit_p, [peak_list(1,1), peak_list(max(size(peak_list)),1)], 'linewidth', 2);
-title(sprintf("F = %ikHz, r2 = %f, a = %f, b = %f, c = %fHz, d = %f, e = %f, f = %f", freq/1000, gof.rsquare, curve.a, curve.b, curve.c/(2*pi), curve.d, curve.e, curve.f));
+title(sprintf("F = %ikHz, r2 = %f, F fit = %fkHz", freq/1000, gof.rsquare, curve.c/(2*pi*1000)));
 xlabel("Time (s)");
 ylabel("Detector Voltage (V)");
-legend("Original waveform", "Resampled peaks", "original peaks", "function fit");
-h = 1+curve.a-curve.f;
-l = 1-curve.a-curve.f;
+legend("Original waveform","original peaks", "Resampled peaks",  "function fit");
+
+
+h = max(f_fit_p(t_vec));
+l = min(f_fit_p(t_vec));
 gain_fit = log10(h/l)*10;
 end
+
+
+
 
 %peak list is [time, value]
 function p_l = get_peaks(peak_in, thresh)

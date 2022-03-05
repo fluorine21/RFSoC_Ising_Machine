@@ -1,7 +1,23 @@
 clear; close all; clc;
 
+
+t2 = readtable("2022_2_27/noMHz.csv");
+figure();
+plot(t2{:,1}, t2{:,2});
+title("No Modulation slow detector")
+xlabel("Time (s)");
+ylabel("Detector Voltage (V)");
+ylim([0, max(t2{:,2})*1.2]);
+
+t2 = readtable("2022_2_27/noMHz_2.csv");
+figure();
+plot(t2{:,1}, t2{:,2});
+title("No Modulation fast detector")
+xlabel("Time (s)");
+ylabel("Detector Voltage (V)");
+
 %list of directories
-dir_list = ["long_1"];
+dir_list = ["2022_2_27/group5_1", "2022_2_27/group4_3", "2022_1_27/long_1"];
 
 res_list = {};
 
@@ -41,7 +57,7 @@ end
 
 b = sortrows([freq_l',rat_l]);
 
-res_list{1,i} = b;
+res_list{1,k} = b;
 
 end
 
@@ -49,15 +65,20 @@ figure();
 hold on
 
 for k = 1:max(size(res_list))
-    b = res_list{1,i};
-    plot(b(:,1), b(:,2), 'linewidth', 2);
-    plot(b(:,1), b(:,3), 'linewidth', 2);
+    b = res_list{1,k};
+    %plot(b(:,1), b(:,2), 'linewidth', 2);
+    err = b(:,2)*0.3;
+    errorbar(b(:,1), b(:,2), err, 'linewidth', 2);
+    plot(b(:,1), b(:,3), '--', 'linewidth', 2);
 end
 title("Transfer measurement");
 xlabel("Frequency (Hz)");
 ylabel("Extinction Ratio (dB)");
 set(gca, 'XScale', 'log')
-legend("long 1", "long 1 fit");
+legend("long 1 (DC)", "long 1 fit (DC)", "short rf", "short rf fit", "long rf" ,"long rf fit");
+
+
+
 
 
 function [mi, ma, gain_fit] = get_min_max(t, freq)
@@ -121,7 +142,7 @@ plot(t{:,1}, t{:,2});
 plot(p_o(:,1), p_o(:,2), "g*");
 plot(t_vec, peak_resample, "r*");
 fplot(f_fit_p, [peak_list(1,1), peak_list(max(size(peak_list)),1)], 'linewidth', 2);
-title(sprintf("F = %ikHz, r2 = %f, a = %f, b = %f, c = %fkHz, d = %f, e = %f, f = %f", freq/1000, gof.rsquare, curve.a, curve.b, curve.c/(2*pi*1000), curve.d, curve.e, curve.f));
+title(sprintf("F = %ikHz, r2 = %f, F fit = %fkHz", freq/1000, gof.rsquare, curve.c/(2*pi*1000)));
 xlabel("Time (s)");
 ylabel("Detector Voltage (V)");
 legend("Original waveform","original peaks", "Resampled peaks",  "function fit");
