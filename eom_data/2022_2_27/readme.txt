@@ -1,1 +1,1 @@
-2022_2_27_rf_eom_bandwidth_meas_fs_source
+2022_2_27_rf_eom_bandwidth_meas_fs_source This is from RF chip #1 (the first one I measured)

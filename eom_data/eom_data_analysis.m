@@ -17,7 +17,7 @@ xlabel("Time (s)");
 ylabel("Detector Voltage (V)");
 
 %list of directories
-dir_list = ["2022_2_27/group5_1", "2022_2_27/group4_3", "2022_1_27/long_1"];
+dir_list = ["2022_2_27/group5_1", "2022_2_27/group4_3", "2022_1_27/long_1", "2022_3_5_group4_1"];
 
 res_list = {};
 
@@ -75,7 +75,7 @@ title("Transfer measurement");
 xlabel("Frequency (Hz)");
 ylabel("Extinction Ratio (dB)");
 set(gca, 'XScale', 'log')
-legend("long 1 (DC)", "long 1 fit (DC)", "short rf", "short rf fit", "long rf" ,"long rf fit");
+legend("long 1 (DC)", "long 1 fit (DC)", "short rf", "short rf fit", "long rf" ,"long rf fit", "group4 1", "group4 1 fit");
 
 
 
@@ -136,16 +136,16 @@ ft = fittype('(a*sin(b*cos((c*x)+d)+e))+f','options',fo);
 
 f_fit = @(a,b,c,d,e,f,dt) (a.*sin(b.*cos(c*dt + d)+e))+f;
 f_fit_p = @(dt) f_fit(curve.a, curve.b, curve.c, curve.d, curve.e, curve.f, dt);
-figure();
-hold on
-plot(t{:,1}, t{:,2});
-plot(p_o(:,1), p_o(:,2), "g*");
-plot(t_vec, peak_resample, "r*");
-fplot(f_fit_p, [peak_list(1,1), peak_list(max(size(peak_list)),1)], 'linewidth', 2);
-title(sprintf("F = %ikHz, r2 = %f, F fit = %fkHz", freq/1000, gof.rsquare, curve.c/(2*pi*1000)));
-xlabel("Time (s)");
-ylabel("Detector Voltage (V)");
-legend("Original waveform","original peaks", "Resampled peaks",  "function fit");
+% figure();
+% hold on
+% plot(t{:,1}, t{:,2});
+% plot(p_o(:,1), p_o(:,2), "g*");
+% plot(t_vec, peak_resample, "r*");
+% fplot(f_fit_p, [peak_list(1,1), peak_list(max(size(peak_list)),1)], 'linewidth', 2);
+% title(sprintf("F = %ikHz, r2 = %f, F fit = %fkHz", freq/1000, gof.rsquare, curve.c/(2*pi*1000)));
+% xlabel("Time (s)");
+% ylabel("Detector Voltage (V)");
+% legend("Original waveform","original peaks", "Resampled peaks",  "function fit");
 
 
 h = max(f_fit_p(t_vec));
