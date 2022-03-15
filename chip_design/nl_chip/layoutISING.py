@@ -861,11 +861,11 @@ def eom23(wg_width, off_chip, W, L_tp, W_tp, L_mmi, W_mmi,Y_mmi,
         length, radius, x_pos, y_pos, middle_e_width, e_e_gap):
     
     if e_e_gap == 9:
-        angle = 12.5196846104787
+        angle1 = 12.5196846104787
     elif e_e_gap == 7:
-        angle = 11.83919343835311
+        angle1 = 11.83919343835311
     elif e_e_gap == 11:
-        angle = 13.165741242693    
+        angle1 = 13.165741242693    
     
     
     
@@ -873,7 +873,7 @@ def eom23(wg_width, off_chip, W, L_tp, W_tp, L_mmi, W_mmi,Y_mmi,
     mmi_length = L_tp*2+L_mmi
     side_electrode_width = middle_e_width*2
     
-    eulerX = mod_euler(radius = radius, angle = angle)[1][0]
+    eulerX = mod_euler(radius = radius, angle = angle1)[1][0]
     racetrack_length = eulerX*4 + length
     #mzi_length = racetrack_length + mmi_length*2
     side =x_pos
