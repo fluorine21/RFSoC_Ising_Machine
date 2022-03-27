@@ -1,0 +1,35 @@
+
+
+
+locking alg:
+
+idle: 
+
+	calibration test result witin tolerance of previously known result?
+		do nothing
+	not in tolerance:
+		begin search
+
+search:
+	i = 1
+	while i < mem_length
+		i = i * 2
+		np = i + 1
+		collect (n-1)/2 p data points for na averages on either side of previously know result
+		maximum found?
+			above some threshold? (i.e not a side lobe?)
+				update previously known result
+				set mul correction factor to origional result used to generate the cal table divided by updated previous result
+				return
+			continue
+		else:
+			continue
+	fail!
+
+
+
+
+
+
+
+	

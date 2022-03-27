@@ -298,7 +298,7 @@ endfunction
 
 /////////////////////////////////////////////////////////////////////////////
 //The following set of functions are used to generate the LUT and set-point// 
-//information fromthe chip model implemented in the two functions above//////
+//information from the chip model implemented in the two functions above/////
 /////////////////////////////////////////////////////////////////////////////
 
 
