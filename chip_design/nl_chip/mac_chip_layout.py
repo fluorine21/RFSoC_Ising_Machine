@@ -38,16 +38,18 @@ nm = 10 ** (-3)
 # Global Chip Parameters
 chip_width = 23*mm
 chip_height = 13*mm
-T = li.chip(size=(chip_width,chip_height), name='nl_0', text_size=150, keepout=1.5*mm)
+ko=1.5*mm
+T = li.chip(size=(chip_width,chip_height), name='MAC CHIP REV #0', text_size=150, keepout=ko)
 
 X0 = 0
 Y0 = 2300
 ΔX = chip_width
 ΔY = 1048
+#ΔY = 1000
 
 height = ΔY
-for k in range(9):
-    T << pg.rectangle( size=(chip_width, height), layer=98 ).move( [0,Y0+k*ΔY-height/2] )
+#for k in range(9):
+    #T << pg.rectangle( size=(chip_width, height), layer=98 ).move( [0,Y0+k*ΔY-height/2] )
 
 qp(T)
 
@@ -57,7 +59,7 @@ qp(T)
 wg_width = 1.8*um
 wg_width_oc = 2.3*um #outside cavity
 wg_width_ic = 2.5*um #inside cavity
-wg_width_m2m = 2.2*um #main to memory wg  NEED TO ADJUST THE RF EOM ANGLES FOR SPECIFIC CASE
+wg_width_m2m = 2.3*um #main to memory wg  NEED TO ADJUST THE RF EOM ANGLES FOR SPECIFIC CASE
 wg_width_nif = 1.9*um
 V_Groove_Spacing = 127*um;
 xmargin =0.5*mm
@@ -713,6 +715,7 @@ D << (pg.rectangle( size=(100*um, 28*um), layer=70 ).rotate(0)).move( [lg_x, lg_
 D << (pg.rectangle( size=(88*um, 28*um), layer=70 ).rotate(90)).move( [lg_x, lg_y] )
 D << (pg.rectangle( size=(100*um, 28*um), layer=70 ).rotate(0)).move( [lg_x, lg_y+60*um] )
 
+
 ##Busses for routing modulators to edge of chip##
 #Coordinate reference for all connections. 
 x_p = 21.0*mm-449.153*um
@@ -720,7 +723,7 @@ y_p = 0
 
 #electrode size and spacing
 x_s = 100*um
-y_s = 1*mm
+y_s = ΔY
 x_space = 50*um
 
 #First one is ground
@@ -728,4 +731,22 @@ for i in range(0, 8):
     D << pg.rectangle( size=(x_s, y_s), layer=70 ).move( [x_p + (i*(x_s+x_space)), y_p] )
 
 D.write_gds('mac_0.gds')
+
+##make the final layout with all of the device copies and whatnot##
+
+for i in range(0,9):
+    D_cpy = pg.copy(D)
+    T << D_cpy.move( [0,Y0+i*ΔY-height/2] )
+    
+    
+#Extend electrodes to top and bottom of chip
+y_s = y_s + 728
+ebond_yoff = 11208
+for i in range(0, 8):
+    T << pg.rectangle( size=(x_s, y_s), layer=70 ).move( [x_p + (i*(x_s+x_space)), y_p] )
+    T << pg.rectangle( size=(x_s, y_s), layer=70 ).move( [x_p + (i*(x_s+x_space)), y_p+ebond_yoff] )
+    
+
+
+T.write_gds('mac_0_final.gds')
 

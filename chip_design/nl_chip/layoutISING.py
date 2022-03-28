@@ -92,9 +92,9 @@ def chip(size = (13000, 18000), keepout=2000, name='chip01', text_size=250,
     M = global_markers()
     offset = 110
     CHIP.add_ref(M).move([k-offset,k-offset])
-    CHIP.add_ref(M).move([DX-k+offset,k-offset])
+    CHIP.add_ref(M).move([DX-k+offset-3000,k-offset])
     CHIP.add_ref(M).move([k-offset,DY-k+offset])
-    CHIP.add_ref(M).move([DX-k+offset,DY-k+offset])
+    CHIP.add_ref(M).move([DX-k+offset-3000,DY-k+offset])
     
     return CHIP
   

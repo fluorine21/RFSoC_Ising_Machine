@@ -1,7 +1,7 @@
 import ising_config::*;
 
 
-module db_tl();
+module dl_tb();
 
 
 initial begin
