@@ -1,0 +1,19 @@
+* D:\repos\RFSoC_Ising_Machine\pcbs\eom_driver_v1\ltspice\eom_driver_sim.asc
+V1 Vin 0 SINE(1.25 1.25 1kHz 0 0 0 100)
+V2 0 -12 12
+V3 +12 0 12
+V4 0 -170 170
+V5 +170 0 170
+XU1 Vin N003 +12 -12 N004 level.2 Avol=1Meg GBW=10Meg Slew=10Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+XU2 N004 N005 +12 -12 N005 level.2 Avol=1Meg GBW=10Meg Slew=10Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+XU3 0 N001 +170 -170 Vout level.2 Avol=1Meg GBW=10Meg Slew=10Meg ilimit=25m rail=0 Vos=0 phimargin=45 en=0 enk=0 in=0 ink=0 Rin=500Meg
+V6 N002 0 2.5
+R1 N003 N002 10k
+R2 N004 N003 10k
+R3 N001 N005 1k
+R4 Vout N001 50k
+R5 Vout 0 1000k
+.tran 0 10ms 0
+.lib UniversalOpamps2.sub
+.backanno
+.end
