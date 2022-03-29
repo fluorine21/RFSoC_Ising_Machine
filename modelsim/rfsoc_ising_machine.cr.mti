@@ -166,6 +166,15 @@ Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Ap
 Top level modules:
 	experiment_fsm
 
+} {} {}} D:/repos/RFSoC_Ising_Machine/dynamic_locking/dl_tb.sv {1 {vlog -work work -sv -stats=none D:/repos/RFSoC_Ising_Machine/dynamic_locking/dl_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
+-- Compiling package dl_tb_sv_unit
+-- Importing package ising_config
+-- Compiling module db_tl
+
+Top level modules:
+	db_tl
+
 } {} {}} D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v {1 {vlog -work work -stats=none D:/repos/RFSoC_Ising_Machine/verilog_source/rtl/experiment_top_level_wrapper.v
 Model Technology ModelSim - Intel FPGA Edition vlog 2020.1_3 Compiler 2020.04 Apr 28 2020
 -- Compiling module experiment_top_level_wrapper
