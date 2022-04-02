@@ -1,102 +1,27 @@
-# file mkdir dl
+# Compile of dl_tb.sv failed with 3 errors.
+# Compile of dl_tb.sv failed with 3 errors.
+# Compile of dl_tb.sv failed with 10 errors.
+# Compile of dl_tb.sv failed with 9 errors.
+# Compile of dl_tb.sv failed with 3 errors.
 # Compile of dl_tb.sv failed with 2 errors.
-# Compile of dl_tb.sv failed with 14 errors.
-# Compile of dl_tb.sv failed with 15 errors.
-# Compile of dl_tb.sv failed with 15 errors.
-# Compile of dl_tb.sv failed with 12 errors.
-# Compile of dl_tb.sv failed with 11 errors.
-# Compile of dl_tb.sv failed with 6 errors.
-# Compile of dl_tb.sv failed with 6 errors.
-# Compile of dl_tb.sv failed with 5 errors.
-# Compile of adc_driver.sv was successful.
-# Compile of axis_fifos.sv was successful.
-# Compile of config_reg.sv was successful.
-# Compile of dac_driver.sv was successful.
-# Compile of fifo_wrappers.sv was successful.
-# Compile of ising_config.sv was successful.
-# Compile of output_scaler.sv was successful.
-# Compile of shifter.sv was successful.
-# Compile of adc_driver_tb.sv was successful.
-# Compile of dac_driver_tb.sv was successful.
-# Compile of delay_cal.sv was successful.
-# Compile of lookup_table.sv was successful.
-# Compile of experiment_fsm.sv was successful.
-# Compile of experiment_fsm_tb.sv was successful.
-# Compile of experiment_top_level_tb.sv was successful.
-# Compile of axis_selector.sv was successful.
-# Compile of counter_fifo.sv was successful.
-# Compile of gpio_reader.sv was successful.
-# Compile of gpio_axis_writer.sv was successful.
-# Compile of experiment_top_level_wrapper.v was successful.
-# Compile of experiment_top_level.sv was successful.
-# Compile of chip_cal_alg.sv was successful.
-# Compile of full_sim_tb.sv was successful.
-# Compile of waveform_assembler.sv was successful.
-# Compile of sample_selector.sv was successful.
 # Compile of dl_tb.sv failed with 2 errors.
-# 26 compiles, 3 failed with 2 errors.
-# Compile of dl_tb.sv was successful with warnings.
-vsim -gui work.db_tl
-# vsim -gui work.db_tl 
-# Start time: 18:19:16 on Mar 26,2022
-# Loading sv_std.std
-# Loading work.ising_config
-# Loading work.dl_tb_sv_unit
-# Loading work.db_tl
-# ** Error: (vsim-3043) Unresolved reference to 'cmp_abs'.
-#    Time: 0 ps  Iteration: 0  Instance: /db_tl File: D:/repos/RFSoC_Ising_Machine/dynamic_locking/dl_tb.sv Line: 60
-# ** Error: (vsim-3043) Unresolved reference to 'cmp_abs'.
-#    Time: 0 ps  Iteration: 0  Instance: /db_tl File: D:/repos/RFSoC_Ising_Machine/dynamic_locking/dl_tb.sv Line: 60
-# ** Error (suppressible): (vsim-13215) Cannot assign an unpacked type 'struct ising_config::cmp_num' to a packed type 'reg'.
-#    Time: 0 ps  Iteration: 0  Instance: /db_tl File: D:/repos/RFSoC_Ising_Machine/dynamic_locking/dl_tb.sv Line: 60
-# Error loading design
-# End time: 18:19:17 on Mar 26,2022, Elapsed time: 0:00:01
-# Errors: 3, Warnings: 16
-# Compile of dl_tb.sv was successful with warnings.
-vsim -gui work.db_tl
-# vsim -gui work.db_tl 
-# Start time: 18:19:49 on Mar 26,2022
-# Loading sv_std.std
-# Loading work.ising_config
-# Loading work.dl_tb_sv_unit
-# Loading work.db_tl
-# Compile of dl_tb.sv was successful.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.dl_tb_sv_unit
-# Loading work.db_tl
-run -all
-# MZI test finished!
-# Compile of dl_tb.sv was successful.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.dl_tb_sv_unit
-# Loading work.db_tl
-run -all
-# GetModuleFileName: The specified module could not be found.
-# 
-# 
-# MZI test finished!
-# Compile of dl_tb.sv was successful.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.dl_tb_sv_unit
-# Loading work.db_tl
-run -all
-# GetModuleFileName: The specified module could not be found.
-# 
-# 
-# MZI test finished!
 # Compile of dl_tb.sv failed with 1 errors.
 # Compile of dl_tb.sv was successful.
-restart -f
-# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
-# Loading work.dl_tb_sv_unit
-# Loading work.db_tl
-run -all
-# GetModuleFileName: The specified module could not be found.
-# 
-# 
-# MZI test finished!
-# End time: 16:59:07 on Mar 27,2022, Elapsed time: 22:39:18
-# Errors: 0, Warnings: 1
+# Compile of dl.sv failed with 23 errors.
+# Compile of dl.sv failed with 18 errors.
+# Compile of dl.sv failed with 9 errors.
+# Compile of dl.sv failed with 9 errors.
+# Compile of dl.sv failed with 25 errors.
+# Compile of dl.sv failed with 22 errors.
+# Compile of dl.sv failed with 20 errors.
+# Compile of dl.sv failed with 17 errors.
+# Compile of dl.sv failed with 12 errors.
+# Compile of dl.sv failed with 10 errors.
+# Compile of dl.sv failed with 8 errors.
+# Compile of dl.sv failed with 5 errors.
+# Compile of dl.sv failed with 4 errors.
+# Compile of dl.sv failed with 4 errors.
+# Compile of dl.sv failed with 3 errors.
+# Compile of dl.sv failed with 2 errors.
+# Compile of dl.sv failed with 4 errors.
+# Compile of dl.sv was successful.

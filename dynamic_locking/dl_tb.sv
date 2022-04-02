@@ -4,14 +4,17 @@ import ising_config::*;
 module dl_tb();
 
 reg clk, rst;
-reg [31:0] gpio_in;
+reg w_clk;
+reg [15:0] gpio_addr;
+reg [7:0] gpio_data;
+wire [31:0] gpio_in = {8'b0,w_clk, gpio_data, gpio_addr};
 
-reg [255:0] adc_data_in;
+reg [127:0] adc_data_in;
 
 reg lock_sig_active, trig_lock;
 
 wire lock_done;
-wire [15:0] setpt_out_ext//Setpoint
+wire [15:0] setpt_out_ext;//Setpoint
 
 
 //scale factor
@@ -20,8 +23,7 @@ real mzi_to_dl_scale_fac = 100;
 reg [15:0] mzi_res;
 real setpt_cast;
 
-dl
-#(parameter base_addr = 0) dut
+dl #(0) dut
 (
 	clk, rst, 
 	gpio_in,
@@ -45,7 +47,9 @@ initial begin
 	
 	clk <= 0;
 	rst <= 1;
-	gpio_in <= 0;
+	gpio_addr <= 0;
+	gpio_data <= 0;
+	w_clk <= 0;
 	adc_data_in <= 0;
 	lock_sig_active <= 0;
 	trig_lock <= 0;
@@ -58,18 +62,19 @@ initial begin
 	
 	
 	//Write the max_pos_tol
-	gpio_write(0,0);
+	gpio_write_word(0,0, 2);
 	//write setpt_in;
-	gpio_write(1, 1000);
+	gpio_write_word(1, 1000, 2);
 	//write the initial expected value exp_val_in
-	gpio_write(2, 500);
+	gpio_write_word(2, 500, 2);
 	//write the tolerance
-	gpio_write(3, 10);
+	gpio_write_word(3, 10, 2);
 	//write the number of averages to take 
-	gpio_write(4, 2);//this is 4 averages
-	gpio_write(5, 2);//lock signal pos
+	gpio_write_word(4, 2, 2);//this is 4 averages
+	gpio_write_word(5, 2, 2);//lock signal pos
+	gpio_write_word(6, 1, 2);//Setpt step
 	
-	repeat(10) clk_cycle();
+	repeat(10) clk_cycle();//Delay before locking cycle start
 	trig_lock <= 1;
 	lock_sig_active <= 1;
 	
@@ -83,12 +88,13 @@ end
 
 task step_dl_sim();
 begin
-
+	real pn;
 	//Evaluate the current MZI result and feed it into the buffer
 	setpt_cast = real'(setpt_out_ext*dl_to_mzi_scale_fac);
-	mzi_res = 16'(run_mzi_sim(setpt_cast, get_noise())*mzi_to_dl_scale_fac);
+	get_noise(pn);
+	mzi_res = int'(run_mzi_sim(setpt_cast, pn)*mzi_to_dl_scale_fac)&16'hffff;
 	//Update the ADC register going into dl
-	adc_data_in <= { {1{16'h0}}, 
+	adc_data_in <= { {1{16'h0}}, mzi_res, {6{16'h0}}};
 	// cycle the clock
 	clk_cycle();
 
@@ -114,12 +120,12 @@ function void test_mzi_sim();
 	//$display("Running MZI test");
 	automatic int outfile = $fopen("mzi_test_results.csv", "w");
 	real p, res, p_max;
-	p_max = 20*2*pi;
+	p_max = 65535;
 	$fwrite(outfile, "p, res\n");
 	
-	for(p = -1*p_max; p < p_max; p = p + 0.01) begin
-		res = run_mzi_sim(p, 0);
-		$fwrite(outfile, "%f, %f\n", p, res);
+	for(p = -1*p_max; p < p_max; p = p + 1) begin
+		res = run_mzi_sim(p*dl_to_mzi_scale_fac, 0);
+		$fwrite(outfile, "%f, %f\n", p, res*mzi_to_dl_scale_fac);
 	end
 	$display("MZI test finished!");
 	$fclose(outfile);
@@ -176,7 +182,6 @@ task gpio_write;
 input [15:0] addr;
 input [7:0] data;
 begin
-	
 	clk_cycle();
 	gpio_addr <= addr;
 	gpio_data <= data;
@@ -185,8 +190,21 @@ begin
 	repeat(2) clk_cycle();
 	w_clk <= 0;
 	repeat(5) clk_cycle();
-	
+end
+endtask
+
+
+task gpio_write_word;
+input [15:0] addr;
+input int data;
+input int num_bytes;
+begin
+	int k;
+	for(k = 0; k < num_bytes; k = k + 1) begin
+		gpio_write(addr, (data >> (8*(num_bytes-k-1)))&8'hff);
+	end
 end
 endtask
 
 endmodule
+
