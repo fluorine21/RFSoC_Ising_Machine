@@ -1,24 +1,48 @@
 import ising_config::*;
 
 
+//Assuming set point is positive value from 0 to 0xffff, will remap to 0x8000 to 0x7FFF by adding 0x8000 before output
+
 module dl
+#(parameter base_addr = 0)
 (
 	input wire clk, rst, 
 	input wire [31:0] gpio_in,
 	
-	
-	input wire [255:0] adc_data_in
-	
-	//initial set point and expected value and tolerance, and number of averages to collect for each locking pt, and number of cycles to wait before locking
-	//And how much to inc/dec the locking setpoint by
-	input wire [15:0] setpt_in, exp_val_in, tol_in, num_avgs, wait_cnt_in, setpt_step,
+	//Incomming ADC data
+	input wire [255:0] adc_data_in,
 	
 	input wire lock_sig_active,//if 1, a calibration pulse is currently being read back and must be locked to
-	input wire [2:0] lock_sig_pos,//Tells us which sample is the locking sample
 	input wire trig_lock,//if 1, we're actively running the fsm and trying to lock
+	output wire lock_done,//If 1, this module is not in the process of locking
 	
-	output wire [15:0] setpt_out//Setpoint output of the lockbox
+	output wire [15:0] setpt_out_ext//Setpoint output of the lockbox
 );
+
+
+
+//GPIO registers for setting internal values
+reg [15:0] max_pos_tol;//The maximum must be this far away from the edge of the sweep to be accepted as valid
+config_reg #(16,1,16,base_addr + 0) adc_run_reg_inst (clk, rst, gpio_in, max_pos_tol);
+
+reg [15:0] setpt_in;//Tells the module where to start looking after being reset by trig_lock going low
+config_reg #(16,1,16,base_addr + 1) adc_run_reg_inst (clk, rst, gpio_in, setpt_in);
+
+reg [15:0] exp_val_in;//Tells the module what the expected initial max should be so it knows when it falls out of lock
+config_reg #(16,1,16,base_addr + 2) adc_run_reg_inst (clk, rst, gpio_in, exp_val_in);
+
+reg [15:0] tol_in;//Tells the module what the expected initial max should be so it knows when it falls out of lock
+config_reg #(16,1,16,base_addr + 3) adc_run_reg_inst (clk, rst, gpio_in, tol_in);
+
+reg [15:0] num_avgs;//Tells the module how many averages to take when measuring each point
+config_reg #(16,1,16,base_addr + 4) adc_run_reg_inst (clk, rst, gpio_in, num_avgs);
+
+reg [15:0] lock_sig_pos;//Tells us which sample is the locking sample
+config_reg #(16,1,16,base_addr + 5) adc_run_reg_inst (clk, rst, gpio_in, lock_sig_pos);
+
+//Internal setpt register and translation to signed value
+reg [15:0] setpt_out;
+assign setpt_out_ext = setpt_out + 16'h8000;
 
 
 //Current locking signal value extraced from the adc sample list
@@ -27,40 +51,115 @@ wire[15:0] lock_sig_val = adc_data_in[(lock_sig_pos*8)+:16];
 reg [15:0] wait_cnt;//Wait counter before doing the locking cycle
 
 initial begin
-
-
+	reset_reg();
 end
 
 task reset_reg();
 begin
 	state <= state_idle;
 	setpt_out <= 0;
+	setpt_max <= 0;
+	exp_val_max <= 0;
+	exp_val_int <= 0;
+	setpt_h <= 0;
+	setpt_l <= 0;
+	avg_reg <= 0;
+	sum_cnt <= 0;
+	num_pts <= 0;
+	num_pts_cnt <= 0;
 end
 endtask
 
-//Locking algorithm local variables
-reg [15:0] setpt_max, exp_val_max, exp_val_int;
+//Locking algorithm local variables, _f and _l are the high and low setpts used
+reg [15:0] setpt_max, exp_val_max, exp_val_int, setpt_h, setpt_l;
 reg [31:0] avg_reg;
-reg [15:0] sum_cnt;//Second counter for the calculate and compare portion
+reg [15:0] sum_cnt;//Second counter for the calculate and compare portion in collect_average()
+//This counter is only for what to output, first is how many averages to collect (2**) second counter is for the total we'll collect to figure out when to end
+reg [15:0] num_pts, num_pts_cnt;
+localparam num_pts_max = 512;//Maxumum number of points to count on each side of previous lock
 
-reg [15:0] num_pts, num_pts_cnt;//This counter is only for what to output
-localparam num_pts_max = 512
+
+task collect_average();
+begin
+	//Collects a single average measurement
+	//When finished, compares it to previous average and keeps it if it is larger
+	//Average calculation and max update logic plus 
+	if(sum_cnt >= num_avgs) begin//If we're done with this average
+		sum_cnt <= 1;//Reser the sum counter
+		//Update avg reg to new value this cycle
+		avg_reg <= lock_sig_val;
+		//if this is a new max
+		if(avg_reg[num_avgs+:16] > setpt_max)begin
+			exp_val_max <= avg_reg[num_avgs+:16];
+			setpt_max <= setpt_out - (setpt_step*(wait_cnt_in>>num_avgs));
+		end
+			
+	end
+	else begin//Continue averaging
+		sum_cnt <= sum_cnt + 1;
+		avg_reg <= avg_reg + lock_sig_val;
+	end
+
+end
+endtask
+
+
+task update_setpt();
+begin
+	//Updates the setpt to the next search value
+	if(num_avgs_cnt >= num_avgs) begin
+		num_avgs_cnt <= 1;
+		num_pts_cnt <= num_pts_cnt + 1;
+		setpt <= setpt + setpt_step;
+	end
+	else begin
+		num_avgs_cnt <= num_avgs_cnt + 1;
+	end
+end
+endtask
+
+
+//FSM for waiting wait_cnt_in before sending a pulse to lock_sig_active
+reg [15:0] lock_sig_wait;
+reg lock_sig_state
+always @ (posedge clk or negedge rst) begin
+	if(!rst) begin
+		lock_sig_state <= 0;
+		lock_sig_active_int <= 0;
+	end
+	else begin
+		if(!lock_sig_state) begin
+			lock_sig_active_int <= 0;
+			if(lock_sig_active) begin
+				lock_sig_state <= 1;
+				lock_sig_wait <= wait_cnt_in;
+			end
+		end
+		else begin
+			if(lock_sig_wait) begin
+				lock_sig_wait <= lock_sig_wait - 1;
+			end
+			else begin
+				lock_sig_active_int <= 1;
+				lock_sig_state <= 0;
+			end
+		end
+	end	
+end
+
+
+
 task run_lock_fsm();
 begin
 	case(lock_state)
-	
 	
 		lock_state_idle: begin
 			if(lock_done) begin
 				//do nothing
 			end
-			if(lock_found) begin//If the rest of the algorithm found the lock point
-				//Write the new setpoint and expected value
-				setpt_out <= setpt_max;
-				exp_val_int <= exp_val_max;
-				num_pts <= 0;//Reset number of points to collect
-			end
 			else begin
+			
+				//We always increase the number of points we're taking each cycle by 2x
 				num_pts <= num_pts + 1;//number of points to collect is (1 << num_pts);
 				
 				//If we're failing
@@ -72,11 +171,16 @@ begin
 				state <= state_lock_start_write;
 				
 				//Setup the set point for the next round of data
-				setpt_out <= setpt_int - (setpt_step << num_pts)
-				//And the wait cycles as well
-				wait_cnt <= wait_cnt_in;
-				num_avgs_cnt <= 1;
+				setpt_out <= setpt_int - (setpt_step << num_pts);
+				setpt_l <= setpt_int - (setpt_step << num_pts);
 				
+				
+				//And the counters we need
+				wait_cnt <= wait_cnt_in;//Number of cycle delay between writing and reading
+				num_avgs_cnt <= 1;//Which average we're currently outputting
+				sum_cnt <= 1;//which average we're currently taking
+				
+				//Two variables for storing max experimental value and which setpt gave it to us
 				exp_val_max <= 0;
 				setpt_max <= 0;
 			end
@@ -85,18 +189,10 @@ begin
 	
 		//Starts writing setpt sweep values out to the DAC and counting off how many cycles to wait till the incomming adc data is valid
 		lock_start_write: begin
-			//If we have enough averages, go to the next setpt
-			if(num_avgs_cnt >= num_avgs) begin
-				num_avgs_cnt <= 1;
-				num_pts_cnt <= num_pts_cnt + 1;
-				setpt <= setpt + setpt_step;
-			end
-			else begin
-				num_avgs_cnt <= num_avgs_cnt + 1;
-			end
 			
+			update_setpt();
 			
-			//Once we're done with all that, if it's time to move on, do so
+			//If we're about to start receiving valid data, move on to recording it
 			if(!wait_cnt) begin
 				state <= lock_continue_write;
 				wait_cnt <= num_avgs;
@@ -107,52 +203,36 @@ begin
 		
 		lock_continue_write: begin
 		
-			//If we have enough averages, go to the next setpt
-			if(num_avgs_cnt >= num_avgs) begin
-				num_avgs_cnt <= 1;
-				num_pts_cnt <= num_pts_cnt + 1;
-				setpt_out <= setpt_out + setpt_step;
-			end
-			else begin
-				num_avgs_cnt <= num_avgs_cnt + 1;
-			end
+			update_setpt();
+			collect_average();
 			
-			//Average calculation and max update logic plus 
-			if(sum_cnt >= num_avgs) begin
-				sum_cnt <= 1;
-				//Update avg reg to new value this cycle
-				avg_reg <= lock_sig_val;
-				//if this is a new max
-				if(avg_reg[num_avgs+:16] > setpt_max)begin
-					exp_val_max <= avg_reg[num_avgs+:16];
-					setpt_max <= setpt_out - (setpt_step*num_avgs);
-				end
-					
+			//If we need to write the last setpt
+			if(num_pts_cnt > ((1<<(num_pts+1))+1) begin
+				setpt_h <= setpt_out;
 			end
-			else begin//Continue averaging
-				sum_cnt <= sum_cnt + 1;
-				avg_reg <= avg_reg + lock_sig_val;
-			end
-			
-			
-			
 			
 			//If we're done collecting points and collecting the end bit too
-			if(num_pts_cnt > ((1<<(num_pts+1))+1)+wait_cnt_in) begin
-				//wait for data collection to end
+			if(num_pts_cnt >= ((1<<(num_pts+1))+1)+wait_cnt_in) begin
+				//Figure out if we had a successful lock and cleanup
 				lock_state <= lock_cleanup;
 			end
-			
 			
 		end
 		
 		lock_cleanup begin
-			setpt_out <= setpt_max;
-			exp_val_int <= exp_val_max;
+	
+			//If the lock was successful:
+			if(setpt_max > setpt_l + max_pos_tol && setpt_max < setpt_h - max_pos_tol) begin
+				lock_done <= 1;
+				setpt_out <= setpt_max;
+				exp_val_int <= exp_val_max;
+				num_pts <= 0;//Reset number of points to collect
+			end
+			else begin
+				lock_done <= 0;
+			end
 		
-			//done
 			lock_state <= lock_idle;
-			lock_done <= 1;
 		end
 	
 	
@@ -165,14 +245,14 @@ endtask
 
 always @ (posedge clk or negedge rst) begin
 	if(!rst) begin
-	
+		reset_reg();
 	end
 	else begin
 	
 		if(!trig_lock) begin
 			reset_reg();
 			setpt_int <= setpt_in;//Update the internal setpoint with the initial setpoint while we're waiting
-			exp_val_int <= exp_val_in
+			exp_val_int <= exp_val_in;
 		end
 		else begin
 	
@@ -180,8 +260,8 @@ always @ (posedge clk or negedge rst) begin
 			
 			state_idle: begin
 			
-				//If we're out of tolerance
-				if(int_abs(exp_val_int-lock_sig_val) > tol_in) begin
+				//If we're supposed to be locking and are out of tolerance
+				if(lock_sig_active_int && int_abs(exp_val_int-lock_sig_val) > tol_in) begin
 					//If it's better than expected, update the expectation
 					if(lock_sig_val>exp_val_int) begin
 						exp_val_int <= lock_sig_val;

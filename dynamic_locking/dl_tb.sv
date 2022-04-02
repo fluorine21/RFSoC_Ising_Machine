@@ -3,12 +3,108 @@ import ising_config::*;
 
 module dl_tb();
 
+reg clk, rst;
+reg [31:0] gpio_in;
+
+reg [255:0] adc_data_in;
+
+reg lock_sig_active, trig_lock;
+
+wire lock_done;
+wire [15:0] setpt_out_ext//Setpoint
+
+
+//scale factor
+real dl_to_mzi_scale_fac = 0.01;
+real mzi_to_dl_scale_fac = 100;
+reg [15:0] mzi_res;
+real setpt_cast;
+
+dl
+#(parameter base_addr = 0) dut
+(
+	clk, rst, 
+	gpio_in,
+	
+	//Incomming ADC data
+	adc_data_in,
+	
+	lock_sig_active,//if 1, a calibration pulse is currently being read back and must be locked to
+	trig_lock,//if 1, we're actively running the fsm and trying to lock
+	lock_done,//If 1, this module is not in the process of locking
+	
+	setpt_out_ext//Setpoint output of the lockbox
+);
+
+reg [63:0] step_num;
+
 
 initial begin
 
 	test_mzi_sim();
+	
+	clk <= 0;
+	rst <= 1;
+	gpio_in <= 0;
+	adc_data_in <= 0;
+	lock_sig_active <= 0;
+	trig_lock <= 0;
+	
+	repeat(10) clk_cycle();
+	rst <= 0;
+	repeat(10) clk_cycle();
+	rst <= 1;
+	repeat(10) clk_cycle();
+	
+	
+	//Write the max_pos_tol
+	gpio_write(0,0);
+	//write setpt_in;
+	gpio_write(1, 1000);
+	//write the initial expected value exp_val_in
+	gpio_write(2, 500);
+	//write the tolerance
+	gpio_write(3, 10);
+	//write the number of averages to take 
+	gpio_write(4, 2);//this is 4 averages
+	gpio_write(5, 2);//lock signal pos
+	
+	repeat(10) clk_cycle();
+	trig_lock <= 1;
+	lock_sig_active <= 1;
+	
+	repeat (100000) step_dl_sim();
+	
+end
+
+
+
+
+
+task step_dl_sim();
+begin
+
+	//Evaluate the current MZI result and feed it into the buffer
+	setpt_cast = real'(setpt_out_ext*dl_to_mzi_scale_fac);
+	mzi_res = 16'(run_mzi_sim(setpt_cast, get_noise())*mzi_to_dl_scale_fac);
+	//Update the ADC register going into dl
+	adc_data_in <= { {1{16'h0}}, 
+	// cycle the clock
+	clk_cycle();
 
 end
+endtask
+
+
+
+task get_noise(output real phase);
+begin
+	phase = 0;
+	step_num <= step_num + 1;
+end
+endtask
+
+
 
 
 
@@ -61,5 +157,36 @@ function real run_mzi_sim(input real phase1, phase2);
 	return cmp_sqr_mag(cmp_mul(E5, cmp_exp('{r_fac, 0})));
 
 endfunction
+
+
+
+task clk_cycle();
+begin
+	#1
+	clk <= 1;
+	#1
+	#1
+	clk <= 0;
+	#1
+	clk <= 0;
+end
+endtask
+
+task gpio_write;
+input [15:0] addr;
+input [7:0] data;
+begin
+	
+	clk_cycle();
+	gpio_addr <= addr;
+	gpio_data <= data;
+	clk_cycle();
+	w_clk <= 1;
+	repeat(2) clk_cycle();
+	w_clk <= 0;
+	repeat(5) clk_cycle();
+	
+end
+endtask
 
 endmodule
